@@ -1,0 +1,541 @@
+/*================= Premium Breadcrumb Header ==================*/
+.mining-header {
+    background-color: #050b16;
+    position: relative;
+    padding: 80px 0 100px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    border-bottom: 4px solid #d4af37;
+    margin-top: 100px !important;
+}
+
+.mining-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(5, 11, 22, 0.4), rgba(5, 11, 22, 1)),
+        url('https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&q=80&w=1200');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1;
+}
+
+.mining-content {
+    position: relative;
+    z-index: 2;
+}
+
+
+.breadcrumb-mining-box {
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 10px 25px;
+    display: inline-flex;
+    margin-bottom: 30px;
+    border-radius: 0;
+}
+
+.breadcrumb-mining-box .breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
+    color: #d4af37;
+    padding: 0 15px;
+    opacity: 0.6;
+}
+
+.breadcrumb-mining-box a {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.breadcrumb-mining-box .active {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.mining-label {
+    color: #d4af37;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+/* ========================MINING PALUSE SECTION ============== */
+
+.mineral-pulse-section {
+    background-color: #020812;
+    padding: 70px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.pulse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.pulse-card-mining {
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 2px solid #d4af37;
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.pulse-card-mining:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.ticker-name {
+    font-size: 0.75rem;
+    color: #8da2b5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.ticker-val {
+    font-family: 'Consolas', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+    margin: 8px 0;
+}
+
+.ticker-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pulse-meta {
+    font-size: 0.65rem;
+    color: #5a6a85;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* ================MINING OVERVIEW SECTION================ */
+
+.mineral-portfolio {
+    background-color: #ffffff;
+    padding: 110px 0;
+}
+
+.mineral-card {
+    background: #ffffff;
+    border: 1px solid #eef0f2;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.mineral-img-container {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mineral-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.6s ease;
+}
+
+.mineral-card:hover .mineral-img-container img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.mineral-body {
+    padding: 35px;
+}
+
+.asset-category {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.asset-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0a192f;
+    margin-bottom: 15px;
+}
+
+.asset-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f2f5;
+}
+
+.stat-box small {
+    display: block;
+    color: #8892b0;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-box span {
+    font-weight: 700;
+    color: #0a192f;
+    font-size: 0.9rem;
+}
+
+.intell-feed {
+    overflow-wrap: anywhere;
+}
+
+
+/* ================== RISK MAPPING SECTION ================= */
+
+.mining-risk-map {
+    background-color: #040c1a;
+    padding: 110px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.map-visualization-area {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 40px;
+    position: relative;
+}
+
+
+.risk-layer-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-left: 3px solid #d4af37;
+    padding: 25px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.risk-layer-card:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateX(10px);
+}
+
+.risk-index-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #8da2b5;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.risk-level-tag {
+    font-family: 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: #ffbf00;
+    background: rgba(255, 191, 0, 0.1);
+    padding: 2px 8px;
+    float: right;
+}
+
+
+
+/* ====================MINING VALUE CHAING SECTION ================== */
+
+.value-chain-section {
+    background-color: #ffffff;
+    padding: 100px 0;
+}
+
+.chain-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 50px;
+}
+
+.chain-container::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: #eef0f2;
+    z-index: 1;
+}
+
+.chain-node {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 18%;
+}
+
+.node-icon {
+    width: 60px;
+    height: 60px;
+    background: #0a192f;
+    color: #d4af37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.4rem;
+    border: 4px solid #ffffff;
+    transition: all 0.3s ease;
+}
+
+.chain-node:hover .node-icon {
+    background: #d4af37;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.node-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0a192f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.node-desc {
+    font-size: 0.75rem;
+    color: #8892b0;
+    line-height: 1.5;
+}
+
+
+
+.reclamation-section {
+    background-color: #f8fafc;
+    padding: 100px 0;
+}
+
+.reclamation-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 40px;
+    height: 100%;
+    transition: all 0.4s ease;
+}
+
+.reclamation-card:hover {
+    border-color: #10b981;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);
+}
+
+.eco-icon {
+    font-size: 2.5rem;
+    color: #10b981;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.reclamation-progress-bar {
+    height: 6px;
+    background: #e2e8f0;
+    margin: 25px 0;
+    position: relative;
+}
+
+.progress-fill {
+    position: absolute;
+    height: 100%;
+    background: #10b981;
+    width: 100%;
+}
+
+.esg-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: #0a192f;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ==================sustainability and ESG section css ================ */
+
+/* ESG Section Custom Styles */
+.esg-section {
+    background-color: #050c1a;
+    /* Deep Navy Background */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+.esg-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.esg-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #10b981;
+    /* Emerald Green */
+    transform: translateY(-10px);
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.icon-env {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.icon-soc {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.icon-gov {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.metrics-bar {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(5, 12, 26, 1));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    padding: 30px 60px;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .metrics-bar {
+        border-radius: 30px;
+        padding: 30px;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+}
+
+
+
+/* ==================OUR NEWS SECTION ================== */
+
+/* News & Insights Custom Styles */
+.news-section {
+    background-color: #f8f9fa;
+    /* Light grey to contrast with dark ESG section */
+}
+
+.news-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+
+}
+
+.news-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.news-img-wrapper {
+    overflow: hidden;
+    height: 220px;
+}
+
+.news-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-img-wrapper img {
+    transform: scale(1.1);
+}
+
+.category-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.read-more-link {
+    color: orange !important;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s;
+}
+
+.read-more-link:hover {
+    gap: 12px;
+}

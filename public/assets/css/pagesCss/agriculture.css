@@ -1,0 +1,547 @@
+/* Agriculture Concept Breadcrumb */
+.agri-breadcrumb-header {
+    background-color: #0b1a10;
+    position: relative;
+    padding: 100px 0 80px;
+    overflow: hidden;
+    border-bottom: 3px solid #ffc107;
+    margin-top: 100px;
+}
+
+.agri-breadcrumb-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(11, 26, 16, 0.4), rgba(11, 26, 16, 1)),
+        url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=1200');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1;
+}
+
+.agri-breadcrumb-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Glassmorphism Breadcrumb Box */
+.breadcrumb-agri-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    display: inline-flex;
+    margin-bottom: 25px;
+}
+
+.breadcrumb-agri-box .breadcrumb-item+.breadcrumb-item::before {
+    content: " \f105 ";
+    /* Bootstrap Icon Chevron */
+    font-family: "bootstrap-icons";
+    color: #ffc107;
+    padding: 0 10px;
+}
+
+.breadcrumb-agri-box a {
+    color: #a5b4a9;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.breadcrumb-agri-box a:hover {
+    color: #ffc107;
+}
+
+.breadcrumb-agri-box .active {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.agri-subtitle-badge {
+    color: #ffc107;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+/* ===============OUR AGRICULTURE OVERVIEW SECTION ================ */
+.agri-dashboard {
+    background-color: #173622;
+    padding: 100px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.db-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(139, 195, 74, 0.2);
+    border-radius: 4px;
+    padding: 30px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.db-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8bc34a, transparent);
+    opacity: 0.5;
+}
+
+.db-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #8bc34a;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.db-value {
+    font-family: 'Consolas', monospace;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.db-unit {
+    font-size: 0.9rem;
+    color: #a5b4a9;
+    margin-left: 5px;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #8bc34a;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #8bc34a;
+    margin-right: 10px;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.sensor-item {
+    background: rgba(139, 195, 74, 0.05);
+    padding: 10px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+
+/* ==============OUR SUBSECTOR SECTION ============= */
+
+.agri-pillars {
+    background-color: #173622;
+    padding: 100px 0;
+}
+
+.agri-pillar-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(139, 195, 74, 0.1);
+    padding: 40px;
+    height: 100%;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 0;
+
+}
+
+.agri-pillar-card:hover {
+    background: rgba(139, 195, 74, 0.05);
+    border-color: #8bc34a;
+    transform: translateY(-10px);
+}
+
+.pillar-icon-agri {
+    width: 60px;
+    height: 60px;
+    background: rgba(139, 195, 74, 0.15);
+    color: #8bc34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.pillar-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #8bc34a;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* ===================Investment Opportunities ================= */
+
+.crop-portfolio-section {
+    background-color: #ffffff;
+    padding: 100px 0;
+}
+
+.crop-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    background: #fff;
+}
+
+.crop-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    border-color: #8bc34a;
+}
+
+.crop-img-box {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.crop-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.crop-card:hover .crop-img-box img {
+    transform: scale(1.1);
+}
+
+.crop-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(11, 26, 16, 0.8);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.crop-info {
+    padding: 30px;
+}
+
+.crop-category {
+    font-size: 0.7rem;
+    color: #8bc34a;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.crop-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0b1a10;
+    margin-bottom: 15px;
+}
+
+.crop-stats {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.stat-item span {
+    display: block;
+    font-size: 0.65rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-item strong {
+    font-size: 0.9rem;
+    color: #0b1a10;
+}
+
+
+/* =================CORP PORTFOLIO SECTION =================*/
+
+
+.intel-section {
+    padding: 90px 0;
+    background: linear-gradient(180deg, #ffffff, #f6f9ff);
+}
+
+/* Card */
+.intel-card {
+    background: linear-gradient(145deg, #ffffff, #f9fbff);
+    padding: 24px;
+    border-radius: 18px;
+    height: 100%;
+
+    border: 1px solid rgba(11, 37, 64, .12);
+
+    position: relative;
+    transition: .35s;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, .04),
+        inset 0 0 0 1px rgba(255, 255, 255, .7);
+}
+
+.intel-card:hover {
+    transform: translateY(-8px) scale(1.01);
+
+    box-shadow:
+        0 22px 40px rgba(0, 0, 0, .08),
+        0 0 0 1px rgba(243, 146, 0, .25);
+}
+
+/* Icon */
+.intel-card .icon {
+    width: 60px;
+    height: 60px;
+
+    background: linear-gradient(135deg, #fff4e3, #ffe8c6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+    font-size: 26px;
+
+    margin-bottom: 12px;
+
+    box-shadow: 0 6px 14px rgba(243, 146, 0, .12);
+}
+
+/* Pill */
+.pill {
+    display: inline-block;
+
+    background: #f0f5ff;
+    color: #0b2540;
+
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 8px;
+
+    margin-top: 8px;
+}
+
+/* Button */
+.intel-btn {
+    background: linear-gradient(135deg, #0b2540, #123a64);
+    color: #fff;
+
+    padding: 13px 28px;
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    box-shadow: 0 8px 18px rgba(11, 37, 64, .18);
+}
+
+.intel-btn:hover {
+    background: linear-gradient(135deg, #123a64, #0b2540);
+    color: #fff;
+}
+
+/* Common */
+.mini-tag {
+    color: #f39200;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media(max-width:768px) {
+    .intel-section {
+        padding: 60px 10px;
+    }
+}
+
+
+
+/* ===============RECLAM REMUNERATION ================*/
+
+.reclaim-section {
+    background-color: #f9fafb;
+    padding: 100px 0;
+}
+
+.reclaim-visual-box {
+    position: relative;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    padding: 20px;
+}
+
+.reclaim-card {
+    border-left: 4px solid #198754;
+    background: #ffffff;
+    padding: 30px;
+    height: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.reclaim-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.process-step {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #198754;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.reclaim-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0b1a10;
+    margin-bottom: 15px;
+}
+
+/* ===================Supply Chain CSS ================ */
+
+.supply-chain-section {
+    background-color: #0b1a10;
+    padding: 100px 0;
+    color: #ffffff;
+}
+
+.sc-flow-container {
+    position: relative;
+}
+
+.sc-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    height: 100%;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.sc-card:hover {
+    border-color: #8bc34a;
+    background: rgba(139, 195, 74, 0.05);
+}
+
+.sc-icon-box {
+    width: 50px;
+    height: 50px;
+    background: #8bc34a;
+    color: #0b1a10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.sc-step-num {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.05);
+}
+
+.sc-label {
+    color: #8bc34a;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+/* =====================R & D PARTNERS SECTION CSS ================== */
+
+
+.agri-rd-section {
+    background-color: #fcfdfc;
+    padding: 100px 0;
+    position: relative;
+}
+
+.rd-innovation-card {
+    background: #ffffff;
+    border: 1px solid #e0e7e1;
+    padding: 40px;
+    height: 100%;
+    transition: all 0.4s ease;
+    border-top: 4px solid #8bc34a;
+}
+
+.rd-innovation-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+.rd-icon-lab {
+    font-size: 2.5rem;
+    color: #8bc34a;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.partner-slider-wrap {
+    margin-top: 80px;
+    border-top: 1px solid #eee;
+    padding-top: 50px;
+}
+
+.partner-logo-grayscale {
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.3s;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.partner-logo-grayscale:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}

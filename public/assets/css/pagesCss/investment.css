@@ -1,0 +1,394 @@
+/*===================Investment breadcrum =================== */
+.investment-header {
+    background-color: #030a1c;
+    position: relative;
+    padding: 125px 0 95px;
+    overflow: hidden;
+    border-bottom: 3px solid #ffbf00;
+    margin-top: 80px;
+}
+
+.investment-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(3, 10, 28, 0.4), rgba(3, 10, 28, 1)),
+        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1;
+}
+
+.investment-content {
+    position: relative;
+    z-index: 2;
+}
+
+
+.breadcrumb-investment-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 191, 0, 0.2);
+    padding: 12px 28px;
+    display: inline-flex;
+    margin-bottom: 35px;
+    border-radius: 0;
+}
+
+.breadcrumb-investment-box .breadcrumb-item+.breadcrumb-item::before {
+    content: "/";
+    color: #ffbf00;
+    padding: 0 15px;
+}
+
+.breadcrumb-investment-box a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.breadcrumb-investment-box .active {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.invest-label {
+    color: #ffbf00;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+
+
+/* ==============ESG SECTION ================ */
+
+
+.esg-container {
+    background: #291e1e;
+    color: #ffffff;
+    padding: 100px 0;
+}
+
+.esg-card-premium {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0px;
+    padding: 40px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.esg-card-premium:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #ff9800;
+
+    transform: translateY(-5px);
+}
+
+
+.esg-card-premium::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #ff9800;
+    transition: width 0.5s ease;
+}
+
+.esg-card-premium:hover::after {
+    width: 100%;
+}
+
+.esg-icon-circle {
+    width: 70px;
+    height: 70px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    color: #ff9800 !important;
+    transition: 0.5s;
+}
+
+.esg-card-premium:hover .esg-icon-circle {
+    background: #ff9800;
+    color: #000 !important;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8892b0;
+    margin-bottom: 5px;
+}
+
+
+
+/* ===================COMMODITY TICKER ================= */
+
+.ticker-wrap {
+    background: #040911;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 15px 0;
+    margin-top: 0px !important;
+}
+
+.ticker-scroll {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 40px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ticker-item:last-child {
+    border-right: none;
+}
+
+.ticker-symbol {
+    font-weight: 800;
+    color: #ff9800;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+}
+
+.ticker-price {
+    font-family: 'Monaco', 'Consolas', monospace;
+    color: #ffffff;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.ticker-change {
+    font-size: 0.75rem;
+    margin-left: 8px;
+}
+
+.up {
+    color: #00e676;
+}
+
+.down {
+    color: #ff5252;
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.ticker-wrap:hover .ticker-scroll {
+    animation-play-state: paused;
+}
+
+
+
+
+
+/* =====================NEWS AND INSIGHT SECTION ================ */
+
+/* News & Insights Premium Styling */
+.news-section {
+    background-color: #f4f7f9;
+    /* Light contrast to your dark sections */
+    padding: 100px 0;
+}
+
+.insight-card {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    /* Keep it sharp and industrial */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    height: 100%;
+}
+
+.insight-card img {
+    height: 100% !important;
+
+}
+
+.insight-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.insight-img-box {
+    position: relative;
+    overflow: hidden;
+    height: 440px;
+}
+
+.insight-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.insight-card:hover .insight-img-box img {
+    transform: scale(1.1);
+}
+
+.category-tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #ff9800;
+    /* Your brand orange */
+    color: #fff;
+    padding: 5px 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.insight-body {
+    padding: 30px;
+}
+
+.insight-date {
+    font-size: 0.8rem;
+    color: #999;
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.insight-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #0a192f;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.insight-card:hover .insight-title {
+    color: #ff9800;
+}
+
+.read-more-btn {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #0a192f;
+    text-decoration: none;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+/* ================TEAM SECTION ================ */
+
+.team-section {
+    background-color: #ffffff;
+    padding: 100px 0;
+}
+
+.team-card {
+    border: none;
+    background: transparent;
+    transition: all 0.4s ease;
+    border: 2px solid #FF9800;
+    box-shadow: #FF9800 0px 5px 15px;
+}
+
+.team-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background-color: #0a192f;
+}
+
+.team-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+.team-card:hover .team-img-wrapper img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.team-info {
+    padding: 20px 0;
+    position: relative;
+    padding-left: 10px;
+}
+
+.team-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0a192f;
+    margin-bottom: 5px;
+}
+
+.team-role {
+    font-size: 0.8rem;
+    color: #ff9800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.team-social {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.team-card:hover .team-social {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-icon-btn {
+    width: 35px;
+    height: 35px;
+    background: #ff9800;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 0;
+}

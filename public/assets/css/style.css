@@ -1,0 +1,1814 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+
+a {
+    text-decoration: none !important;
+    color: #a8b2c3 !important;
+}
+
+
+/* ======= BODY ======= */
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.nav-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px !important;
+}
+
+
+.nav-btn select {
+    background: linear-gradient(135deg, #ff8c00, #ff6a00);
+    color: black;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+
+.nav-btn select:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 101, 160, 0.753);
+    background: linear-gradient(135deg, #ff8c00, #ff6a00) !important;
+}
+
+#language option {
+    background: linear-gradient(135deg, #ff8c00, #ff6a00) !important;
+    color: black !important;
+}
+
+
+/* ==================make a btn =============== */
+.btn-start {
+    background: #0b2c4d;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 15px !important;
+    font-weight: 500;
+    border: none;
+    transition: .3s;
+    border: 2px solid white;
+}
+
+.btn-start:hover {
+    background: #ffffff42;
+    backdrop-filter: blur(9px);
+    color: white;
+}
+
+
+
+/* ==================scrollbar =================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5fb;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#0b2c4d, #1e4b7a);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0b2c4d;
+}
+
+
+
+
+
+/* ======= NAVBAR CONTAINER ======= */
+.premium-nav {
+    /* background: linear-gradient(120deg, #0083b5, #ff7b00); */
+    background-color: #0a434c;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    padding: 15px 0;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.555),
+        0 4px 6px rgba(0, 0, 0, 0.534);
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    position: fixed !important;
+    z-index: 1000;
+}
+
+/* ======= LOGO ======= */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50% !important;
+}
+
+.logo-area img {
+    width: 40px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* ======= MENU ======= */
+.nav-link {
+    color: #ffffff !important;
+    margin: 0 6px;
+    font-weight: 500;
+    font-size: 13px !important;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+
+.nav-link {
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.nav-link::before,
+.nav-link::after {
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform 0.4s;
+}
+
+.nav-link::before {
+    top: 0;
+    left: 0;
+    transform-origin: left;
+}
+
+.nav-link::after {
+    bottom: 0;
+    right: 0;
+    transform-origin: right;
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* Active like image */
+.nav-link.active {
+    color: #ff9800 !important;
+}
+
+
+.navbar-toggler {
+    border-color: white !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* ======= MOBILE ======= */
+@media(max-width:991px) {
+    .nav-link {
+        text-align: center;
+    }
+}
+
+
+
+/* ===================== HERO BANNER  ================== */
+.hero {
+    background:
+        linear-gradient(135deg, rgba(3, 10, 28, 0.96) 0%, rgba(0, 179, 146, 0.4) 100%),
+        url('/assets/images/home-banner.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 160px 0 120px;
+    color: white;
+    margin-top: 0;
+    position: relative;
+}
+
+/* ===== BADGE ===== */
+.tag {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ffbf00;
+}
+
+/* ===== TITLE ===== */
+.hero h1 {
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-top: 25px;
+    background: linear-gradient(to right, #ffffff, #8da2b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== CTA ===== */
+.btn-cta {
+    background: linear-gradient(90deg, #d4af37, #ffbf00);
+    border: none;
+    padding: 16px 40px;
+    border-radius: 0;
+    color: #030a1c;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-cta:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: #ffffff;
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+}
+
+/* ===== IMAGE FRAME ===== */
+.hero-img {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    border: 1px solid rgba(255, 191, 0, 0.3);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 10s linear;
+}
+
+.hero-img:hover img {
+    transform: scale(1.15);
+}
+
+
+.heroImageSwiper {
+    width: 100%;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-img {
+        height: 350px;
+        margin-top: 40px;
+    }
+}
+
+
+/* ====================featured section ============= */
+.featured {
+    padding: 60px 0;
+    margin-top: -100px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== GRID SYSTEM ===== */
+.card-area {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ===== STAT CARD ===== */
+.card-stat {
+    background: linear-gradient(145deg, #0a192f, #050b16);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 0;
+
+    padding: 50px 30px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    color: white;
+    text-align: center;
+    position: relative !important;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.card-stat::after {
+    content: "";
+    position: absolute !important;
+    width: 0%;
+    height: 3px;
+    background: #ffbf00;
+    bottom: 0;
+    left: 0;
+    transition: width 0.4s ease;
+    box-shadow: 0 0 15px rgba(255, 191, 0, 0.5);
+}
+
+.card-stat:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(145deg, #0d213f, #071224);
+    border-color: rgba(255, 191, 0, 0.3) !important;
+}
+
+.card-stat:hover::after {
+    width: 100%;
+}
+
+.card-stat h3 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+.card-stat p {
+    color: #8da2b5;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.card-stat::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 191, 0, 0.05) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.card-stat:hover::before {
+    opacity: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:992px) {
+    .card-area {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media(max-width:600px) {
+    .featured {
+        margin-top: -50px;
+    }
+
+    .card-area {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* =============== SINADAI Intelligence Board ============ */
+.news-board {
+    background: #050b16;
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.news-header {
+    background: #0a192f;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255, 177, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.news-header h4 {
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+.live-tag {
+    color: #ffb100;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+}
+
+.live-tag::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ffb100;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 10px #ffb100;
+    animation: pulse-gold 1.5s infinite;
+}
+
+@keyframes pulse-gold {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.news-list {
+    background: #070f1d;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.news-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.news-list::-webkit-scrollbar-track {
+    background: #050b16;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+    background: #ffb100;
+    border-radius: 10px;
+}
+
+.news-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.news-item h6 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 8px 0;
+    color: #e2e8f0;
+}
+
+.time {
+    background: rgba(255, 255, 255, 0.05);
+    color: #8da2b5;
+    padding: 3px 10px;
+    border-radius: 0;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-agri,
+.badge-invest {
+    padding: 3px 10px;
+    border-radius: 0;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badge-agri {
+    background: #0fa958;
+    color: #fff;
+}
+
+.badge-invest {
+    background: #ffb100;
+    color: #050b16;
+}
+
+.news-footer {
+    background: #0a192f;
+    padding: 12px 20px;
+    font-size: 11px;
+    color: #5a6a85;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* LOADING STYLE */
+.loading {
+    padding: 60px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #ffb100;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+/* ===================== SINADAI Strategic About ==================== */
+.about-v2 {
+    background: #f8fafc;
+    /* Softer, high-end gray-blue backdrop */
+    padding: 120px 0;
+}
+
+/* ===== MAIN CARD ===== */
+.main-card {
+    background: white;
+    border-radius: 0;
+    /* Industrial sharp edges for advisory authority */
+    padding: 45px;
+    box-shadow: 0 30px 60px rgba(10, 25, 47, 0.05);
+    /* Softer shadow */
+    border-top: 4px solid #d4af37;
+    /* Geological Gold */
+    position: relative;
+}
+
+.top-line {
+    color: #d4af37;
+    /* Refined Gold */
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 800;
+}
+
+.main-card h2 {
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-top: 15px;
+    color: #0a192f;
+    /* Boardroom Navy */
+    line-height: 1.1;
+}
+
+.main-card p {
+    color: #5a6a85;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* ===== LIST ===== */
+.check-list {
+    padding: 0;
+    list-style: none;
+    margin-top: 25px;
+    border-top: 1px solid #eef2f6;
+    padding-top: 20px;
+}
+
+.check-list li {
+    margin: 12px 0;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Custom Checkmark Color */
+.check-list li::before {
+    content: "✓";
+    color: #d4af37;
+    margin-right: 15px;
+    font-weight: 900;
+}
+
+/* ===== BUTTON ===== */
+.btn-outline {
+    display: inline-block;
+    margin-top: 25px;
+    color: #0a192f;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    color: #d4af37;
+    border-color: #0a192f;
+}
+
+/* ===== METRICS ===== */
+.metric-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.metric {
+    background: white;
+    border-radius: 0;
+    /* Matching industrial edges */
+    padding: 50px 30px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    text-align: center;
+}
+
+.metric:hover {
+    box-shadow: 0 30px 60px rgba(10, 25, 47, 0.12);
+    cursor: pointer;
+    background-color: #0a192f;
+    /* Hover to Navy for contrast */
+    border-color: #0a192f;
+}
+
+.metric:hover h3 {
+    color: #ffffff !important;
+}
+
+.metric:hover p {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.metric h3 {
+    color: #d4af37;
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.metric p {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #64748b;
+    margin-top: 10px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+    .about-v2 {
+        padding: 80px 0;
+    }
+
+    .metric-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .main-card h2 {
+        font-size: 2.2rem;
+    }
+}
+
+
+
+
+
+/* ================= SINADAI Strategic Advisory ================ */
+
+.service-pro {
+    padding: 120px 0;
+    background-attachment: fixed !important;
+    background: linear-gradient(rgb(0 162 199 / 85%), rgba(3, 10, 28, 0.9)),
+        url('/assets/images/agricultureImage.png');
+    background-size: cover;
+}
+
+/* ===== FLOAT WRAP CARD ===== */
+.wrap-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+    padding: 60px 40px;
+}
+
+/* ===== TITLE ===== */
+.tag {
+    color: #d4af37;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 800;
+}
+
+.title {
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+}
+
+.sub {
+    max-width: 680px;
+    margin: 20px auto 40px;
+    color: #8da2b5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* ===== INNER CARD ===== */
+.p-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0;
+    padding: 45px 35px;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.p-card.focus {
+    border-top: 4px solid #d4af37;
+    background: #ffffff;
+}
+
+.p-card:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+    background: #0a192f;
+    border-color: #0a192f;
+    box-shadow: 0 30px 60px rgba(10, 25, 47, 0.2);
+}
+
+.p-card:hover h5,
+.p-card:hover p {
+    color: #ffffff;
+}
+
+/* ===== ICON ===== */
+.icon {
+    width: 60px;
+    height: 60px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #d4af37;
+    transition: 0.3s;
+}
+
+.p-card:hover .icon {
+    background: #d4af37;
+    color: #ffffff;
+    border-color: #d4af37;
+}
+
+/* ===== TEXT ===== */
+.p-card h5 {
+    font-weight: 800;
+    color: #0a192f;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.p-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #5a6a85;
+    flex-grow: 1;
+}
+
+/* ===== LINK ===== */
+.link {
+    color: #d4af37;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.p-card:hover .link {
+    color: #ffffff;
+    border-bottom-color: #d4af37;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+    .service-pro {
+        padding: 80px 0;
+    }
+
+    .wrap-card {
+        padding: 40px 20px;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+/* ================= SINADAI Industry Sectors ================ */
+
+.sector-pro {
+    padding: 120px 0;
+    background: linear-gradient(140deg, #050b16, #0a192f, #050b16);
+}
+
+/* ===== TITLE ===== */
+.mini {
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.title {
+    color: white;
+    font-weight: 800;
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+}
+
+.sub {
+    max-width: 700px;
+    margin: 20px auto 50px;
+    color: #8da2b5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* ===== SECTOR CARD ===== */
+.sector-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+
+    padding: 45px 35px;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.sector-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-10px);
+}
+
+/* ===== ICON ===== */
+.icon {
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.02));
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #d4af37;
+    transition: 0.3s;
+}
+
+.sector-card:hover .icon {
+    background: #d4af37;
+    color: #0a192f;
+    transform: rotateY(180deg);
+}
+
+/* ===== TEXT ===== */
+.sector-card h4 {
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+
+.sector-card p {
+    color: #8da2b5;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* ===== LINK ===== */
+.view {
+    color: #d4af37;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.view::after {
+    content: ' →';
+    transition: transform 0.3s ease;
+}
+
+.sector-card:hover .view {
+    color: white;
+}
+
+.sector-card:hover .view::after {
+    transform: translateX(8px);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+    .sector-pro {
+        padding: 80px 0;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .sector-card {
+        padding: 35px 25px;
+    }
+}
+
+
+/* ================= SINADAI Live Market Pulse ================ */
+
+.market-section {
+    background: #0a434c;
+    padding: 30px;
+    border-radius: 0;
+    color: white;
+    border-top: 1px solid rgba(255, 177, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 177, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.market-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 255, 255, 0.02) 1px, rgba(255, 255, 255, 0.02) 2px);
+    pointer-events: none;
+}
+
+.market-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #ffb100;
+    display: flex;
+    align-items: center;
+}
+
+.market-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #ffb100;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 0 10px #ffb100;
+}
+
+.market-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0;
+    padding: 20px 25px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.market-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 177, 0, 0.05);
+    border-color: rgba(255, 177, 0, 0.3);
+}
+
+.asset-name {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8da2b5;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -1px;
+}
+
+.change {
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.up {
+    color: #00ff88;
+}
+
+.down {
+    color: #ff3366;
+}
+
+
+.up::before {
+    content: '▲';
+    font-size: 8px;
+}
+
+.down::before {
+    content: '▼';
+    font-size: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px) {
+    .market-card {
+        margin-bottom: 15px;
+    }
+
+    .price {
+        font-size: 1.3rem;
+    }
+}
+
+/* ================= SINADAI Strategic Investment Cards ==========  */
+.invest-card {
+    background: #ffffff;
+    border-radius: 0;
+    border: 1px solid #eef2f6;
+    border-top: 4px solid #0a192f;
+    height: 100%;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(10, 25, 47, 0.05);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.invest-card:hover {
+    transform: translateY(-10px);
+    border-top-color: #d4af37;
+    box-shadow: 0 30px 60px rgba(10, 25, 47, 0.12);
+}
+
+/* PRICE BADGE */
+.price {
+    background: #0a192f;
+    color: #d4af37;
+    padding: 8px 16px;
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* STEP BLOCK */
+.step-block {
+    margin-top: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.step-title {
+    color: #0a192f;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-block p {
+    font-size: 14px;
+    color: #5a6a85;
+    line-height: 1.6;
+    margin-top: 5px;
+}
+
+/* REVIEW BOX */
+.review-box {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 0;
+    margin-top: 25px;
+    border-left: 3px solid #d4af37;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    color: #0a192f;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+/* PROFIT */
+.profit {
+    color: #059669;
+    font-weight: 800;
+    font-family: 'Consolas', monospace;
+}
+
+.profit::before {
+    content: '+ ';
+}
+
+/* FOOTER */
+.footer {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #94a3b8;
+    margin-top: 20px;
+    display: block;
+}
+
+
+/* =======================country news ================= */
+
+.filter-tab {
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 1px solid #eef0f2;
+    background: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.filter-tab.active {
+    background: #198754;
+    /* Success Green */
+    color: #ffffff;
+    border-color: #198754;
+}
+
+.news-card {
+    background: #ffffff;
+    border: 1px solid #eef0f2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-img-wrap {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-wrap:hover .invest-btn {
+    display: inline-block;
+}
+
+.invest-btn {
+    display: none;
+    transition: all 0.6s ease-in-out;
+    position: absolute;
+    background-color: rgb(243, 158, 0);
+    color: black !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 16px;
+    border: 1px solid white;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #6f42c1;
+    /* Mining Purple */
+}
+
+.grade-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #198754;
+}
+
+/* Filtering Animation */
+.news-item {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.news-item.hidden {
+    display: none;
+    opacity: 0;
+}
+
+
+
+
+
+
+/* ================= SINADAI Success Stories ============ */
+
+.investor-voices-section {
+    background: #f8fafc;
+    padding: 100px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* HEADER */
+.investor-voices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.investor-voices-header h2 {
+    color: #0a192f;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+}
+
+.investor-voices-header p {
+    color: #5a6a85;
+    font-size: 1.1rem;
+    max-width: 500px;
+}
+
+/* NAV */
+.investor-voices-nav {
+    display: flex;
+    gap: 12px;
+}
+
+.investor-voices-nav button {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    border-radius: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.investor-voices-nav button:hover {
+    background: #0a192f;
+    color: white;
+    border-color: #0a192f;
+}
+
+/* CARD */
+.investor-voices-card {
+    background: #0a192f;
+    border-radius: 0;
+    color: white;
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    height: 100%;
+}
+
+.investor-voices-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(10, 25, 47, 0.15);
+    border-color: rgba(212, 175, 55, 0.3);
+    /* Gold glow on hover */
+}
+
+/* QUOTE */
+.voices-quote {
+    width: 40px;
+    height: 40px;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+/* TEXT */
+.voices-text {
+    color: #cbd5e1;
+    line-height: 1.7;
+    min-height: 100px;
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+/* TAGS */
+.voices-tags {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.voices-tags span {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.voices-green {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #10b981 !important;
+    border: none !important;
+}
+
+/* PROFILE */
+.voices-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.voices-left {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.voices-left img {
+    width: 48px;
+    height: 48px;
+    border-radius: 0;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    object-fit: cover;
+}
+
+.voices-left h6 {
+    margin-bottom: 2px;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.voices-stars {
+    color: #d4af37;
+    font-size: 0.8rem;
+}
+
+/* SWIPER */
+.investorVoicesSwiper {
+    padding: 20px 10px 50px;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px) {
+    .investor-voices-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============CALL TO ACTION =============== */
+
+/* ===== SECTION ===== */
+.cta-pro {
+    padding: 100px 0;
+    background: #f8fbff;
+    margin-bottom: -12%;
+}
+
+/* ===== BOX ===== */
+.cta-box {
+    background:
+        linear-gradient(135deg, #100f5a, #123e4f);
+
+    border-radius: 24px;
+
+    padding: 60px 20px;
+
+    text-align: center;
+    color: white;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle shape */
+.cta-box::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+
+    background: rgba(255, 255, 255, .06);
+    border-radius: 50%;
+
+    left: -80px;
+    bottom: -80px;
+}
+
+/* ===== TEXT ===== */
+.cta-box h2 {
+    font-weight: 800;
+}
+
+.cta-box p {
+    max-width: 720px;
+    margin: 12px auto;
+    opacity: .9;
+}
+
+/* ===== INPUT WRAP ===== */
+.mail-wrap {
+    max-width: 520px;
+    margin: 20px auto;
+
+    display: flex;
+
+    background: white;
+    border-radius: 40px;
+
+    overflow: hidden;
+}
+
+/* input */
+.mail-wrap input {
+    flex: 1;
+    border: none;
+    padding: 14px 18px;
+    outline: none;
+}
+
+/* button */
+.mail-wrap button {
+    background: #ff9800;
+    border: none;
+
+    padding: 0 24px;
+    color: white;
+    font-weight: 600;
+}
+
+/* small */
+.cta-box small {
+    opacity: .8;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:600px) {
+
+    .mail-wrap {
+        flex-direction: column;
+        border-radius: 16px;
+    }
+
+    .mail-wrap button {
+        padding: 12px;
+    }
+
+}
+
+
+
+
+
+
+
+/* =================FOOTER SECTION ================ */
+
+
+.footer-pro {
+    background: #0a434c;
+    padding: 90px 0 30px;
+    color: #a8b2c3;
+}
+
+/* ===== BRAND BOX ===== */
+.brand-box img {
+    width: 100px !important;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.brand-box span {
+    color: #ff9800;
+}
+
+.brand-box p {
+    margin: 12px 0;
+}
+
+/* social */
+.social a {
+    width: 36px;
+    height: 36px;
+
+    background: rgba(255, 255, 255, .06);
+    border-radius: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 6px;
+}
+
+/* ===== HEAD ===== */
+.footer-pro h5 {
+    color: white;
+    margin-bottom: 12px;
+}
+
+/* ===== LINKS ===== */
+.f-links {
+    padding: 0;
+    list-style: none;
+}
+
+.f-links li {
+    margin: 8px 0;
+    transition: .3s;
+}
+
+.f-links li:hover {
+    color: #ff9800;
+    padding-left: 6px;
+}
+
+/* ===== CONTACT ===== */
+.contact-card {
+    background: rgba(255, 255, 255, .05);
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.contact-card p {
+    margin: 6px 0;
+}
+
+/* ===== BOTTOM ===== */
+.bottom {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    padding-top: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mini {
+    font-size: 13px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px) {
+    .bottom {
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* ================== news api css ============================ */
+
+.news-board {
+    background: #0f172a;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.news-header {
+    background: #111827;
+    padding: 12px 16px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.live-tag {
+    font-weight: 600;
+    color: #facc15;
+}
+
+.news-list {
+    padding: 15px;
+}
+
+.news-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #1f2937;
+    transition: background 0.2s ease;
+}
+
+.news-item:hover {
+    background: #1f2937;
+}
+
+.news-thumb img {
+    width: 110px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.thumb-placeholder {
+    width: 110px;
+    height: 80px;
+    background: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    border-radius: 6px;
+}
+
+.news-content {
+    flex: 1;
+}
+
+.news-meta {
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.news-time {
+    color: #9ca3af;
+    margin-right: 8px;
+}
+
+.news-category {
+    background: #2563eb;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+
+.news-title {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 6px;
+}
+
+.news-title:hover {
+    color: #facc15;
+}
+
+.news-source {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.news-footer {
+    background: #111827;
+    padding: 10px 16px;
+    border-top: 1px solid #1f2937;
+    font-size: 12px;
+}

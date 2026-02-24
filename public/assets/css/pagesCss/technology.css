@@ -1,0 +1,336 @@
+/*============== Technology Breadcrumb =======*/
+.tech-header {
+    background-color: #020817;
+    position: relative;
+    padding: 110px 0 90px;
+    overflow: hidden;
+    border-bottom: 3px solid #00f2ff;
+    margin-top: 100px;
+}
+
+/* Futuristic Background Pattern */
+.tech-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(2, 8, 23, 0.2), rgba(2, 8, 23, 1)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 1;
+}
+
+.tech-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Tech-Wise Breadcrumb Style */
+.breadcrumb-tech {
+    background: rgba(0, 242, 255, 0.05);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 2px;
+    display: inline-flex;
+    margin-bottom: 25px;
+}
+
+.breadcrumb-tech .breadcrumb-item+.breadcrumb-item::before {
+    content: "\F285";
+    font-family: "bootstrap-icons";
+    color: #00f2ff;
+    font-size: 11px;
+    padding: 0 12px;
+}
+
+.breadcrumb-tech a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.breadcrumb-tech a:hover {
+    color: #00f2ff;
+}
+
+.breadcrumb-tech .active {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.tech-label {
+    color: #00f2ff;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+
+/* ==================technology pillars ================== */
+
+
+/* Tech Pillars Premium Styling */
+.tech-pillars-section {
+    background-color: #020817;
+    padding: 100px 0;
+}
+
+.pillar-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    padding: 45px 35px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.pillar-card:hover {
+    background: rgba(0, 242, 255, 0.03);
+    border-color: #00f2ff;
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+}
+
+.pillar-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid #00f2ff;
+    border-left: 2px solid #00f2ff;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.pillar-card:hover::before {
+    opacity: 1;
+}
+
+.pillar-icon-box {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: #00f2ff;
+    font-size: 1.8rem;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.pillar-number {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    line-height: 1;
+    pointer-events: none;
+}
+
+
+
+/* =======================DASHBOARD SECTION CSS ==================== */
+
+/* Tech Dashboard Premium Styling */
+.dashboard-section {
+    background-color: #010409;
+    padding: 100px 0;
+}
+
+.dashboard-frame {
+    background: #0d1117;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.05);
+    overflow: hidden;
+}
+
+/* Dashboard Header/Top Bar */
+.db-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.db-status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00e676;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px #00e676;
+    margin-right: 10px;
+}
+
+/* Data Cards inside Dashboard */
+.db-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    height: 100%;
+}
+
+.db-value {
+    font-family: 'Consolas', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00f2ff;
+}
+
+.db-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8b949e;
+}
+
+/* Simulated Progress Bar */
+.db-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+.db-progress-fill {
+    height: 100%;
+    background: #00f2ff;
+    box-shadow: 0 0 10px #00f2ff;
+}
+
+
+
+/* ================R AND D SECTION =============== */
+
+.rd-section {
+    background-color: #050b16;
+    padding: 100px 0;
+    position: relative;
+    background-image: radial-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.rd-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid #00f2ff;
+    padding: 35px;
+    height: 100%;
+    transition: all 0.4s ease;
+}
+
+.rd-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: #ffffff;
+    transform: translateX(10px);
+}
+
+.rd-patent-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(0, 242, 255, 0.1);
+    color: #00f2ff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+}
+
+.rd-icon {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.rd-stat-box {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+
+
+/* =================SAFETY SECTION ================= */
+
+.safety-section {
+    background-color: #010409;
+    padding: 100px 0;
+    position: relative;
+}
+
+.safety-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(0, 242, 255, 0.3);
+    padding: 40px;
+    height: 100%;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.safety-card:hover {
+    background: rgba(0, 242, 255, 0.05);
+    border-style: solid;
+    border-color: #00f2ff;
+}
+
+.safety-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #00f2ff;
+    color: #010409;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.safety-stat {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.impact-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #00f2ff;
+    font-weight: 700;
+}
+
+.safety-badge {
+    background: #198754;
+    color: white;
+    padding: 5px 15px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 50px;
+    letter-spacing: 1px;
+}

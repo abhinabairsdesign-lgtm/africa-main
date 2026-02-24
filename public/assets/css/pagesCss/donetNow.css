@@ -1,0 +1,63 @@
+/* SINADAI Donation Page Styling */
+.donation-hero {
+    background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), 
+                url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1600');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+    color: white;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.donation-card {
+    background: #ffffff;
+    border-radius: 0;
+    border: 1px solid #eef0f2;
+    padding: 40px;
+    margin-top: -80px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.amount-btn {
+    border: 2px solid #eef0f2;
+    background: transparent;
+    padding: 15px;
+    width: 100%;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.amount-btn:hover, .amount-btn.active {
+    border-color: #ffbf00;
+    background: rgba(255, 191, 0, 0.05);
+    color: #0a192f;
+}
+
+.donate-submit-btn {
+    background: #198754; /* Success Green */
+    color: white;
+    border: none;
+    padding: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.donate-submit-btn:hover {
+    background: #146c43;
+    transform: translateY(-3px);
+}
+
+.impact-badge {
+    background: rgba(25, 135, 84, 0.1);
+    color: #198754;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}

@@ -1,0 +1,139 @@
+/* ===== Background ===== */
+.conversation-section {
+    background: linear-gradient(to right, #0B2A3A, #1B4A4A);
+    padding: 120px 0;
+    min-height: 420px;
+    margin-top: 100px;
+}
+
+/* ===== Small Top Text ===== */
+.mini-title {
+    color: #F39200;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* ===== Main Title ===== */
+.main-title {
+    color: #ffffff;
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: "Times New Roman", serif;
+}
+
+/* ===== Description ===== */
+.description {
+    color: #cfd8e3;
+    font-size: 18px;
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 992px) {
+    .main-title {
+        font-size: 42px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .conversation-section {
+        padding: 80px 15px;
+    }
+
+    .main-title {
+        font-size: 32px;
+    }
+
+    .description {
+        font-size: 15px;
+    }
+}
+
+
+
+/* ====================CONTACT US FORM SECTION ================ */
+
+.contact-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+/* Title */
+.section-title {
+    font-weight: 700;
+    font-family: "Times New Roman", serif;
+}
+
+/* Form */
+.form-control,
+.form-select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #dce3eb;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+/* Button */
+.submit-btn {
+    background: #0B2540;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
+.submit-btn:hover {
+    background: #0e3256;
+    color: #fff;
+}
+
+/* Info */
+.info-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background: #fff1e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #f39200;
+}
+
+/* Card */
+.commit-card {
+    background: #0B2540;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.commit-card p {
+    font-size: 14px;
+    opacity: .9;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .contact-section {
+        padding: 50px 10px;
+    }
+}

@@ -1,0 +1,1 @@
+// assets/logo/readme.txt for SINADAI Website
