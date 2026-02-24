@@ -58,8 +58,8 @@ Route::get('/market-pulse', [MarketController::class, 'pulse']);
 
 
 Route::get('/news', [NewsController::class, 'index']);   // renders the view
-Route::get('/news/fetch', [NewsController::class, 'fetch']);   // returns JSON
-Route::get('/news/newfetch', [NewsController::class, 'newfetch']); 
+// Route::get('/news/fetch', [NewsController::class, 'fetch']);   // returns JSON
+// Route::get('/news/newfetch', [NewsController::class, 'newfetch']); 
 
-Route::get('/news/africa-investment', [NewsController::class, 'fetchAfricanInvestmentNews']);
-Route::get('/articles/fetch', [ArticlesController::class, 'fetch']);
+// Route::get('/news/africa-investment', [NewsController::class, 'fetchAfricanInvestmentNews']);
+// Route::get('/articles/fetch', [ArticlesController::class, 'fetch']);

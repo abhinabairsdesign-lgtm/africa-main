@@ -1034,7 +1034,7 @@
         </div>
     </section> --}}
 
-    <section class="news-section py-5">
+    {{-- <section class="news-section py-5">
     <div class="container">
 
         <!-- Header -->
@@ -1051,10 +1051,8 @@
             </button>
         </div>
 
-        <!-- News Grid (JS fills this) -->
         <div class="row g-4" id="news-grid">
 
-            {{-- Skeleton loader (shown before JS loads data) --}}
             @for ($i = 0; $i < 5; $i++)
                 <div class="col-lg-4">
                     <div class="news-card placeholder-card h-100">
@@ -1074,6 +1072,46 @@
             @endfor
 
         </div>
+    </div>
+</section> --}}
+
+<section class="news-section py-5">
+    <div class="container">
+
+        <div class="d-flex align-items-center mb-4">
+            <h2 class="h4 fw-bold mb-0 me-3">
+                <i class="bi bi-newspaper me-2"></i>
+                Today's Pan-West Africa Investment News
+            </h2>
+            <button class="btn btn-sm btn-light border ms-auto"
+                    onclick="loadAfricanInvestmentNews()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Refresh All News
+            </button>
+        </div>
+
+        <div class="row g-4" id="news-grid">
+            @for ($i = 0; $i < 6; $i++)
+                <div class="col-lg-4">
+                    <div class="news-card h-100">
+                        <div class="card-img-wrap" style="background:#e9ecef;height:200px">
+                            <div class="sk" style="width:100%;height:100%;border-radius:0"></div>
+                        </div>
+                        <div class="p-4">
+                            <div class="sk mb-2" style="height:13px;width:30%"></div>
+                            <div class="sk mb-2" style="height:18px;width:100%"></div>
+                            <div class="sk mb-2" style="height:18px;width:80%"></div>
+                            <div class="sk mb-3" style="height:13px;width:60%"></div>
+                            <div class="d-flex justify-content-between pt-3 border-top">
+                                <div class="sk" style="height:12px;width:40%"></div>
+                                <div class="sk" style="height:12px;width:20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        </div>
+
     </div>
 </section>
 

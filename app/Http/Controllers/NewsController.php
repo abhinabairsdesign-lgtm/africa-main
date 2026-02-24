@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class NewsController extends Controller
 {
 
-/**
+    /**
      * Show the live news board view.
      */
     public function index()
@@ -66,49 +66,49 @@ class NewsController extends Controller
             'count'    => count($articles),
         ]);
     }
-    public function fetchAfricanInvestmentNews()
-{
-    $apiKey = config('services.marketaux.key');
+    // public function fetchAfricanInvestmentNews()
+    // {
+    //     $apiKey = config('services.marketaux.key');
 
-    $cacheKey = 'marketaux_africa_news';
+    //     $cacheKey = 'marketaux_africa_news';
 
-    $articles = Cache::remember($cacheKey, 120, function () use ($apiKey) {
+    //     $articles = Cache::remember($cacheKey, 120, function () use ($apiKey) {
 
-        $response = Http::timeout(10)->get(
-            'https://api.marketaux.com/v1/news/all',
-            [
-                'api_token' => $apiKey,
-                'countries' => 'ng,gh,ke,za,eg,ci',
-                'language'  => 'en',
-                'filter_entities' => 'true',
-                'limit' => 6,
-            ]
-        );
+    //         $response = Http::timeout(10)->get(
+    //             'https://api.marketaux.com/v1/news/all',
+    //             [
+    //                 'api_token' => $apiKey,
+    //                 'countries' => 'ng,gh,ke,za,eg,ci',
+    //                 'language'  => 'en',
+    //                 'filter_entities' => 'true',
+    //                 'limit' => 6,
+    //             ]
+    //         );
 
-        if ($response->failed()) {
-            return [];
-        }
+    //         if ($response->failed()) {
+    //             return [];
+    //         }
 
-        return collect($response->json('data') ?? [])
-            ->map(fn ($item) => [
-                'title'       => $item['title'] ?? '',
-                'description' => $item['description'] ?? '',
-                'url'         => $item['url'] ?? '#',
-                'image'       => $item['image_url'] ?? null,
-                'source'      => $item['source'] ?? 'MarketAux',
-                'published'   => $item['published_at'] ?? null,
-                'country'     => strtolower($item['countries'][0] ?? ''),
-                'category'    => $item['industries'][0] ?? 'Investment',
-            ])
-            ->values()
-            ->all();
-    });
+    //         return collect($response->json('data') ?? [])
+    //             ->map(fn($item) => [
+    //                 'title'       => $item['title'] ?? '',
+    //                 'description' => $item['description'] ?? '',
+    //                 'url'         => $item['url'] ?? '#',
+    //                 'image'       => $item['image_url'] ?? null,
+    //                 'source'      => $item['source'] ?? 'MarketAux',
+    //                 'published'   => $item['published_at'] ?? null,
+    //                 'country'     => strtolower($item['countries'][0] ?? ''),
+    //                 'category'    => $item['industries'][0] ?? 'Investment',
+    //             ])
+    //             ->values()
+    //             ->all();
+    //     });
 
-    return response()->json([
-        'success'  => true,
-        'articles' => $articles,
-    ]);
-}
+    //     return response()->json([
+    //         'success'  => true,
+    //         'articles' => $articles,
+    //     ]);
+    // }
 
     /**
      * Fetch latest news from NewsAPI.ai
@@ -193,32 +193,91 @@ class NewsController extends Controller
     //     };
     // }
 
+    public function fetchAfricanInvestmentNews()
+    {
+        $apiKey = config('services.newsdata.key'); // ← same key you already use
+
+        // Rotate through African countries so we get variety across 6 cards.
+        // newsdata free tier allows ONE country per request, so we make
+        // 3 parallel requests for different countries and merge the results.
+        $targets = [
+            ['country' => 'ng', 'category' => 'business'],  // Nigeria
+            ['country' => 'gh', 'category' => 'business'],  // Ghana
+            ['country' => 'ke', 'category' => 'business'],  // Kenya
+        ];
+
+        $cacheKey = 'newsdata_africa_investment';
+
+        $articles = Cache::remember($cacheKey, 120, function () use ($apiKey, $targets) {
+
+            $all = [];
+
+            foreach ($targets as $target) {
+                $response = Http::timeout(10)->get('https://newsdata.io/api/1/news', [
+                    'apikey'   => $apiKey,
+                    'country'  => $target['country'],
+                    'category' => $target['category'],
+                    'language' => 'en',
+                ]);
+
+                if ($response->failed()) continue;
+
+                $results = $response->json('results') ?? [];
+
+                // Take 2 articles per country → 6 total for the grid
+                $slice = collect($results)
+                    ->take(2)
+                    ->map(fn($item) => [
+                        'title'       => $item['title']       ?? '',
+                        'description' => $item['description'] ?? '',
+                        'url'         => $item['link']        ?? '#',
+                        'image'       => $item['image_url']   ?? null,
+                        'source'      => $item['source_id']   ?? 'Unknown',
+                        'published'   => $item['pubDate']     ?? null,
+                        'country'     => $target['country'],
+                        // newsdata returns category as array e.g. ["business"]
+                        'category'    => $item['category']    ?? ['business'],
+                    ])
+                    ->all();
+
+                $all = array_merge($all, $slice);
+            }
+
+            return $all;
+        });
+
+        return response()->json([
+            'success'  => true,
+            'articles' => $articles,
+            'count'    => count($articles),
+        ]);
+    }
 
     public function newfetch()
-{
-   $response = Http::withHeaders([
-    'x-rapidapi-host' => 'real-time-news-data.p.rapidapi.com',
-    'x-rapidapi-key'  => config('services.rapidapi.key'),
-])->get('https://real-time-news-data.p.rapidapi.com/search', [
-    'query' => 'Football',
-    'limit' => 10,
-    'country' => 'US',
-    'lang' => 'en'
-]);
+    {
+        $response = Http::withHeaders([
+            'x-rapidapi-host' => 'real-time-news-data.p.rapidapi.com',
+            'x-rapidapi-key'  => config('services.rapidapi.key'),
+        ])->get('https://real-time-news-data.p.rapidapi.com/search', [
+            'query' => 'Football',
+            'limit' => 10,
+            'country' => 'US',
+            'lang' => 'en'
+        ]);
 
-if ($response->failed()) {
-    Log::error('RapidAPI FAILED', [
-        'status' => $response->status(),
-        'body'   => $response->body(),
-        'json'   => $response->json(),
-        'headers'=> $response->headers(),
-    ]);
+        if ($response->failed()) {
+            Log::error('RapidAPI FAILED', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+                'json'   => $response->json(),
+                'headers' => $response->headers(),
+            ]);
 
-    return response()->json([
-        'success' => false,
-        'error' => 'RapidAPI request failed',
-        'status' => $response->status(),
-    ], 500);
-}
-}
+            return response()->json([
+                'success' => false,
+                'error' => 'RapidAPI request failed',
+                'status' => $response->status(),
+            ], 500);
+        }
+    }
 }

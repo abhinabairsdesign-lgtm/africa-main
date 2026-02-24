@@ -1812,3 +1812,124 @@ body {
     border-top: 1px solid #1f2937;
     font-size: 12px;
 }
+
+/* ====== news new ====== */
+
+.news-section { background: #f8f9fa; }
+
+.news-card {
+    background    : #fff;
+    border-radius : 16px;
+    overflow      : hidden;
+    box-shadow    : 0 2px 16px rgba(0,0,0,.08);
+    transition    : transform .2s, box-shadow .2s;
+    display       : flex;
+    flex-direction: column;
+    cursor        : pointer;
+}
+
+.news-card:hover {
+    transform : translateY(-4px);
+    box-shadow: 0 10px 32px rgba(0,0,0,.13);
+}
+
+.card-img-wrap {
+    position   : relative;
+    height     : 200px;
+    overflow   : hidden;
+    background : #1a1a2e;
+    flex-shrink: 0;
+}
+
+.card-img-wrap img {
+    width     : 100%;
+    height    : 100%;
+    object-fit: cover;
+    display   : block;
+    transition: transform .35s ease;
+}
+
+.news-card:hover .card-img-wrap img { transform: scale(1.05); }
+
+.img-placeholder {
+    width          : 100%;
+    height         : 100%;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-size      : 3.5rem;
+    background     : linear-gradient(135deg,#1a1a2e,#16213e);
+}
+
+/* ── BADGES ── */
+.category-badge {
+    position      : absolute !important;
+    top           : 12px;
+    left          : 12px;
+    font-size     : .7rem !important;
+    font-weight   : 700 !important;
+    padding       : .3rem .85rem !important;
+    border-radius : 20px !important;
+    letter-spacing: .04em;
+    text-transform: capitalize;
+    color         : #fff !important;
+    background    : #6c3fc5 !important;
+}
+
+.category-badge.business     { background: #00695c !important; }
+.category-badge.top          { background: #b71c1c !important; }
+.category-badge.technology   { background: #0277bd !important; }
+.category-badge.politics     { background: #4527a0 !important; }
+.category-badge.health       { background: #ad1457 !important; }
+.category-badge.sports       { background: #2e7d32 !important; }
+.category-badge.science      { background: #00838f !important; }
+.category-badge.entertainment{ background: #e65100 !important; }
+.category-badge.environment  { background: #558b2f !important; }
+
+.grade-badge {
+    position      : absolute !important;
+    top           : 12px;
+    right         : 12px;
+    background    : linear-gradient(135deg,#f9a825,#f57f17) !important;
+    color         : #000 !important;
+    font-size     : .68rem !important;
+    font-weight   : 800 !important;
+    padding       : .3rem .85rem !important;
+    border-radius : 20px !important;
+}
+
+/* ── CARD BODY ── */
+.news-card .p-4 { flex: 1; display: flex; flex-direction: column; }
+.news-card p.text-muted { flex: 1; }
+
+.news-card h5 {
+    font-size          : .95rem;
+    line-height        : 1.45;
+    display            : -webkit-box;
+    -webkit-line-clamp : 3;
+    -webkit-box-orient : vertical;
+    overflow           : hidden;
+}
+
+.news-card p.text-muted.small {
+    font-size          : .8rem;
+    line-height        : 1.55;
+    display            : -webkit-box;
+    -webkit-line-clamp : 3;
+    -webkit-box-orient : vertical;
+    overflow           : hidden;
+}
+
+/* ── SKELETON ── */
+.sk {
+    display         : block;
+    background      : linear-gradient(90deg,#e9ecef 25%,#dee2e6 50%,#e9ecef 75%);
+    background-size : 200% 100%;
+    animation       : sk-shine 1.4s infinite;
+    border-radius   : 5px;
+}
+
+@keyframes sk-shine { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+.state-card { text-align:center; padding:3rem 1rem; color:#aaa; }
+.state-card .icon { font-size:2.5rem; margin-bottom:.5rem; }

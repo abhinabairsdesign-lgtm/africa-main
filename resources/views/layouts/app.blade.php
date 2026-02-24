@@ -322,7 +322,7 @@ async function fetchNews() {
     const params = new URLSearchParams({ category, country, language });
 
     try {
-        const res = await fetch(`/news/fetch?${params}`, {
+        const res = await fetch(`/api/news/fetch?${params}`, {
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
             }
@@ -606,7 +606,7 @@ setInterval(loadMarketPulse, REFRESH_MS);
 
 {{-- 
 ======== Today’s Pan-West Africa Investment News ====== --}}
-<script>
+{{-- <script>
 async function loadAfricanInvestmentNews() {
     const grid = document.getElementById('news-grid');
 
@@ -614,7 +614,7 @@ async function loadAfricanInvestmentNews() {
     grid.classList.add('loading');
 
     try {
-        const res = await fetch('/news/africa-investment');
+        const res = await fetch('/api/news/africa-investment');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const data = await res.json();
@@ -699,105 +699,172 @@ function esc(str = '') {
 }
 
 document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
-</script>
+</script> --}}
 
-{{-- <script>
-async function loadInvestmentArticles() {
-    try {
-        const res = await fetch('/articles/fetch?category=business');
-        const data = await res.json();
-
-        if (!data?.success || !Array.isArray(data.articles)) return;
-
-        const articles = data.articles;
-
-        // Sort newest first
-        articles.sort((a, b) => new Date(b.published) - new Date(a.published));
-
-        const row = document.querySelector('#investmentArticles .row');
-        if (!row) return;
-
-        if (!articles.length) {
-            row.innerHTML = `
-                <div class="col-12 text-muted text-center py-4">
-                    No investment articles available.
-                </div>`;
-            return;
-        }
-
-        row.innerHTML = articles.map(a => `
-            <div class="col-lg-4 col-md-6">
-                <div class="invest-card p-3 h-100 position-relative">
-
-                    <h6>${esc(a.title)}</h6>
-
-                    <div class="step">
-                        ${esc(normalizeCategory(a.category))}
-                    </div>
-
-                    <div class="return">
-                        ${formatAge(a.published)}
-                    </div>
-
-                    <p>
-                        ${esc((a.description || '').slice(0, 120))}
-                    </p>
-
-                    <small class="text-muted">
-                        Source: ${esc(a.source)}
-                    </small>
-
-                    <a href="${esc(a.url)}"
-                       target="_blank"
-                       rel="noopener"
-                       class="stretched-link"></a>
-                </div>
-            </div>
-        `).join('');
-
-    } catch (e) {
-        console.error('Failed loading investment articles', e);
-    }
-}
-
-// ---------------- HELPERS ----------------
-
-function normalizeCategory(cat) {
-    if (Array.isArray(cat)) return cat[0] || 'Investment';
-    return cat || 'Investment';
+<script>
+// ── Helpers ───────────────────────────────────────────────────────────────
+function esc(str = '') {
+    return String(str)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function formatAge(dateStr) {
     if (!dateStr) return '';
-
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return '';
-
-    const diffMs = Date.now() - date.getTime();
-    const diffMinutes = Math.floor(diffMs / 60000);
-
-    if (diffMinutes < 1) return 'Just now';
-    if (diffMinutes < 60) return `${diffMinutes}m ago`;
-
-    const diffHours = Math.floor(diffMinutes / 60);
-    if (diffHours < 24) return `${diffHours}h ago`;
-
-    const diffDays = Math.floor(diffHours / 24);
-    return `${diffDays}d ago`;
+    const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
+    if (diff < 1)    return 'Just now';
+    if (diff < 60)   return `${diff}m ago`;
+    if (diff < 1440) return `${Math.floor(diff / 60)}h ago`;
+    return `${Math.floor(diff / 1440)}d ago`;
 }
 
-function esc(value) {
-    return String(value ?? '')
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;')
-        .replace(/'/g,'&#39;');
+// ── newsdata.io returns category as string[] e.g. ["business","finance"] ──
+function getCatLabel(cat) {
+    // ❌ OLD: esc(a.category || 'Investment')  ← prints "[object Array]"
+    // ✅ FIX: grab first element of the array
+    if (Array.isArray(cat)) return cat[0] ?? 'Investment';
+    return cat || 'Investment';
 }
 
-document.addEventListener('DOMContentLoaded', loadInvestmentArticles);
-</script> --}}
+function getCatClass(cat) {
+    const label = getCatLabel(cat).toLowerCase();
+    const map = {
+        business    : 'business',
+        top         : 'top',
+        technology  : 'technology',
+        politics    : 'politics',
+        health      : 'health',
+        sports      : 'sports',
+        science     : 'science',
+        entertainment:'entertainment',
+        environment : 'environment',
+    };
+    return map[label] ?? '';
+}
 
+// Auto-grade from article richness
+function computeGrade(a) {
+    let s = 5;
+    if (a.image)                              s++;
+    if ((a.description?.length ?? 0) > 100)  s++;
+    if ((a.title?.length ?? 0) > 40)          s++;
+    if (Array.isArray(a.category) && a.category.length) s++;
+    return Math.min(s, 10);
+}
+
+// ── Skeleton ──────────────────────────────────────────────────────────────
+function showSkeleton() {
+    document.getElementById('news-grid').innerHTML = Array(6).fill(`
+        <div class="col-lg-4">
+            <div class="news-card h-100">
+                <div class="card-img-wrap" style="background:#e9ecef;height:200px">
+                    <div class="sk" style="width:100%;height:100%;border-radius:0"></div>
+                </div>
+                <div class="p-4">
+                    <div class="sk mb-2" style="height:13px;width:30%"></div>
+                    <div class="sk mb-2" style="height:18px;width:100%"></div>
+                    <div class="sk mb-2" style="height:18px;width:80%"></div>
+                    <div class="sk mb-3" style="height:13px;width:60%"></div>
+                    <div class="d-flex justify-content-between pt-3 border-top">
+                        <div class="sk" style="height:12px;width:40%"></div>
+                        <div class="sk" style="height:12px;width:20%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+// ── Main fetch ────────────────────────────────────────────────────────────
+async function loadAfricanInvestmentNews() {
+    const grid = document.getElementById('news-grid');
+    showSkeleton();
+
+    try {
+        // ❌ OLD: '/api/news/africa-investment'  ← 404, wrong prefix
+        // ✅ FIX: '/news/africa-investment'
+        const res = await fetch('/api/news/africa-investment', {
+            headers: {
+                'Accept'      : 'application/json',
+                // ✅ CSRF header required by Laravel for all fetch() calls
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+            }
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const data = await res.json();
+
+        if (!data.success || !data.articles?.length) {
+            grid.innerHTML = `
+                <div class="col-12 state-card">
+                    <div class="icon">📭</div>
+                    <p>No African investment news available right now.</p>
+                </div>`;
+            return;
+        }
+
+        grid.innerHTML = data.articles.map(a => {
+            const catLabel = getCatLabel(a.category);
+            const catCls   = getCatClass(a.category);
+            const g        = computeGrade(a);
+
+            const imgHtml = a.image
+                ? `<img src="${esc(a.image)}"
+                        alt=""
+                        loading="lazy"
+                        onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
+                : `<div class="img-placeholder">📰</div>`;
+
+            return `
+                <div class="col-lg-4 news-item ${esc(a.country || '')}">
+                    <div class="news-card h-100"
+                         onclick="window.open('${esc(a.url)}','_blank')">
+
+                        <div class="card-img-wrap">
+                            ${imgHtml}
+                            <span class="badge category-badge ${catCls}">
+                                ${esc(catLabel)}
+                            </span>
+                            <span class="badge grade-badge">
+                                ${g * 10}% Growth
+                            </span>
+                        </div>
+
+                        <div class="p-4">
+                            <h5 class="fw-bold">${esc(a.title)}</h5>
+
+                            ${a.description
+                                ? `<p class="text-muted small">${esc(a.description)}</p>`
+                                : '<p class="text-muted small">No description available.</p>'}
+
+                            <div class="d-flex align-items-center mt-3 pt-3 border-top">
+                                <small class="text-muted">
+                                    Source: ${esc(a.source || 'Market')}
+                                </small>
+                                <small class="ms-auto fw-bold">
+                                    Grade: ${g}/10
+                                </small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>`;
+        }).join('');
+
+    } catch (e) {
+        console.error('News load error:', e);
+        grid.innerHTML = `
+            <div class="col-12 state-card">
+                <div class="icon">⚠️</div>
+                <p>Failed to load investment news — ${e.message}</p>
+            </div>`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
+</script>
+
+{{-- ======== this is for the articals ========== --}}
 <script>
 let allArticles = [];
 let currentPage = 1;
@@ -805,7 +872,7 @@ const perPage = 6;
 
 async function loadInvestmentArticles() {
     try {
-        const res = await fetch('/articles/fetch?category=business');
+        const res = await fetch('/api/articles/fetch?category=business');
         const data = await res.json();
 
         if (!data?.success || !Array.isArray(data.articles)) return;
