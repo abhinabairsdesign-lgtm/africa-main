@@ -1340,3 +1340,335 @@
 
 
 @endsection
+@push('scripts')
+
+ <script>
+        // ── Config ────────────────────────────────────────────────────────────────
+        const REFRESH_MS = 60000; // 60 seconds
+
+        // ── Helpers ───────────────────────────────────────────────────────────────
+        function fmt(val, dec = 2) {
+            const n = parseFloat(val);
+            if (!val || isNaN(n)) return '—';
+            return n.toLocaleString('en-US', {
+                minimumFractionDigits: dec,
+                maximumFractionDigits: dec,
+            });
+        }
+
+        // ── Fetch & render ────────────────────────────────────────────────────────
+        function loadMarketPulse() {
+
+            fetch('/market-pulse', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+                    }
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(json => {
+                    if (!json.success || !json.stocks) throw new Error('Bad response');
+
+                    json.stocks.forEach(stock => {
+
+                        // data-symbol="NPN:JSE" matches stock.key "NPN:JSE"
+                        const card = document.querySelector(
+                            `.market-card[data-symbol="${stock.key}"]`
+                        );
+                        if (!card) return;
+
+                        const priceEl = card.querySelector('.price');
+                        const changeEl = card.querySelector('.change');
+
+                        // ── Error state ───────────────────────────────────────────────
+                        if (stock.error || stock.price == null) {
+                            priceEl.textContent = '—';
+                            changeEl.textContent = 'No data';
+                            changeEl.className = 'change';
+                            return;
+                        }
+
+                        // ── Price ─────────────────────────────────────────────────────
+                        priceEl.textContent = `${stock.currency} ${fmt(stock.price)}`;
+
+                        // ── Change % ──────────────────────────────────────────────────
+                        const pct = parseFloat(stock.change_pct);
+                        if (!isNaN(pct)) {
+                            const dir = pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat';
+                            changeEl.textContent =
+                                `${pct > 0 ? '▲' : pct < 0 ? '▼' : '→'} ${Math.abs(pct).toFixed(2)}% today`;
+                            changeEl.className = `change ${dir}`;
+
+                            // top-border colour on card
+                            card.classList.remove('up', 'down', 'flat');
+                            card.classList.add(dir);
+                        }
+                    });
+                })
+                .catch(err => console.error('Market Pulse Error:', err));
+        }
+
+        // ── Init + auto-refresh ───────────────────────────────────────────────────
+        loadMarketPulse();
+        setInterval(loadMarketPulse, REFRESH_MS);
+    </script>
+
+    {{-- =================== this is for the bottom news section ============================ --}}
+
+    <script>
+let allNews = [];
+let currentPages = 1;
+const perPages = 3;
+
+// ── Helpers ─────────────────────────────────────────────
+function esc(str = '') {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function getCatLabel(cat) {
+    if (Array.isArray(cat)) return cat[0] ?? 'Investment';
+    return cat || 'Investment';
+}
+
+function getCatClass(cat) {
+    const label = getCatLabel(cat).toLowerCase();
+    const map = {
+        business: 'business',
+        technology: 'technology',
+        politics: 'politics',
+        health: 'health',
+        sports: 'sports',
+        science: 'science',
+        entertainment: 'entertainment',
+        environment: 'environment',
+    };
+    return map[label] ?? '';
+}
+
+function computeGrade(a) {
+    let s = 5;
+    if (a.image) s++;
+    if ((a.description?.length ?? 0) > 100) s++;
+    if ((a.title?.length ?? 0) > 40) s++;
+    if (Array.isArray(a.category) && a.category.length) s++;
+    return Math.min(s, 10);
+}
+
+// ── Fetch ─────────────────────────────────────────────
+async function loadAfricanInvestmentNews() {
+    const grid = document.getElementById('news-grid');
+    grid.innerHTML = `<div class="col-12 text-center py-5">Loading news...</div>`;
+
+    try {
+        const res = await fetch('/api/news/africa-investment');
+        const data = await res.json();
+
+        if (!data.success || !data.articles?.length) {
+            grid.innerHTML = `<div class="col-12 text-center">No news available.</div>`;
+            return;
+        }
+
+        // Save all articles
+        allNews = data.articles;
+
+        currentPages = 1;
+
+        renderNews();
+
+    } catch (e) {
+        grid.innerHTML = `<div class="col-12 text-center text-danger">
+            Failed to load news.
+        </div>`;
+    }
+}
+
+// ── Render With Pagination ─────────────────────────────
+function renderNews() {
+    const grid = document.getElementById('news-grid');
+    const loadBtn = document.getElementById('loadMoreBtnMore');
+
+    const end = currentPages * perPages;
+    const newsToShow = allNews.slice(0, end);
+
+    grid.innerHTML = newsToShow.map(a => {
+        const catLabel = getCatLabel(a.category);
+        const catCls = getCatClass(a.category);
+        const g = computeGrade(a);
+
+        const imgHtml = a.image
+            ? `<img src="${esc(a.image)}"
+                    loading="lazy"
+                    style="height:200px;width:100%;object-fit:cover"
+                    onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
+            : `<div class="img-placeholder">📰</div>`;
+
+        return `
+        <div class="col-lg-4 mb-4">
+            <div class="news-card h-100 shadow-sm"
+                 onclick="window.open('${esc(a.url)}','_blank')"
+                 style="cursor:pointer;">
+
+                <div class="card-img-wrap position-relative">
+                    ${imgHtml}
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-2">
+                        ${esc(catLabel)}
+                    </span>
+                </div>
+
+                <div class="p-3">
+                    <h6 class="fw-bold">${esc(a.title)}</h6>
+
+                    <p class="text-muted small">
+                        ${esc(a.description || 'No description available.')}
+                    </p>
+
+                    <div class="d-flex justify-content-between small text-muted border-top pt-2">
+                        <span>${esc(a.source)}</span>
+                        <span>Grade ${g}/10</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>`;
+    }).join('');
+
+    // Show / Hide button
+    if (end >= allNews.length) {
+        loadBtn.classList.add('d-none');
+    } else {
+        loadBtn.classList.remove('d-none');
+    }
+}
+
+// ── Load More Button ─────────────────────────────
+function loadMoreNews() {
+    currentPages++;
+    renderNews();
+}
+
+// ── Init ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
+</script>
+
+    {{-- ======== this is for the articals ========== --}}
+    <script>
+        let allArticles = [];
+        let currentPage = 1;
+        const perPage = 6;
+
+        async function loadInvestmentArticles() {
+            try {
+                const res = await fetch('/api/articles/fetch?category=business');
+                const data = await res.json();
+
+                if (!data?.success || !Array.isArray(data.articles)) return;
+
+                // Sort newest first
+                allArticles = data.articles.sort(
+                    (a, b) => new Date(b.published) - new Date(a.published)
+                );
+
+                renderNewsArticles();
+
+            } catch (e) {
+                console.error('Failed loading investment articles', e);
+            }
+        }
+
+        function renderNewsArticles() {
+            const row = document.querySelector('#investmentArticles .row');
+            if (!row) return;
+
+            const end = currentPage * perPage;
+            const articlesToShow = allArticles.slice(0, end);
+
+            row.innerHTML = articlesToShow.map(a => `
+        <div class="col-lg-4 col-md-6">
+            <div class="invest-card p-3 h-100 position-relative">
+
+                <h6>${esc(a.title)}</h6>
+
+                <div class="step">
+                    ${esc(normalizeCategory(a.category))}
+                </div>
+
+                <div class="return">
+                    ${formatAge(a.published)}
+                </div>
+
+                <p>
+                    ${esc((a.description || '').slice(0, 120))}
+                </p>
+
+                <small class="text-muted">
+                    Source: ${esc(a.source)}
+                </small>
+
+                <a href="${esc(a.url)}"
+                   target="_blank"
+                   rel="noopener"
+                   class="stretched-link"></a>
+            </div>
+        </div>
+    `).join('');
+
+            // Hide button if no more articles
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (end >= allArticles.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
+
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            currentPage++;
+            renderNewsArticles();
+        });
+
+        // ---------------- HELPERS ----------------
+
+        function normalizeCategory(cat) {
+            if (Array.isArray(cat)) return cat[0] || 'Investment';
+            return cat || 'Investment';
+        }
+
+        function formatAge(dateStr) {
+            if (!dateStr) return '';
+
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '';
+
+            const diffMs = Date.now() - date.getTime();
+            const diffMinutes = Math.floor(diffMs / 60000);
+
+            if (diffMinutes < 1) return 'Just now';
+            if (diffMinutes < 60) return `${diffMinutes}m ago`;
+
+            const diffHours = Math.floor(diffMinutes / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
+
+            const diffDays = Math.floor(diffHours / 24);
+            return `${diffDays}d ago`;
+        }
+
+        function esc(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadInvestmentArticles);
+    </script>
+
+@endpush

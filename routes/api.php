@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArgriculturalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticlesController;
@@ -20,3 +21,5 @@ Route::get('/news/newfetch', [NewsController::class, 'newfetch']);
 
 Route::get('/news/africa-investment', [NewsController::class, 'fetchAfricanInvestmentNews']);
 Route::get('/articles/fetch', [ArticlesController::class, 'fetch']);
+
+Route::get('/field-telemetry', [ArgriculturalController::class, 'fetchFieldTelemetry']);

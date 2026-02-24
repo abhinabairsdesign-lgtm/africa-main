@@ -45,7 +45,7 @@
         </section>
 
         <!--==============OUR AGRICULTURE DASHBOARD SECTION ================-->
-        <section class="agri-dashboard text-white">
+        {{-- <section class="agri-dashboard text-white">
             <div class="container">
                 <div class="row mb-5">
                     <div class="col-lg-6">
@@ -123,7 +123,116 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
+
+        <section class="agri-dashboard text-white">
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold">
+                    Live <span style="color: #8bc34a;">Field Telemetry</span>
+                </h2>
+                <p class="text-secondary">
+                    Real-time monitoring of soil health and climate conditions across our primary plantations.
+                </p>
+            </div>
+
+            <div class="col-lg-6 d-flex align-items-center justify-content-lg-end">
+                <select id="countrySelect" class="form-select w-auto bg-dark text-white border-secondary">
+                    <option value="ng">Nigeria</option>
+                    <option value="gh">Ghana</option>
+                    <option value="ke">Kenya</option>
+                    <option value="za">South Africa</option>
+                    <option value="eg">Egypt</option>
+                    <option value="sn">Senegal</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Climate -->
+            <div class="col-lg-4">
+                <div class="db-panel">
+                    <span class="db-title">Climate Conditions</span>
+
+                    <div class="mb-4">
+                        <div class="db-value" id="tempValue">
+                            --<span class="db-unit">°C</span>
+                        </div>
+                        <small class="text-secondary">Ambient Temperature</small>
+                    </div>
+
+                    <div class="sensor-grid">
+                        <div class="sensor-item">
+                            <div class="fw-bold text-white" id="humidityValue">--%</div>
+                            <small class="text-secondary" style="font-size: 9px;">Humidity</small>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="fw-bold text-white" id="precipValue">
+                                --<span style="font-size: 8px;">mm</span>
+                            </div>
+                            <small class="text-secondary" style="font-size: 9px;">Precipitation</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soil -->
+            <div class="col-lg-4">
+                <div class="db-panel">
+                    <span class="db-title">Soil Composition (Simulated)</span>
+
+                    <div class="mb-4">
+                        <div class="db-value" id="phValue">
+                            --<span class="db-unit">pH</span>
+                        </div>
+                        <small class="text-secondary">Soil Acidity Levels</small>
+                    </div>
+
+                    <div class="sensor-grid">
+                        <div class="sensor-item border-start border-info">
+                            <div class="fw-bold text-info" id="nitrogenValue">--</div>
+                            <small class="text-secondary" style="font-size: 9px;">Nitrogen (N)</small>
+                        </div>
+                        <div class="sensor-item border-start border-warning">
+                            <div class="fw-bold text-warning" id="potassiumValue">--</div>
+                            <small class="text-secondary" style="font-size: 9px;">Potassium (K)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Yield -->
+            <div class="col-lg-4">
+                <div class="db-panel">
+                    <span class="db-title">AI Yield Forecast</span>
+
+                    <div class="mb-4">
+                        <div class="db-value text-success" id="yieldValue">
+                            --<span class="db-unit">%</span>
+                        </div>
+                        <small class="text-secondary">Projected vs Previous Cycle</small>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between small mb-1">
+                            <span>Harvest Readiness</span>
+                            <span id="harvestPercent">--%</span>
+                        </div>
+                        <div class="progress bg-dark" style="height: 4px;">
+                            <div class="progress-bar bg-success"
+                                 id="harvestBar"
+                                 style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
         <!--============aGRI PILLARS SECTION =============-->
 
@@ -475,6 +584,63 @@
                 </div>
             </div>
         </section>
-
-
 @endsection
+@push('scripts')
+
+<script>
+async function loadFieldTelemetry() {
+
+    const country = document.getElementById('countrySelect').value;
+
+    try {
+        const res = await fetch(`/api/field-telemetry?country=${country}`);
+        const data = await res.json();
+
+        if (!data.success) return;
+
+        // Climate
+        document.getElementById('tempValue').innerHTML =
+            data.temperature + '<span class="db-unit">°C</span>';
+
+        document.getElementById('humidityValue').innerText =
+            data.humidity + '%';
+
+        document.getElementById('precipValue').innerHTML =
+            data.precip + '<span style="font-size:8px;">mm</span>';
+
+        // Simulated Soil Data
+        const ph = (6 + (data.humidity / 100)).toFixed(1);
+        document.getElementById('phValue').innerHTML =
+            ph + '<span class="db-unit">pH</span>';
+
+        document.getElementById('nitrogenValue').innerText =
+            data.humidity > 60 ? 'High' : 'Moderate';
+
+        document.getElementById('potassiumValue').innerText =
+            data.temperature > 25 ? 'Optimum' : 'Low';
+
+        // AI Yield Forecast
+        const yieldForecast = Math.min(20, (data.temperature / 2)).toFixed(1);
+        document.getElementById('yieldValue').innerHTML =
+            '+' + yieldForecast + '<span class="db-unit">%</span>';
+
+        const harvest = Math.min(100, data.humidity + 20);
+        document.getElementById('harvestPercent').innerText =
+            harvest + '%';
+
+        document.getElementById('harvestBar').style.width =
+            harvest + '%';
+
+    } catch (error) {
+        console.error('Telemetry error:', error);
+    }
+}
+
+// Reload when country changes
+document.getElementById('countrySelect')
+    .addEventListener('change', loadFieldTelemetry);
+
+document.addEventListener('DOMContentLoaded', loadFieldTelemetry);
+</script>
+    
+@endpush
