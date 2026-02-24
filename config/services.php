@@ -58,4 +58,8 @@ return [
     'key' => env('WEATHER_API_KEY'),
 ],
 
+'eia' => [
+    'key' => env('EIA_API_KEY'),
+],
+
 ];

@@ -55,7 +55,7 @@
 
         <!-- ====================live stream section =============== -->
 
-        <section class="petro-pulse-section text-white">
+        {{-- <section class="petro-pulse-section text-white">
             <div class="container">
                 <div class="row mb-5 align-items-center">
                     <div class="col-lg-6">
@@ -108,7 +108,74 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
+        <section class="petro-pulse-section text-white">
+    <div class="container">
+
+        <div class="row mb-5 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="h4 fw-bold mb-0">
+                    <span class="status-dot"></span>
+                    Real-Time <span style="color: #ffbf00;">Market Pulse</span>
+                </h2>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <small id="marketUpdated"
+                       class="text-secondary text-uppercase tracking-widest"
+                       style="font-size: 10px;">
+                    Last Update: --
+                </small>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Brent -->
+            <div class="col-lg-3 col-md-6">
+                <div class="pulse-card-premium">
+                    <span class="ticker-label">Brent Crude Oil</span>
+                    <span class="ticker-price" id="brentPrice">$--</span>
+                    <span class="ticker-change" id="brentChange"></span>
+                </div>
+            </div>
+
+            <!-- Natural Gas -->
+            <div class="col-lg-3 col-md-6">
+                <div class="pulse-card-premium">
+                    <span class="ticker-label">Natural Gas (HH)</span>
+                    <span class="ticker-price" id="gasPrice">$--</span>
+                    <span class="ticker-change" id="gasChange"></span>
+                </div>
+            </div>
+
+            <!-- Risk Mapping -->
+            <div class="col-lg-6">
+                <div class="pulse-card-premium" style="border-left-color: #00f2ff;">
+                    <span class="ticker-label">Jurisdictional Risk Mapping</span>
+
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <small class="d-block text-secondary">West Africa Hub</small>
+                            <span class="fw-bold" id="westAfricaRisk">--</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="d-block text-secondary">East Africa Gas</small>
+                            <span class="fw-bold text-info" id="eastAfricaRisk">--</span>
+                        </div>
+                    </div>
+
+                    <div class="risk-indicator">
+                        <small class="text-secondary small">
+                            Structured data analysis reduces investment hazard.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
         <!-- ===================RISK MAPPING SECTION ============= -->
 
@@ -302,3 +369,44 @@
         </section>
 
 @endsection
+@push('scripts')
+<script>
+    async function loadAfricaMarketPulse() {
+    const res = await fetch('/api/africa-market-gass');
+    const json = await res.json();
+    if (!json.success) return;
+
+    const d = json.data;
+
+    document.getElementById('brentPrice').innerText =
+        '$' + parseFloat(d.brent_price).toFixed(2);
+
+    document.getElementById('gasPrice').innerText =
+        '$' + parseFloat(d.gas_price).toFixed(2);
+
+    document.getElementById('marketUpdated').innerText =
+        'Last Update: ' + d.updated_at;
+
+    // Brent
+    document.getElementById('brentChange').innerHTML =
+        d.brent_change >= 0
+            ? `<span class="text-success">+${d.brent_change}% <i class="bi bi-graph-up"></i></span>`
+            : `<span class="text-danger">${d.brent_change}% <i class="bi bi-graph-down"></i></span>`;
+
+    // Gas
+    document.getElementById('gasChange').innerHTML =
+        d.gas_change >= 0
+            ? `<span class="text-success">+${d.gas_change}% <i class="bi bi-graph-up"></i></span>`
+            : `<span class="text-danger">${d.gas_change}% <i class="bi bi-graph-down"></i></span>`;
+
+    // Risk Logic
+    document.getElementById('westAfricaRisk').innerText =
+        d.brent_price > 80 ? 'Growth (A-)' : 'Stable (B+)';
+
+    document.getElementById('eastAfricaRisk').innerText =
+        d.gas_price > 3 ? 'Expansion (A)' : 'Stable (B)';
+}
+
+document.addEventListener('DOMContentLoaded', loadAfricaMarketPulse);
+</script>
+@endpush

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArgriculturalController;
+use App\Http\Controllers\GassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticlesController;
@@ -23,3 +24,6 @@ Route::get('/news/africa-investment', [NewsController::class, 'fetchAfricanInves
 Route::get('/articles/fetch', [ArticlesController::class, 'fetch']);
 
 Route::get('/field-telemetry', [ArgriculturalController::class, 'fetchFieldTelemetry']);
+
+
+Route::get('/africa-market-gass', [GassController::class, 'fetchAfricaMarketPulse']);
