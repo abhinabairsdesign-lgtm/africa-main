@@ -271,7 +271,7 @@ class NewsController extends Controller
         shuffle($countries);
 
         // Take first 3 countries per request (to avoid too many API calls)
-        $selectedCountries = array_slice($countries, 0, 3);
+        $selectedCountries = array_slice($countries, 0, 4);
 
         $cacheKey = "newsdata_africa_{$category}";
 
@@ -293,7 +293,7 @@ class NewsController extends Controller
                 $results = $response->json('results') ?? [];
 
                 $slice = collect($results)
-                    ->take(2) // 2 per country → 6 total
+                    ->take(3) // 2 per country → 6 total
                     ->map(fn($item) => [
                         'title'       => $item['title']       ?? '',
                         'description' => $item['description'] ?? '',

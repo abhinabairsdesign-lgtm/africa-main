@@ -54,5 +54,8 @@ return [
 'rapidapi' => [
     'key' => env('RAPIDAPI_KEY'),
 ],
+'weatherapi' => [
+    'key' => env('WEATHER_API_KEY'),
+],
 
 ];

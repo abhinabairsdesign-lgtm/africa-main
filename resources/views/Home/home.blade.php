@@ -1091,7 +1091,7 @@
         </div>
 
         <div class="row g-4" id="news-grid">
-            @for ($i = 0; $i < 6; $i++)
+            @for ($i = 0; $i < 8; $i++)
                 <div class="col-lg-4">
                     <div class="news-card h-100">
                         <div class="card-img-wrap" style="background:#e9ecef;height:200px">
@@ -1111,6 +1111,12 @@
                 </div>
             @endfor
         </div>
+        <div class="text-center mt-4">
+    <button id="loadMoreBtnMore" class="btn btn-dark px-4"
+        onclick="loadMoreNews()">
+    Read More News
+</button>
+</div>
 
     </div>
 </section>

@@ -662,7 +662,7 @@ function changeLanguage(lang) {
 
 
     {{-- =================== this is for the bottom news section ============================ --}}
-    <script>
+    {{-- <script>
         // ── Helpers ───────────────────────────────────────────────────────────────
         function esc(str = '') {
             return String(str)
@@ -823,7 +823,146 @@ function changeLanguage(lang) {
         }
 
         document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
-    </script>
+    </script> --}}
+
+    <script>
+let allNews = [];
+let currentPages = 1;
+const perPages = 3;
+
+// ── Helpers ─────────────────────────────────────────────
+function esc(str = '') {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function getCatLabel(cat) {
+    if (Array.isArray(cat)) return cat[0] ?? 'Investment';
+    return cat || 'Investment';
+}
+
+function getCatClass(cat) {
+    const label = getCatLabel(cat).toLowerCase();
+    const map = {
+        business: 'business',
+        technology: 'technology',
+        politics: 'politics',
+        health: 'health',
+        sports: 'sports',
+        science: 'science',
+        entertainment: 'entertainment',
+        environment: 'environment',
+    };
+    return map[label] ?? '';
+}
+
+function computeGrade(a) {
+    let s = 5;
+    if (a.image) s++;
+    if ((a.description?.length ?? 0) > 100) s++;
+    if ((a.title?.length ?? 0) > 40) s++;
+    if (Array.isArray(a.category) && a.category.length) s++;
+    return Math.min(s, 10);
+}
+
+// ── Fetch ─────────────────────────────────────────────
+async function loadAfricanInvestmentNews() {
+    const grid = document.getElementById('news-grid');
+    grid.innerHTML = `<div class="col-12 text-center py-5">Loading news...</div>`;
+
+    try {
+        const res = await fetch('/api/news/africa-investment');
+        const data = await res.json();
+
+        if (!data.success || !data.articles?.length) {
+            grid.innerHTML = `<div class="col-12 text-center">No news available.</div>`;
+            return;
+        }
+
+        // Save all articles
+        allNews = data.articles;
+
+        currentPages = 1;
+
+        renderNews();
+
+    } catch (e) {
+        grid.innerHTML = `<div class="col-12 text-center text-danger">
+            Failed to load news.
+        </div>`;
+    }
+}
+
+// ── Render With Pagination ─────────────────────────────
+function renderNews() {
+    const grid = document.getElementById('news-grid');
+    const loadBtn = document.getElementById('loadMoreBtnMore');
+
+    const end = currentPages * perPages;
+    const newsToShow = allNews.slice(0, end);
+
+    grid.innerHTML = newsToShow.map(a => {
+        const catLabel = getCatLabel(a.category);
+        const catCls = getCatClass(a.category);
+        const g = computeGrade(a);
+
+        const imgHtml = a.image
+            ? `<img src="${esc(a.image)}"
+                    loading="lazy"
+                    style="height:200px;width:100%;object-fit:cover"
+                    onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
+            : `<div class="img-placeholder">📰</div>`;
+
+        return `
+        <div class="col-lg-4 mb-4">
+            <div class="news-card h-100 shadow-sm"
+                 onclick="window.open('${esc(a.url)}','_blank')"
+                 style="cursor:pointer;">
+
+                <div class="card-img-wrap position-relative">
+                    ${imgHtml}
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-2">
+                        ${esc(catLabel)}
+                    </span>
+                </div>
+
+                <div class="p-3">
+                    <h6 class="fw-bold">${esc(a.title)}</h6>
+
+                    <p class="text-muted small">
+                        ${esc(a.description || 'No description available.')}
+                    </p>
+
+                    <div class="d-flex justify-content-between small text-muted border-top pt-2">
+                        <span>${esc(a.source)}</span>
+                        <span>Grade ${g}/10</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>`;
+    }).join('');
+
+    // Show / Hide button
+    if (end >= allNews.length) {
+        loadBtn.classList.add('d-none');
+    } else {
+        loadBtn.classList.remove('d-none');
+    }
+}
+
+// ── Load More Button ─────────────────────────────
+function loadMoreNews() {
+    currentPages++;
+    renderNews();
+}
+
+// ── Init ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
+</script>
 
     {{-- ======== this is for the articals ========== --}}
     <script>
