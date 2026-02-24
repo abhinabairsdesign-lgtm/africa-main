@@ -21,7 +21,8 @@
 
     <!-- link custom css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
 
     @stack('styles')
 </head>
@@ -305,167 +306,219 @@ ${i.desc}
     </script> --}}
 
     {{-- ── JAVASCRIPT ─────────────────────────────────────────────── --}}
+    <script>
+        const REFRESH_INTERVAL = 60;
 
-<script>
-const REFRESH_INTERVAL = 30;
+        let countdown = REFRESH_INTERVAL;
+        let timer = null;
+        let playing = true;
 
-let countdown = REFRESH_INTERVAL;
-let timer     = null;
-let playing   = true;
+        /* =========================================
+           FETCH NEWS
+        ========================================= */
+        async function fetchNews() {
 
-// ── Fetch ─────────────────────────────────────────────────────────────────
-async function fetchNews() {
-    const category = document.getElementById('filterCategory')?.value || 'top';
-    const country  = document.getElementById('filterCountry')?.value  || 'ng';
-    const language = document.getElementById('filterLanguage')?.value || 'en';
+            const newsBox = document.getElementById('newsBox');
+            if (!newsBox) return;
 
-    const params = new URLSearchParams({ category, country, language });
-
-    try {
-        const res = await fetch(`/api/news/fetch?${params}`, {
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-            }
-        });
-
-        if (!res.ok) throw new Error('Server error ' + res.status);
-
-        const data = await res.json();
-
-        data.success && data.articles?.length
-            ? renderArticles(data.articles)
-            : renderEmpty();
-
-        document.getElementById('updateTime').textContent =
-            'Last updated: ' + new Date().toLocaleTimeString('en-GB');
-
-    } catch (e) {
-        renderError(e.message);
-    }
-}
-
-// ── Render ────────────────────────────────────────────────────────────────
-function catClass(cats) {
-    if (!cats?.length) return 'default';
-    const c = cats[0].toLowerCase();
-    if (c.includes('agri'))                          return 'agriculture';
-    if (c.includes('invest') || c.includes('busi'))  return 'investment';
-    if (c.includes('tech'))                          return 'technology';
-    if (c.includes('polit'))                         return 'politics';
-    if (c.includes('health'))                        return 'health';
-    if (c.includes('sport'))                         return 'sports';
-    if (c.includes('world'))                         return 'world';
-    return 'default';
-}
-
-function catLabel(cats) {
-    return cats?.length ? cats[0].toUpperCase() : 'NEWS';
-}
-
-function formatAge(dateStr) {
-    if (!dateStr) return '';
-    const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
-    if (diff < 1)    return 'JUST NOW';
-    if (diff < 60)   return `${diff}M AGO`;
-    if (diff < 1440) return `${Math.floor(diff / 60)}H AGO`;
-    return `${Math.floor(diff / 1440)}D AGO`;
-}
-
-function esc(s) {
-    if (!s) return '';
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')
-            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* Build the thumbnail HTML — real image or emoji placeholder */
-function thumbHtml(imageUrl) {
-    if (imageUrl) {
-        return `<img
-            class="card-thumb"
-            src="${esc(imageUrl)}"
-            alt=""
-            loading="lazy"
-            onerror="this.outerHTML='<div class=\\'card-thumb-placeholder\\'>📰</div>'"
-        >`;
-    }
-    return `<div class="card-thumb-placeholder">📰</div>`;
-}
-
-function renderArticles(articles) {
-    document.getElementById('newsBox').innerHTML = articles.map(a => `
-        <div class="news-item">
-
-            <div class="news-thumb">
-                ${a.image 
-                    ? `<img src="${esc(a.image)}" onerror="this.remove()">`
-                    : `<div class="thumb-placeholder">📰</div>`}
-            </div>
-
-            <div class="news-content">
-                <div class="news-meta">
-                    <span class="news-time">${formatAge(a.published)}</span>
-                    <span class="news-category">${catLabel(a.category)}</span>
-                </div>
-
-                <a href="${esc(a.url)}"
-                   target="_blank"
-                   class="news-title">
-                    ${esc(a.title)}
-                </a>
-
-                <div class="news-source">
-                    ${esc(a.source)}
-                </div>
-            </div>
-
+            newsBox.innerHTML = `
+        <div class="text-center py-4 text-primary">
+            Loading latest news...
         </div>
-    `).join('');
-}
+    `;
 
-function renderEmpty() {
-    document.getElementById('newsBox').innerHTML = `
-        <div class="state-msg">
-            <div class="icon">📭</div>
-            <p>No articles found for this selection.</p>
-        </div>`;
-}
+            try {
+                const response = await fetch('/api/news/fetch');
 
-function renderError(msg = '') {
-    document.getElementById('newsBox').innerHTML = `
-        <div class="state-msg">
-            <div class="icon">⚠️</div>
-            <p>Could not load news. ${msg}</p>
-        </div>`;
-}
+                if (!response.ok) {
+                    throw new Error('Server error: ' + response.status);
+                }
 
-// ── Timer ─────────────────────────────────────────────────────────────────
-function startTimer() {
-    clearInterval(timer);
-    countdown = REFRESH_INTERVAL;
-    timer = setInterval(() => {
-        countdown--;
-        document.getElementById('sec').textContent = countdown;
-        if (countdown <= 0) { fetchNews(); countdown = REFRESH_INTERVAL; }
-    }, 1000);
-}
+                const data = await response.json();
 
-function togglePlay() {
-    playing = !playing;
-    document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
-    playing ? startTimer() : clearInterval(timer);
-}
+                if (data.success && Array.isArray(data.articles) && data.articles.length > 0) {
+                    renderArticles(data.articles);
+                } else {
+                    renderEmpty();
+                }
 
-function refreshNews() {
-    fetchNews();
-    if (playing) startTimer();
-}
+                const updateTime = document.getElementById('updateTime');
+                if (updateTime) {
+                    updateTime.textContent =
+                        'Last updated: ' + new Date().toLocaleTimeString();
+                }
 
-// ── Init ──────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    fetchNews();
-    startTimer();
-});
-</script>
+            } catch (error) {
+                renderError(error.message);
+            }
+        }
+
+        /* =========================================
+           RENDER ARTICLES
+        ========================================= */
+        function renderArticles(articles) {
+
+            const newsBox = document.getElementById('newsBox');
+
+            newsBox.innerHTML = articles.map(article => {
+
+                const title = esc(article.title);
+                const url = esc(article.url);
+                const source = esc(article.source);
+                const description = esc(article.description);
+                const image = article.image;
+                const timeAgo = formatAge(article.published);
+                const category = getCategory(article.category);
+
+                return `
+            <div class="news-item d-flex gap-3 mb-4 pb-3 border-bottom">
+
+                <div class="news-thumb">
+                    ${image
+                        ? `<img src="${esc(image)}"
+                                       style="width:120px;height:85px;object-fit:cover;border-radius:6px;"
+                                       onerror="this.remove()">`
+                        : `<div style="width:120px;height:85px;background:#eee;
+                                               display:flex;align-items:center;justify-content:center;
+                                               border-radius:6px;">📰</div>`}
+                </div>
+
+                <div class="flex-grow-1">
+
+                    <div class="d-flex justify-content-between small text-primary mb-1">
+                        <span>${timeAgo}</span>
+                        <span class="badge bg-primary">${category}</span>
+                    </div>
+
+                    <h6 class="fw-bold mb-1">
+    <a href="${url}"
+       target="_blank"
+       rel="noopener"
+       class="text-decoration-none text-white">
+        ${title}
+    </a>
+</h6>
+
+${description
+    ? `<p class="small text-light mb-1">${description}</p>`
+    : ''}
+
+<small class="text-info">
+    ${source}
+</small>
+
+                </div>
+
+            </div>
+        `;
+            }).join('');
+        }
+
+        /* =========================================
+           HELPERS
+        ========================================= */
+        function formatAge(dateStr) {
+            if (!dateStr) return '';
+
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '';
+
+            const diffMinutes = Math.floor((Date.now() - date.getTime()) / 60000);
+
+            if (diffMinutes < 1) return 'Just now';
+            if (diffMinutes < 60) return `${diffMinutes}m ago`;
+
+            const diffHours = Math.floor(diffMinutes / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
+
+            const diffDays = Math.floor(diffHours / 24);
+            return `${diffDays}d ago`;
+        }
+
+        function getCategory(cat) {
+            if (Array.isArray(cat) && cat.length) {
+                return cat[0].toUpperCase();
+            }
+            if (typeof cat === 'string') {
+                return cat.toUpperCase();
+            }
+            return 'NEWS';
+        }
+
+        function esc(str) {
+            return String(str ?? '')
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        /* =========================================
+           EMPTY + ERROR STATES
+        ========================================= */
+        function renderEmpty() {
+            document.getElementById('newsBox').innerHTML = `
+        <div class="text-center py-4 text-muted">
+            No news articles available.
+        </div>
+    `;
+        }
+
+        function renderError(msg) {
+            document.getElementById('newsBox').innerHTML = `
+        <div class="text-center py-4 text-danger">
+            Could not load news. ${esc(msg)}
+        </div>
+    `;
+        }
+
+        /* =========================================
+           TIMER CONTROLS
+        ========================================= */
+        function startTimer() {
+            clearInterval(timer);
+            countdown = REFRESH_INTERVAL;
+
+            timer = setInterval(() => {
+                countdown--;
+
+                const sec = document.getElementById('sec');
+                if (sec) sec.textContent = countdown;
+
+                if (countdown <= 0) {
+                    fetchNews();
+                    countdown = REFRESH_INTERVAL;
+                }
+            }, 1000);
+        }
+
+        function togglePlay() {
+            playing = !playing;
+
+            const btn = document.getElementById('playBtn');
+            if (btn) btn.textContent = playing ? '⏸' : '▶';
+
+            if (playing) {
+                startTimer();
+            } else {
+                clearInterval(timer);
+            }
+        }
+
+        function refreshNews() {
+            fetchNews();
+            if (playing) startTimer();
+        }
+
+        /* =========================================
+           INIT
+        ========================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchNews();
+            startTimer();
+        });
+    </script>
 
     <!-- LIVES MARKETING LOGIC -->
     <script>
@@ -525,236 +578,144 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     </script>
 
-    <script>
+    {{-- <script>
 function changeLanguage(lang) {
     window.location.href = "/lang/" + lang;
 }
-</script>
-
-<script>
-// ── Config ────────────────────────────────────────────────────────────────
-const REFRESH_MS = 60000; // 60 seconds
-
-// ── Helpers ───────────────────────────────────────────────────────────────
-function fmt(val, dec = 2) {
-    const n = parseFloat(val);
-    if (!val || isNaN(n)) return '—';
-    return n.toLocaleString('en-US', {
-        minimumFractionDigits: dec,
-        maximumFractionDigits: dec,
-    });
-}
-
-// ── Fetch & render ────────────────────────────────────────────────────────
-function loadMarketPulse() {
-
-    fetch('/market-pulse', {
-        headers: {
-            'Accept':       'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
-        }
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-    })
-    .then(json => {
-        if (!json.success || !json.stocks) throw new Error('Bad response');
-
-        json.stocks.forEach(stock => {
-
-            // data-symbol="NPN:JSE" matches stock.key "NPN:JSE"
-            const card = document.querySelector(
-                `.market-card[data-symbol="${stock.key}"]`
-            );
-            if (!card) return;
-
-            const priceEl  = card.querySelector('.price');
-            const changeEl = card.querySelector('.change');
-
-            // ── Error state ───────────────────────────────────────────────
-            if (stock.error || stock.price == null) {
-                priceEl.textContent  = '—';
-                changeEl.textContent = 'No data';
-                changeEl.className   = 'change';
-                return;
-            }
-
-            // ── Price ─────────────────────────────────────────────────────
-            priceEl.textContent = `${stock.currency} ${fmt(stock.price)}`;
-
-            // ── Change % ──────────────────────────────────────────────────
-            const pct = parseFloat(stock.change_pct);
-            if (!isNaN(pct)) {
-                const dir = pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat';
-                changeEl.textContent = `${pct > 0 ? '▲' : pct < 0 ? '▼' : '→'} ${Math.abs(pct).toFixed(2)}% today`;
-                changeEl.className   = `change ${dir}`;
-
-                // top-border colour on card
-                card.classList.remove('up', 'down', 'flat');
-                card.classList.add(dir);
-            }
-        });
-    })
-    .catch(err => console.error('Market Pulse Error:', err));
-}
-
-// ── Init + auto-refresh ───────────────────────────────────────────────────
-loadMarketPulse();
-setInterval(loadMarketPulse, REFRESH_MS);
-</script>
-
-{{-- 
-======== Today’s Pan-West Africa Investment News ====== --}}
-{{-- <script>
-async function loadAfricanInvestmentNews() {
-    const grid = document.getElementById('news-grid');
-
-    // Loading state
-    grid.classList.add('loading');
-
-    try {
-        const res = await fetch('/api/news/africa-investment');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-        const data = await res.json();
-
-        if (!data.success || !Array.isArray(data.articles) || !data.articles.length) {
-            grid.innerHTML = `
-                <div class="col-12 text-center text-muted py-5">
-                    No African investment news available.
-                </div>`;
-            return;
-        }
-
-        grid.innerHTML = data.articles.map(a => `
-            <div class="col-lg-4 news-item ${esc(a.country || '')}">
-                <div class="news-card h-100">
-
-                    <div class="card-img-wrap">
-                        ${
-                            a.image
-                                ? `<img src="${esc(a.image)}"
-                                       alt=""
-                                       loading="lazy"
-                                       onerror="this.outerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
-                                : `<div class="img-placeholder">📰</div>`
-                        }
-                        <span class="badge category-badge">
-                            ${esc(a.category || 'Investment')}
-                        </span>
-                    </div>
-
-                    <div class="p-4">
-                        <h5 class="fw-bold">${esc(a.title)}</h5>
-
-                        ${
-                            a.description
-                                ? `<p class="text-muted small">${esc(a.description)}</p>`
-                                : ''
-                        }
-
-                        <div class="d-flex align-items-center mt-3 pt-3 border-top">
-                            <small class="text-muted">
-                                Source: ${esc(a.source || 'Market')}
-                            </small>
-                            <small class="ms-auto text-muted">
-                                ${formatAge(a.published)}
-                            </small>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        `).join('');
-
-    } catch (e) {
-        console.error('News load error:', e);
-
-        grid.innerHTML = `
-            <div class="col-12 text-danger text-center py-5">
-                Failed to load investment news.
-            </div>`;
-    } finally {
-        grid.classList.remove('loading');
-    }
-}
-
-function formatAge(dateStr) {
-    if (!dateStr) return '';
-    const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
-    if (diff < 1) return 'Just now';
-    if (diff < 60) return `${diff}m ago`;
-    if (diff < 1440) return `${Math.floor(diff / 60)}h ago`;
-    return `${Math.floor(diff / 1440)}d ago`;
-}
-
-// Simple HTML escape (prevents injection)
-function esc(str = '') {
-    return String(str)
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;');
-}
-
-document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
 </script> --}}
 
-<script>
-// ── Helpers ───────────────────────────────────────────────────────────────
-function esc(str = '') {
-    return String(str)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
 
-function formatAge(dateStr) {
-    if (!dateStr) return '';
-    const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
-    if (diff < 1)    return 'Just now';
-    if (diff < 60)   return `${diff}m ago`;
-    if (diff < 1440) return `${Math.floor(diff / 60)}h ago`;
-    return `${Math.floor(diff / 1440)}d ago`;
-}
+    <script>
+        // ── Config ────────────────────────────────────────────────────────────────
+        const REFRESH_MS = 60000; // 60 seconds
 
-// ── newsdata.io returns category as string[] e.g. ["business","finance"] ──
-function getCatLabel(cat) {
-    // ❌ OLD: esc(a.category || 'Investment')  ← prints "[object Array]"
-    // ✅ FIX: grab first element of the array
-    if (Array.isArray(cat)) return cat[0] ?? 'Investment';
-    return cat || 'Investment';
-}
+        // ── Helpers ───────────────────────────────────────────────────────────────
+        function fmt(val, dec = 2) {
+            const n = parseFloat(val);
+            if (!val || isNaN(n)) return '—';
+            return n.toLocaleString('en-US', {
+                minimumFractionDigits: dec,
+                maximumFractionDigits: dec,
+            });
+        }
 
-function getCatClass(cat) {
-    const label = getCatLabel(cat).toLowerCase();
-    const map = {
-        business    : 'business',
-        top         : 'top',
-        technology  : 'technology',
-        politics    : 'politics',
-        health      : 'health',
-        sports      : 'sports',
-        science     : 'science',
-        entertainment:'entertainment',
-        environment : 'environment',
-    };
-    return map[label] ?? '';
-}
+        // ── Fetch & render ────────────────────────────────────────────────────────
+        function loadMarketPulse() {
 
-// Auto-grade from article richness
-function computeGrade(a) {
-    let s = 5;
-    if (a.image)                              s++;
-    if ((a.description?.length ?? 0) > 100)  s++;
-    if ((a.title?.length ?? 0) > 40)          s++;
-    if (Array.isArray(a.category) && a.category.length) s++;
-    return Math.min(s, 10);
-}
+            fetch('/market-pulse', {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+                    }
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(json => {
+                    if (!json.success || !json.stocks) throw new Error('Bad response');
 
-// ── Skeleton ──────────────────────────────────────────────────────────────
-function showSkeleton() {
-    document.getElementById('news-grid').innerHTML = Array(6).fill(`
+                    json.stocks.forEach(stock => {
+
+                        // data-symbol="NPN:JSE" matches stock.key "NPN:JSE"
+                        const card = document.querySelector(
+                            `.market-card[data-symbol="${stock.key}"]`
+                        );
+                        if (!card) return;
+
+                        const priceEl = card.querySelector('.price');
+                        const changeEl = card.querySelector('.change');
+
+                        // ── Error state ───────────────────────────────────────────────
+                        if (stock.error || stock.price == null) {
+                            priceEl.textContent = '—';
+                            changeEl.textContent = 'No data';
+                            changeEl.className = 'change';
+                            return;
+                        }
+
+                        // ── Price ─────────────────────────────────────────────────────
+                        priceEl.textContent = `${stock.currency} ${fmt(stock.price)}`;
+
+                        // ── Change % ──────────────────────────────────────────────────
+                        const pct = parseFloat(stock.change_pct);
+                        if (!isNaN(pct)) {
+                            const dir = pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat';
+                            changeEl.textContent =
+                                `${pct > 0 ? '▲' : pct < 0 ? '▼' : '→'} ${Math.abs(pct).toFixed(2)}% today`;
+                            changeEl.className = `change ${dir}`;
+
+                            // top-border colour on card
+                            card.classList.remove('up', 'down', 'flat');
+                            card.classList.add(dir);
+                        }
+                    });
+                })
+                .catch(err => console.error('Market Pulse Error:', err));
+        }
+
+        // ── Init + auto-refresh ───────────────────────────────────────────────────
+        loadMarketPulse();
+        setInterval(loadMarketPulse, REFRESH_MS);
+    </script>
+
+
+
+    {{-- =================== this is for the bottom news section ============================ --}}
+    <script>
+        // ── Helpers ───────────────────────────────────────────────────────────────
+        function esc(str = '') {
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function formatAge(dateStr) {
+            if (!dateStr) return '';
+            const diff = Math.floor((Date.now() - new Date(dateStr)) / 60000);
+            if (diff < 1) return 'Just now';
+            if (diff < 60) return `${diff}m ago`;
+            if (diff < 1440) return `${Math.floor(diff / 60)}h ago`;
+            return `${Math.floor(diff / 1440)}d ago`;
+        }
+
+        // ── newsdata.io returns category as string[] e.g. ["business","finance"] ──
+        function getCatLabel(cat) {
+            // ❌ OLD: esc(a.category || 'Investment')  ← prints "[object Array]"
+            // ✅ FIX: grab first element of the array
+            if (Array.isArray(cat)) return cat[0] ?? 'Investment';
+            return cat || 'Investment';
+        }
+
+        function getCatClass(cat) {
+            const label = getCatLabel(cat).toLowerCase();
+            const map = {
+                business: 'business',
+                top: 'top',
+                technology: 'technology',
+                politics: 'politics',
+                health: 'health',
+                sports: 'sports',
+                science: 'science',
+                entertainment: 'entertainment',
+                environment: 'environment',
+            };
+            return map[label] ?? '';
+        }
+
+        // Auto-grade from article richness
+        function computeGrade(a) {
+            let s = 5;
+            if (a.image) s++;
+            if ((a.description?.length ?? 0) > 100) s++;
+            if ((a.title?.length ?? 0) > 40) s++;
+            if (Array.isArray(a.category) && a.category.length) s++;
+            return Math.min(s, 10);
+        }
+
+        // ── Skeleton ──────────────────────────────────────────────────────────────
+        function showSkeleton() {
+            document.getElementById('news-grid').innerHTML = Array(6).fill(`
         <div class="col-lg-4">
             <div class="news-card h-100">
                 <div class="card-img-wrap" style="background:#e9ecef;height:200px">
@@ -772,50 +733,50 @@ function showSkeleton() {
                 </div>
             </div>
         </div>`).join('');
-}
+        }
 
-// ── Main fetch ────────────────────────────────────────────────────────────
-async function loadAfricanInvestmentNews() {
-    const grid = document.getElementById('news-grid');
-    showSkeleton();
+        // ── Main fetch ────────────────────────────────────────────────────────────
+        async function loadAfricanInvestmentNews() {
+            const grid = document.getElementById('news-grid');
+            showSkeleton();
 
-    try {
-        // ❌ OLD: '/api/news/africa-investment'  ← 404, wrong prefix
-        // ✅ FIX: '/news/africa-investment'
-        const res = await fetch('/api/news/africa-investment', {
-            headers: {
-                'Accept'      : 'application/json',
-                // ✅ CSRF header required by Laravel for all fetch() calls
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
-            }
-        });
+            try {
+                // ❌ OLD: '/api/news/africa-investment'  ← 404, wrong prefix
+                // ✅ FIX: '/news/africa-investment'
+                const res = await fetch('/api/news/africa-investment', {
+                    headers: {
+                        'Accept': 'application/json',
+                        // ✅ CSRF header required by Laravel for all fetch() calls
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+                    }
+                });
 
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = await res.json();
+                const data = await res.json();
 
-        if (!data.success || !data.articles?.length) {
-            grid.innerHTML = `
+                if (!data.success || !data.articles?.length) {
+                    grid.innerHTML = `
                 <div class="col-12 state-card">
                     <div class="icon">📭</div>
                     <p>No African investment news available right now.</p>
                 </div>`;
-            return;
-        }
+                    return;
+                }
 
-        grid.innerHTML = data.articles.map(a => {
-            const catLabel = getCatLabel(a.category);
-            const catCls   = getCatClass(a.category);
-            const g        = computeGrade(a);
+                grid.innerHTML = data.articles.map(a => {
+                    const catLabel = getCatLabel(a.category);
+                    const catCls = getCatClass(a.category);
+                    const g = computeGrade(a);
 
-            const imgHtml = a.image
-                ? `<img src="${esc(a.image)}"
+                    const imgHtml = a.image ?
+                        `<img src="${esc(a.image)}"
                         alt=""
                         loading="lazy"
-                        onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
-                : `<div class="img-placeholder">📰</div>`;
+                        onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">` :
+                        `<div class="img-placeholder">📰</div>`;
 
-            return `
+                    return `
                 <div class="col-lg-4 news-item ${esc(a.country || '')}">
                     <div class="news-card h-100"
                          onclick="window.open('${esc(a.url)}','_blank')">
@@ -849,54 +810,54 @@ async function loadAfricanInvestmentNews() {
 
                     </div>
                 </div>`;
-        }).join('');
+                }).join('');
 
-    } catch (e) {
-        console.error('News load error:', e);
-        grid.innerHTML = `
+            } catch (e) {
+                console.error('News load error:', e);
+                grid.innerHTML = `
             <div class="col-12 state-card">
                 <div class="icon">⚠️</div>
                 <p>Failed to load investment news — ${e.message}</p>
             </div>`;
-    }
-}
+            }
+        }
 
-document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
-</script>
+        document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
+    </script>
 
-{{-- ======== this is for the articals ========== --}}
-<script>
-let allArticles = [];
-let currentPage = 1;
-const perPage = 6;
+    {{-- ======== this is for the articals ========== --}}
+    <script>
+        let allArticles = [];
+        let currentPage = 1;
+        const perPage = 6;
 
-async function loadInvestmentArticles() {
-    try {
-        const res = await fetch('/api/articles/fetch?category=business');
-        const data = await res.json();
+        async function loadInvestmentArticles() {
+            try {
+                const res = await fetch('/api/articles/fetch?category=business');
+                const data = await res.json();
 
-        if (!data?.success || !Array.isArray(data.articles)) return;
+                if (!data?.success || !Array.isArray(data.articles)) return;
 
-        // Sort newest first
-        allArticles = data.articles.sort(
-            (a, b) => new Date(b.published) - new Date(a.published)
-        );
+                // Sort newest first
+                allArticles = data.articles.sort(
+                    (a, b) => new Date(b.published) - new Date(a.published)
+                );
 
-        renderArticles();
+                renderNewsArticles();
 
-    } catch (e) {
-        console.error('Failed loading investment articles', e);
-    }
-}
+            } catch (e) {
+                console.error('Failed loading investment articles', e);
+            }
+        }
 
-function renderArticles() {
-    const row = document.querySelector('#investmentArticles .row');
-    if (!row) return;
+        function renderNewsArticles() {
+            const row = document.querySelector('#investmentArticles .row');
+            if (!row) return;
 
-    const end = currentPage * perPage;
-    const articlesToShow = allArticles.slice(0, end);
+            const end = currentPage * perPage;
+            const articlesToShow = allArticles.slice(0, end);
 
-    row.innerHTML = articlesToShow.map(a => `
+            row.innerHTML = articlesToShow.map(a => `
         <div class="col-lg-4 col-md-6">
             <div class="invest-card p-3 h-100 position-relative">
 
@@ -926,59 +887,59 @@ function renderArticles() {
         </div>
     `).join('');
 
-    // Hide button if no more articles
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (end >= allArticles.length) {
-        loadMoreBtn.style.display = 'none';
-    } else {
-        loadMoreBtn.style.display = 'inline-block';
-    }
-}
+            // Hide button if no more articles
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (end >= allArticles.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+        }
 
-document.getElementById('loadMoreBtn').addEventListener('click', () => {
-    currentPage++;
-    renderArticles();
-});
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            currentPage++;
+            renderNewsArticles();
+        });
 
-// ---------------- HELPERS ----------------
+        // ---------------- HELPERS ----------------
 
-function normalizeCategory(cat) {
-    if (Array.isArray(cat)) return cat[0] || 'Investment';
-    return cat || 'Investment';
-}
+        function normalizeCategory(cat) {
+            if (Array.isArray(cat)) return cat[0] || 'Investment';
+            return cat || 'Investment';
+        }
 
-function formatAge(dateStr) {
-    if (!dateStr) return '';
+        function formatAge(dateStr) {
+            if (!dateStr) return '';
 
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return '';
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '';
 
-    const diffMs = Date.now() - date.getTime();
-    const diffMinutes = Math.floor(diffMs / 60000);
+            const diffMs = Date.now() - date.getTime();
+            const diffMinutes = Math.floor(diffMs / 60000);
 
-    if (diffMinutes < 1) return 'Just now';
-    if (diffMinutes < 60) return `${diffMinutes}m ago`;
+            if (diffMinutes < 1) return 'Just now';
+            if (diffMinutes < 60) return `${diffMinutes}m ago`;
 
-    const diffHours = Math.floor(diffMinutes / 60);
-    if (diffHours < 24) return `${diffHours}h ago`;
+            const diffHours = Math.floor(diffMinutes / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
 
-    const diffDays = Math.floor(diffHours / 24);
-    return `${diffDays}d ago`;
-}
+            const diffDays = Math.floor(diffHours / 24);
+            return `${diffDays}d ago`;
+        }
 
-function esc(value) {
-    return String(value ?? '')
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;')
-        .replace(/'/g,'&#39;');
-}
+        function esc(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
 
-document.addEventListener('DOMContentLoaded', loadInvestmentArticles);
-</script>
+        document.addEventListener('DOMContentLoaded', loadInvestmentArticles);
+    </script>
 
-@stack('scripts')
+    @stack('scripts')
 
 </body>
 

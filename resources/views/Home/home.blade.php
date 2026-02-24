@@ -101,7 +101,7 @@
 
     <!-- ===================Breaking News section =========== -->
 
-     {{-- <section class="py-4">
+     <section class="py-4">
     <div class="container">
 
         <div class="news-board shadow rounded overflow-hidden">
@@ -115,7 +115,7 @@
 
                 <div class="d-flex gap-3 align-items-center">
 
-                    <div class="time small text-muted">
+                    <div class="time small text-white">
                         Auto-refresh: <span id="sec">30</span>s
                     </div>
 
@@ -146,7 +146,7 @@
             </div>
 
             <!-- FOOTER -->
-            <div class="news-footer d-flex justify-content-between px-3 py-2 border-top small text-muted">
+            <div class="news-footer d-flex justify-content-between px-3 py-2 border-top small text-white">
 
                 <div>
                     🟢 Monitoring global news sources
@@ -161,9 +161,9 @@
         </div>
 
     </div>
-</section>  --}}
+</section> 
 
- <section>
+ {{-- <section>
     <div class="container">
         <div class="news-board">
 
@@ -206,7 +206,7 @@
 
         </div>
     </div>
-</section>
+</section> --}}
 
 
 

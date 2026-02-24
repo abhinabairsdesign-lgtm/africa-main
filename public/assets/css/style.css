@@ -1716,104 +1716,9 @@ body {
 
 /* ================== news api css ============================ */
 
-.news-board {
-    background: #0f172a;
-    color: #fff;
-    border-radius: 8px;
-}
 
-.news-header {
-    background: #111827;
-    padding: 12px 16px;
-    border-bottom: 1px solid #1f2937;
-}
 
-.live-tag {
-    font-weight: 600;
-    color: #facc15;
-}
-
-.news-list {
-    padding: 15px;
-}
-
-.news-item {
-    display: flex;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid #1f2937;
-    transition: background 0.2s ease;
-}
-
-.news-item:hover {
-    background: #1f2937;
-}
-
-.news-thumb img {
-    width: 110px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 6px;
-}
-
-.thumb-placeholder {
-    width: 110px;
-    height: 80px;
-    background: #374151;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    border-radius: 6px;
-}
-
-.news-content {
-    flex: 1;
-}
-
-.news-meta {
-    font-size: 12px;
-    margin-bottom: 6px;
-}
-
-.news-time {
-    color: #9ca3af;
-    margin-right: 8px;
-}
-
-.news-category {
-    background: #2563eb;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-}
-
-.news-title {
-    display: block;
-    font-weight: 600;
-    font-size: 15px;
-    color: #fff;
-    text-decoration: none;
-    margin-bottom: 6px;
-}
-
-.news-title:hover {
-    color: #facc15;
-}
-
-.news-source {
-    font-size: 12px;
-    color: #9ca3af;
-}
-
-.news-footer {
-    background: #111827;
-    padding: 10px 16px;
-    border-top: 1px solid #1f2937;
-    font-size: 12px;
-}
-
-/* ====== news new ====== */
+/* ====== down news new ====== */
 
 .news-section { background: #f8f9fa; }
 
@@ -1933,3 +1838,16 @@ body {
 
 .state-card { text-align:center; padding:3rem 1rem; color:#aaa; }
 .state-card .icon { font-size:2.5rem; margin-bottom:.5rem; }
+
+.news-board {
+    background: #0b1c2d;
+    color: #ffffff;
+}
+
+.news-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.news-item:hover {
+    background: rgba(255,255,255,0.05);
+}

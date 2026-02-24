@@ -22,43 +22,36 @@ class NewsController extends Controller
      * Fetch latest news from NewsData.io (called via AJAX).
      * GET /news/fetch?category=top&country=ng&language=en
      */
-    public function fetch(Request $request)
+    public function fetch()
     {
-        $apiKey   = config('services.newsdata.key');
-        $category = $request->query('category', 'top');
-        $country  = $request->query('country', 'ng');   // Nigeria default
-        $language = $request->query('language', 'en');
+        $apiKey = config('services.newsdata.key');
 
-        $cacheKey = "newsdata_{$category}_{$country}_{$language}";
+        $response = Http::timeout(10)->get('https://newsdata.io/api/1/news', [
+            'apikey'   => $apiKey,
+            'language' => 'en',
+            'country'  => 'ng,gh',
+        ]);
 
-        $articles = Cache::remember($cacheKey, 60, function () use ($apiKey, $category, $country, $language) {
-            $response = Http::timeout(10)->get('https://newsdata.io/api/1/news', [
-                'apikey'   => $apiKey,
-                'category' => $category,
-                'country'  => $country,
-                'language' => $language,
+        if ($response->failed()) {
+            return response()->json([
+                'success' => false,
+                'articles' => []
             ]);
+        }
 
-            if ($response->failed()) {
-                return [];
-            }
+        $results = $response->json('results') ?? [];
 
-            $data = $response->json();
-
-            return collect($data['results'] ?? [])
-                ->map(fn($item) => [
-                    'title'       => $item['title']       ?? 'No title',
-                    'description' => $item['description'] ?? '',
-                    'url'         => $item['link']        ?? '#',
-                    'source'      => $item['source_id']   ?? 'Unknown',
-                    'image'       => $item['image_url']   ?? null,
-                    'published'   => $item['pubDate']     ?? null,
-                    'category'    => $item['category']    ?? [],
-                    'country'     => $item['country']     ?? [],
-                ])
-                ->values()
-                ->all();
-        });
+        $articles = collect($results)->map(function ($item) {
+            return [
+                'title'       => $item['title'] ?? '',
+                'description' => $item['description'] ?? '',
+                'url'         => $item['link'] ?? '#',
+                'image'       => $item['image_url'] ?? null,
+                'source'      => $item['source_id'] ?? 'Unknown',
+                'published'   => $item['pubDate'] ?? null,
+                'category'    => $item['category'] ?? [],
+            ];
+        })->values()->all();
 
         return response()->json([
             'success'  => true,
@@ -193,30 +186,105 @@ class NewsController extends Controller
     //     };
     // }
 
-    public function fetchAfricanInvestmentNews()
+    public function fetchAfricanInvestmentNews(Request $request)
     {
-        $apiKey = config('services.newsdata.key'); // ← same key you already use
+        // $apiKey = config('services.newsdata.key'); // ← same key you already use
 
-        // Rotate through African countries so we get variety across 6 cards.
-        // newsdata free tier allows ONE country per request, so we make
-        // 3 parallel requests for different countries and merge the results.
-        $targets = [
-            ['country' => 'ng', 'category' => 'business'],  // Nigeria
-            ['country' => 'gh', 'category' => 'business'],  // Ghana
-            ['country' => 'ke', 'category' => 'business'],  // Kenya
+        // // Rotate through African countries so we get variety across 6 cards.
+        // // newsdata free tier allows ONE country per request, so we make
+        // // 3 parallel requests for different countries and merge the results.
+        // $targets = [
+        //     ['country' => 'ng', 'category' => 'business'],  // Nigeria
+        //     ['country' => 'gh', 'category' => 'business'],  // Ghana
+        //     ['country' => 'ke', 'category' => 'business'],  // Kenya
+        // ];
+
+        // $cacheKey = 'newsdata_africa_investment';
+
+        // $articles = Cache::remember($cacheKey, 120, function () use ($apiKey, $targets) {
+
+        //     $all = [];
+
+        //     foreach ($targets as $target) {
+        //         $response = Http::timeout(10)->get('https://newsdata.io/api/1/news', [
+        //             'apikey'   => $apiKey,
+        //             'country'  => $target['country'],
+        //             'category' => $target['category'],
+        //             'language' => 'en',
+        //         ]);
+
+        //         if ($response->failed()) continue;
+
+        //         $results = $response->json('results') ?? [];
+
+        //         // Take 2 articles per country → 6 total for the grid
+        //         $slice = collect($results)
+        //             ->take(2)
+        //             ->map(fn($item) => [
+        //                 'title'       => $item['title']       ?? '',
+        //                 'description' => $item['description'] ?? '',
+        //                 'url'         => $item['link']        ?? '#',
+        //                 'image'       => $item['image_url']   ?? null,
+        //                 'source'      => $item['source_id']   ?? 'Unknown',
+        //                 'published'   => $item['pubDate']     ?? null,
+        //                 'country'     => $target['country'],
+        //                 // newsdata returns category as array e.g. ["business"]
+        //                 'category'    => $item['category']    ?? ['business'],
+        //             ])
+        //             ->all();
+
+        //         $all = array_merge($all, $slice);
+        //     }
+
+        //     return $all;
+        // });
+
+        // return response()->json([
+        //     'success'  => true,
+        //     'articles' => $articles,
+        //     'count'    => count($articles),
+        // ]);
+
+
+
+
+
+        $apiKey = config('services.newsdata.key');
+
+        // Allow category from frontend (default = business)
+        $category = $request->query('category', 'business');
+
+        $countries = [
+            'ng', // Nigeria
+            'gh', // Ghana
+            'ke', // Kenya
+            'za', // South Africa
+            'eg', // Egypt
+            'ma', // Morocco
+            'et', // Ethiopia
+            'tz', // Tanzania
+            'sn', // Senegal
+            'rw', // Rwanda
         ];
 
-        $cacheKey = 'newsdata_africa_investment';
+        // Shuffle countries for variety
+        shuffle($countries);
 
-        $articles = Cache::remember($cacheKey, 120, function () use ($apiKey, $targets) {
+        // Take first 3 countries per request (to avoid too many API calls)
+        $selectedCountries = array_slice($countries, 0, 3);
+
+        $cacheKey = "newsdata_africa_{$category}";
+
+        $articles = Cache::remember($cacheKey, 120, function () use ($apiKey, $selectedCountries, $category) {
 
             $all = [];
 
-            foreach ($targets as $target) {
+            foreach ($selectedCountries as $country) {
+
                 $response = Http::timeout(10)->get('https://newsdata.io/api/1/news', [
                     'apikey'   => $apiKey,
-                    'country'  => $target['country'],
-                    'category' => $target['category'],
+                    'country'  => $country,
+                    'category' => null,
                     'language' => 'en',
                 ]);
 
@@ -224,9 +292,8 @@ class NewsController extends Controller
 
                 $results = $response->json('results') ?? [];
 
-                // Take 2 articles per country → 6 total for the grid
                 $slice = collect($results)
-                    ->take(2)
+                    ->take(2) // 2 per country → 6 total
                     ->map(fn($item) => [
                         'title'       => $item['title']       ?? '',
                         'description' => $item['description'] ?? '',
@@ -234,14 +301,18 @@ class NewsController extends Controller
                         'image'       => $item['image_url']   ?? null,
                         'source'      => $item['source_id']   ?? 'Unknown',
                         'published'   => $item['pubDate']     ?? null,
-                        'country'     => $target['country'],
-                        // newsdata returns category as array e.g. ["business"]
-                        'category'    => $item['category']    ?? ['business'],
+                        'country'     => $country,
+                        'category'    => $item['category']    ?? [$category],
                     ])
                     ->all();
 
                 $all = array_merge($all, $slice);
             }
+
+            // Sort newest first
+            usort($all, function ($a, $b) {
+                return strtotime($b['published']) - strtotime($a['published']);
+            });
 
             return $all;
         });
@@ -253,31 +324,4 @@ class NewsController extends Controller
         ]);
     }
 
-    public function newfetch()
-    {
-        $response = Http::withHeaders([
-            'x-rapidapi-host' => 'real-time-news-data.p.rapidapi.com',
-            'x-rapidapi-key'  => config('services.rapidapi.key'),
-        ])->get('https://real-time-news-data.p.rapidapi.com/search', [
-            'query' => 'Football',
-            'limit' => 10,
-            'country' => 'US',
-            'lang' => 'en'
-        ]);
-
-        if ($response->failed()) {
-            Log::error('RapidAPI FAILED', [
-                'status' => $response->status(),
-                'body'   => $response->body(),
-                'json'   => $response->json(),
-                'headers' => $response->headers(),
-            ]);
-
-            return response()->json([
-                'success' => false,
-                'error' => 'RapidAPI request failed',
-                'status' => $response->status(),
-            ], 500);
-        }
-    }
 }
