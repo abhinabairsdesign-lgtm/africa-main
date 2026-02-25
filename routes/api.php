@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\MarketController;
+use App\Http\Controllers\MineralsController;
 use App\Http\Controllers\NewsController;
 
 Route::get('/user', function (Request $request) {
@@ -27,3 +28,5 @@ Route::get('/field-telemetry', [ArgriculturalController::class, 'fetchFieldTelem
 
 
 Route::get('/africa-market-gass', [GassController::class, 'fetchAfricaMarketPulse']);
+
+Route::get('/africa-minerals', [MineralsController::class, 'fetchAfricaMinerals']);

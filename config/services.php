@@ -62,4 +62,8 @@ return [
     'key' => env('EIA_API_KEY'),
 ],
 
+'metalprice' => [
+    'key' => env('METALPRICE_KEY'),
+],
+
 ];
