@@ -120,7 +120,7 @@
 
         <!-- ==================DASHBOARD SECTION =================== -->
 
-        <section class="dashboard-section">
+        {{-- <section class="dashboard-section">
             <div class="container">
                 <div class="row mb-5 text-center">
                     <div class="col-lg-8 mx-auto">
@@ -198,8 +198,135 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
+        <section class="dashboard-section text-white">
+    <div class="container">
+
+        <!-- SECTION HEADER -->
+        <div class="row mb-5 text-center">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-6 fw-bold">
+                    Live <span style="color: #00f2ff;">Command Center</span>
+                </h2>
+                <p class="text-secondary">
+                    Proprietary monitoring interface for all active autonomous mining blocks.
+                </p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD FRAME -->
+        <div class="dashboard-frame">
+
+            <!-- HEADER BAR -->
+            <div class="db-header">
+                <div class="d-flex align-items-center">
+                    <span class="db-status-dot"></span>
+                    <small id="systemStatus"
+                        class="text-white-50 text-uppercase fw-bold"
+                        style="letter-spacing: 2px; font-size: 10px;">
+                        System Status: Loading...
+                    </small>
+                </div>
+
+                <div class="text-white-50 small">
+                    <i class="bi bi-broadcast me-2"></i>
+                    Latency: <span id="latencyVal">--</span>
+                </div>
+            </div>
+
+            <!-- DASHBOARD BODY -->
+            <div class="p-4">
+
+                <!-- TOP METRICS -->
+                <div class="row g-3">
+
+                    <!-- Drilling Efficiency -->
+                    <div class="col-md-3">
+                        <div class="db-card text-center">
+                            <span class="db-label">Drilling Efficiency</span>
+                            <div class="db-value mt-2" id="efficiencyVal">--%</div>
+
+                            <div class="db-progress">
+                                <div class="db-progress-fill"
+                                     id="efficiencyBar"
+                                     style="width:0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Prediction -->
+                    <div class="col-md-3">
+                        <div class="db-card text-center">
+                            <span class="db-label">AI Prediction</span>
+                            <div class="db-value mt-2" id="forecastVal">--</div>
+                            <small id="forecastNote"
+                                   class="text-success"
+                                   style="font-size: 10px;">
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Active Units -->
+                    <div class="col-md-3">
+                        <div class="db-card text-center">
+                            <span class="db-label">Active Units</span>
+                            <div class="db-value mt-2" id="unitsVal">-- / --</div>
+
+                            <div class="db-progress">
+                                <div class="db-progress-fill"
+                                     id="unitsBar"
+                                     style="width:0%; background:#ff9800; box-shadow:0 0 10px #ff9800;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Safety Score -->
+                    <div class="col-md-3">
+                        <div class="db-card text-center">
+                            <span class="db-label">Safety Score</span>
+                            <div class="db-value mt-2" id="safetyVal">--</div>
+                            <small id="safetyNote"
+                                   class="text-info"
+                                   style="font-size: 10px;">
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- GEOLOGICAL DATA FEED -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="db-card" style="height: 300px; position: relative;">
+                            <div class="db-label mb-3">
+                                Geological Data Feed (Live)
+                            </div>
+
+                            <div id="geoFeed"
+                                 class="w-100 h-75 border border-white border-opacity-10 rounded d-flex align-items-center justify-content-center"
+                                 style="background:
+                                    repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(255,255,255,0.03) 20px),
+                                    repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(255,255,255,0.03) 20px);">
+
+                                <div class="text-center text-white-50">
+                                    <i class="bi bi-graph-up-arrow fs-1 mb-3 text-info"></i>
+                                    <p class="small text-uppercase tracking-widest">
+                                        Awaiting Visual Uplink...
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
 
         <!-- ===================R&D SECTION ================= -->
 
@@ -349,3 +476,92 @@
 
 
 @endsection
+@push('scripts')
+    <script>
+async function loadCommandCenter() {
+    try {
+        const res = await fetch('/api/africa-tech');
+        const json = await res.json();
+
+        if (!json.success) return;
+
+        const d = json.data;
+
+        /* ---------------- SYSTEM STATUS ---------------- */
+
+        const statusEl = document.getElementById('systemStatus');
+        statusEl.innerText = 'System Status: ' +
+            (d.safety_score > 80 ? 'Operational' : 'Monitoring');
+
+        document.getElementById('latencyVal').innerText = d.latency;
+
+        /* ---------------- DRILLING EFFICIENCY ---------------- */
+
+        document.getElementById('efficiencyVal').innerText =
+            d.efficiency + '%';
+
+        document.getElementById('efficiencyBar').style.width =
+            d.efficiency + '%';
+
+        /* ---------------- AI FORECAST ---------------- */
+
+        document.getElementById('forecastVal').innerText =
+            d.forecast;
+
+        document.getElementById('forecastNote').innerText =
+            d.forecast === 'Bullish'
+                ? 'Commodity Upside Momentum'
+                : d.forecast === 'Neutral'
+                    ? 'Stable Outlook'
+                    : 'Downside Pressure Detected';
+
+        /* ---------------- ACTIVE UNITS ---------------- */
+
+        document.getElementById('unitsVal').innerText =
+            d.active_units + ' / ' + d.total_units;
+
+        const percent =
+            (d.active_units / d.total_units) * 100;
+
+        document.getElementById('unitsBar').style.width =
+            percent + '%';
+
+        /* ---------------- SAFETY SCORE ---------------- */
+
+        document.getElementById('safetyVal').innerText =
+            d.safety_score.toFixed(1);
+
+        document.getElementById('safetyNote').innerText =
+            d.safety_score > 80
+                ? 'Low Operational Risk'
+                : 'Moderate Regional Risk';
+
+        /* ---------------- GEOLOGICAL FEED ---------------- */
+
+        document.getElementById('geoFeed').innerHTML = `
+            <div class="text-center">
+                <div class="mb-2 text-info fw-bold">
+                    Gold: $${d.gold_usd}
+                </div>
+                <div class="mb-2 text-warning fw-bold">
+                    Oil: $${d.oil_usd}
+                </div>
+                <div class="small text-white-50">
+                    Updated: ${d.updated}
+                </div>
+            </div>
+        `;
+
+    } catch (e) {
+        console.error('Command Center Error:', e);
+    }
+}
+
+/* ---------------- AUTO REFRESH ---------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCommandCenter();
+    setInterval(loadCommandCenter, 60000); // refresh every 60s
+});
+</script>
+@endpush

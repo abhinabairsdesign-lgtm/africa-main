@@ -41,7 +41,7 @@
             <!-- right button -->
             <div class="nav-btn ">
 
-                        <select name="language" id="language">
+                        <select name="language" id="language" class="notranslate">
                             <option value="en">English</option>
                             <option value="fr">French</option>
                         </select>

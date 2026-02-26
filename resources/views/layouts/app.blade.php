@@ -23,6 +23,28 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
         integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    {{-- ================= HIDE GOOGLE TRANSLATE BAR ================= --}}
+<style>
+  /* Hide the Google Translate toolbar iframe */
+  .goog-te-banner-frame,
+  #goog-gt-tt,
+  .goog-te-balloon-frame,
+  .goog-tooltip,
+  .goog-tooltip:hover {
+    display: none !important;
+  }
+
+  /* Remove the body top offset Google Translate adds */
+  body {
+    top: 0 !important;
+    position: static !important;
+  }
+
+  /* Hide the "Translated by Google" notification bar */
+  .skiptranslate {
+    display: none !important;
+  }
+</style>
 
     @stack('styles')
 </head>
@@ -30,7 +52,7 @@
 <body>
 
     @include('layouts.header')
-
+    <div id="google_translate_element" style="display:none;"></div>
     <main>
         @yield('content')
         @include('layouts.footer')
@@ -583,6 +605,106 @@ function changeLanguage(lang) {
     window.location.href = "/lang/" + lang;
 }
 </script> --}}
+
+<script>
+fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
+.then(res => res.json())
+.then(data => {
+    let output = "";
+    data.forEach(post => {
+        output += `
+          <div style="margin-bottom:20px;">
+            <h3>${post.title}</h3>
+            <p>${post.body}</p>
+          </div>
+        `;
+    });
+    // document.getElementById("news").innerHTML = output;
+});
+</script>
+
+
+ {{-- ================= GOOGLE TRANSLATE INIT =================  --}}
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,fr',
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+ {{-- ================= CONNECT YOUR DROPDOWN =================  --}}
+<script>
+document.getElementById("language").addEventListener("change", function() {
+
+    const lang = this.value;
+    const googleSelect = document.querySelector(".goog-te-combo");
+
+    if(googleSelect){
+        googleSelect.value = lang;
+        googleSelect.dispatchEvent(new Event("change"));
+    }
+
+});
+</script>
+
+{{-- =============== new code (Avinaba) ================ --}}
+<script>
+  // Suppress Google Translate top bar - reliable version
+  (function () {
+    // Inject the CSS immediately so it's ready before GT loads
+    const style = document.createElement('style');
+    style.textContent = `
+      .goog-te-banner-frame,
+      .goog-te-balloon-frame,
+      #goog-gt-tt,
+      .goog-tooltip,
+      .skiptranslate iframe {
+        display: none !important;
+        visibility: hidden !important;
+      }
+      body {
+        top: 0 !important;
+        position: static !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    function removeGoogleBar() {
+      // Reset body shift
+      document.body.style.setProperty('top', '0px', 'important');
+
+      // Hide banner frame
+      const banner = document.querySelector('.goog-te-banner-frame');
+      if (banner) {
+        banner.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    // Start observing as early as possible
+    const observer = new MutationObserver(removeGoogleBar);
+
+    // Wait for body to exist (in case script is in <head>)
+    if (document.body) {
+      observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+      });
+    }
+
+    // Also run on load and after short delays to catch late GT injection
+    window.addEventListener('load', function () {
+      removeGoogleBar();
+      setTimeout(removeGoogleBar, 500);
+      setTimeout(removeGoogleBar, 1500);
+    });
+  })();
+</script>
 
     @stack('scripts')
 
