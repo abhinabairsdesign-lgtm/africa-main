@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\IntelligenceAccessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\EmailVerificationController;
 
 Route::get('/', function () {
     return view('Home.home');
@@ -63,3 +65,12 @@ Route::get('/news', [NewsController::class, 'index']);   // renders the view
 
 // Route::get('/news/africa-investment', [NewsController::class, 'fetchAfricanInvestmentNews']);
 // Route::get('/articles/fetch', [ArticlesController::class, 'fetch']);
+
+Route::post('/intelligence-access', [IntelligenceAccessController::class, 'store']);
+
+Route::get('/payment-success', [PaymentController::class, 'success']);
+Route::get('/payment-cancel', [PaymentController::class, 'cancel']);
+
+
+Route::post('/send-otp', [EmailVerificationController::class, 'sendOtp']);
+Route::post('/verify-otp', [EmailVerificationController::class, 'verifyOtp']);

@@ -101,69 +101,64 @@
 
     <!-- ===================Breaking News section =========== -->
 
-     <section class="py-4">
-    <div class="container">
+    <section class="py-4">
+        <div class="container">
 
-        <div class="news-board shadow rounded overflow-hidden">
+            <div class="news-board shadow rounded overflow-hidden">
 
-            <!-- HEADER -->
-            <div class="news-header d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
+                <!-- HEADER -->
+                <div class="news-header d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
 
-                <div class="live-tag fw-bold">
-                    ⚡ LIVE BREAKING NEWS
-                </div>
-
-                <div class="d-flex gap-3 align-items-center">
-
-                    <div class="time small text-white">
-                        Auto-refresh: <span id="sec">30</span>s
+                    <div class="live-tag fw-bold">
+                        ⚡ LIVE BREAKING NEWS
                     </div>
 
-                    <button class="btn btn-sm btn-outline-light"
-                            id="playBtn"
-                            type="button"
-                            onclick="togglePlay()">
-                        ⏸
-                    </button>
+                    <div class="d-flex gap-3 align-items-center">
 
-                    <button class="btn btn-sm btn-success"
-                            type="button"
-                            onclick="refreshNews()">
-                        ↻
-                    </button>
+                        <div class="time small text-white">
+                            Auto-refresh: <span id="sec">30</span>s
+                        </div>
 
-                </div>
-            </div>
+                        <button class="btn btn-sm btn-outline-light" id="playBtn" type="button" onclick="togglePlay()">
+                            ⏸
+                        </button>
 
-            <!-- LIST -->
-            <div class="news-list p-3" id="newsBox">
+                        <button class="btn btn-sm btn-success" type="button" onclick="refreshNews()">
+                            ↻
+                        </button>
 
-                <!-- Default loading state -->
-                <div class="text-center py-4 text-primary">
-                    Loading latest news...
+                    </div>
                 </div>
 
-            </div>
+                <!-- LIST -->
+                <div class="news-list p-3" id="newsBox">
 
-            <!-- FOOTER -->
-            <div class="news-footer d-flex justify-content-between px-3 py-2 border-top small text-white">
+                    <!-- Default loading state -->
+                    <div class="text-center py-4 text-primary">
+                        Loading latest news...
+                    </div>
 
-                <div>
-                    🟢 Monitoring global news sources
                 </div>
 
-                <div id="updateTime">
-                    Last updated: --
+                <!-- FOOTER -->
+                <div class="news-footer d-flex justify-content-between px-3 py-2 border-top small text-white">
+
+                    <div>
+                        🟢 Monitoring global news sources
+                    </div>
+
+                    <div id="updateTime">
+                        Last updated: --
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
-</section> 
-
- {{-- <section>
+    {{-- <section>
     <div class="container">
         <div class="news-board">
 
@@ -255,8 +250,8 @@
     </div>
 </section> --}}
 
-{{-- ── SECTION HTML ──────────────────────────────────────────── --}}
-{{-- <section>
+    {{-- ── SECTION HTML ──────────────────────────────────────────── --}}
+    {{-- <section>
     <div class="container">
         <div class="news-board">
 
@@ -575,7 +570,7 @@
 
     <!-- =================== LIVE MARKETING PLUS ============ -->
 
-   {{-- <section>
+    {{-- <section>
         <div class="container my-5">
 
             <div class="market-section">
@@ -630,57 +625,57 @@
         </div>
     </section> --}}
 
-  <section>
-    <div class="container my-5">
-        <div class="market-section">
+    <section>
+        <div class="container my-5">
+            <div class="market-section">
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="market-title">Live African Market Pulse</div>
-                <div class="update-text">● AI UPDATING IN REAL-TIME</div>
-            </div>
-
-            <div class="row g-3" id="marketPulse">
-
-                <!-- Naspers -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="market-card" data-symbol="NPN:JSE">
-                        <div class="asset-name">NASPERS (JSE)</div>
-                        <div class="price">$0</div>
-                        <div class="change"></div>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="market-title">Live African Market Pulse</div>
+                    <div class="update-text">● AI UPDATING IN REAL-TIME</div>
                 </div>
 
-                <!-- Dangote Cement -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="market-card" data-symbol="DANGCEM:NGX">
-                        <div class="asset-name">DANGOTE CEMENT (NGX)</div>
-                        <div class="price">$0</div>
-                        <div class="change"></div>
-                    </div>
-                </div>
+                <div class="row g-3" id="marketPulse">
 
-                <!-- Safaricom -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="market-card" data-symbol="SCOM:NSE">
-                        <div class="asset-name">SAFARICOM (NSE)</div>
-                        <div class="price">$0</div>
-                        <div class="change"></div>
+                    <!-- Naspers -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="market-card" data-symbol="NPN:JSE">
+                            <div class="asset-name">NASPERS (JSE)</div>
+                            <div class="price">$0</div>
+                            <div class="change"></div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- CIB Bank -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="market-card" data-symbol="COMI:EGX">
-                        <div class="asset-name">CIB BANK (EGX)</div>
-                        <div class="price">$0</div>
-                        <div class="change"></div>
+                    <!-- Dangote Cement -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="market-card" data-symbol="DANGCEM:NGX">
+                            <div class="asset-name">DANGOTE CEMENT (NGX)</div>
+                            <div class="price">$0</div>
+                            <div class="change"></div>
+                        </div>
                     </div>
-                </div>
 
+                    <!-- Safaricom -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="market-card" data-symbol="SCOM:NSE">
+                            <div class="asset-name">SAFARICOM (NSE)</div>
+                            <div class="price">$0</div>
+                            <div class="change"></div>
+                        </div>
+                    </div>
+
+                    <!-- CIB Bank -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="market-card" data-symbol="COMI:EGX">
+                            <div class="asset-name">CIB BANK (EGX)</div>
+                            <div class="price">$0</div>
+                            <div class="change"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <!-- ===================OUR INVESTMENT SECTION ========== -->
 
     {{-- <section class="invest-section py-5">
@@ -945,31 +940,31 @@
         </div>
     </section> --}}
 
-<section class="invest-section py-5">
-    <div class="container">
+    <section class="invest-section py-5">
+        <div class="container">
 
-        <!-- HEADER -->
-        <div class="mb-4">
-            <h4 class="fw-bold mb-0">
-                <i class="fa-solid fa-building-circle-arrow-right me-2"></i>
-                Africa Business Articles
-            </h4>
+            <!-- HEADER -->
+            <div class="mb-4">
+                <h4 class="fw-bold mb-0">
+                    <i class="fa-solid fa-building-circle-arrow-right me-2"></i>
+                    Africa Business Articles
+                </h4>
+            </div>
+
+            <!-- ARTICLES GRID -->
+            <div id="investmentArticles">
+                <div class="row g-4"></div>
+            </div>
+
+            <!-- READ MORE BUTTON -->
+            <div class="text-center mt-4">
+                <button id="loadMoreBtn" class="btn btn-dark px-4">
+                    Read More
+                </button>
+            </div>
+
         </div>
-
-        <!-- ARTICLES GRID -->
-        <div id="investmentArticles">
-            <div class="row g-4"></div>
-        </div>
-
-        <!-- READ MORE BUTTON -->
-        <div class="text-center mt-4">
-            <button id="loadMoreBtn" class="btn btn-dark px-4">
-                Read More
-            </button>
-        </div>
-
-    </div>
-</section>
+    </section>
     <!-- ===== INVEST POPUP ===== -->
     {{-- <div class="modal fade" id="investModal">
         <div class="modal-dialog">
@@ -1075,51 +1070,49 @@
     </div>
 </section> --}}
 
-<section class="news-section py-5">
-    <div class="container">
+    <section class="news-section py-5">
+        <div class="container">
 
-        <div class="d-flex align-items-center mb-4">
-            <h2 class="h4 fw-bold mb-0 me-3">
-                <i class="bi bi-newspaper me-2"></i>
-                Today's Pan-West Africa Investment News
-            </h2>
-            <button class="btn btn-sm btn-light border ms-auto"
-                    onclick="loadAfricanInvestmentNews()">
-                <i class="bi bi-arrow-clockwise me-1"></i>
-                Refresh All News
-            </button>
-        </div>
+            <div class="d-flex align-items-center mb-4">
+                <h2 class="h4 fw-bold mb-0 me-3">
+                    <i class="bi bi-newspaper me-2"></i>
+                    Today's Pan-West Africa Investment News
+                </h2>
+                <button class="btn btn-sm btn-light border ms-auto" onclick="loadAfricanInvestmentNews()">
+                    <i class="bi bi-arrow-clockwise me-1"></i>
+                    Refresh All News
+                </button>
+            </div>
 
-        <div class="row g-4" id="news-grid">
-            @for ($i = 0; $i < 8; $i++)
-                <div class="col-lg-4">
-                    <div class="news-card h-100">
-                        <div class="card-img-wrap" style="background:#e9ecef;height:200px">
-                            <div class="sk" style="width:100%;height:100%;border-radius:0"></div>
-                        </div>
-                        <div class="p-4">
-                            <div class="sk mb-2" style="height:13px;width:30%"></div>
-                            <div class="sk mb-2" style="height:18px;width:100%"></div>
-                            <div class="sk mb-2" style="height:18px;width:80%"></div>
-                            <div class="sk mb-3" style="height:13px;width:60%"></div>
-                            <div class="d-flex justify-content-between pt-3 border-top">
-                                <div class="sk" style="height:12px;width:40%"></div>
-                                <div class="sk" style="height:12px;width:20%"></div>
+            <div class="row g-4" id="news-grid">
+                @for ($i = 0; $i < 8; $i++)
+                    <div class="col-lg-4">
+                        <div class="news-card h-100">
+                            <div class="card-img-wrap" style="background:#e9ecef;height:200px">
+                                <div class="sk" style="width:100%;height:100%;border-radius:0"></div>
+                            </div>
+                            <div class="p-4">
+                                <div class="sk mb-2" style="height:13px;width:30%"></div>
+                                <div class="sk mb-2" style="height:18px;width:100%"></div>
+                                <div class="sk mb-2" style="height:18px;width:80%"></div>
+                                <div class="sk mb-3" style="height:13px;width:60%"></div>
+                                <div class="d-flex justify-content-between pt-3 border-top">
+                                    <div class="sk" style="height:12px;width:40%"></div>
+                                    <div class="sk" style="height:12px;width:20%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endfor
-        </div>
-        <div class="text-center mt-4">
-    <button id="loadMoreBtnMore" class="btn btn-dark px-4"
-        onclick="loadMoreNews()">
-    Read More News
-</button>
-</div>
+                @endfor
+            </div>
+            <div class="text-center mt-4">
+                <button id="loadMoreBtnMore" class="btn btn-dark px-4" onclick="loadMoreNews()">
+                    Read More News
+                </button>
+            </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
     <!-- ===============our success story ============== -->
 
@@ -1303,6 +1296,292 @@
         </div>
     </section>
 
+    {{-- ====================== NEWSLETTER SECTION ================================== --}}
+
+    <section class="newsletter-section">
+        <div class="container">
+
+            <div class="newsletter-header">
+                <h2>Africa Intelligence <span>Newsletter Archive</span></h2>
+                <p>Strategic briefings across Energy, Mining & Agriculture.</p>
+            </div>
+
+            <div class="newsletter-grid">
+
+                <!-- FREE ISSUE -->
+                <div class="newsletter-card">
+                    <div class="newsletter-meta">
+                        <span class="issue-tag free">Free Issue</span>
+                        <span class="issue-date">Feb 2026</span>
+                    </div>
+
+                    <h4>West Africa Energy Outlook 2026</h4>
+                    <p>
+                        LNG capacity growth, Nigeria upstream reforms and
+                        Angola offshore investment trends shaping the year ahead.
+                    </p>
+
+                    <a href="#" class="view-btn">Read Edition →</a>
+                </div>
+
+                <!-- LOCKED ISSUE -->
+                <div class="newsletter-card locked" onclick="openNewsletterModal()">
+                    <div class="newsletter-meta">
+                        <span class="issue-tag premium">Premium</span>
+                        <span class="issue-date">Jan 2026</span>
+                    </div>
+
+                    <h4>Southern Africa Critical Minerals Report</h4>
+                    <p class="blur-preview">
+                        Platinum, copper and lithium supply modeling across
+                        Zambia, DRC and South Africa indicates tightening export flow...
+                    </p>
+
+                    <button class="unlock-btn">Unlock Edition</button>
+                </div>
+
+                <!-- LOCKED ISSUE -->
+                <div class="newsletter-card locked" onclick="openNewsletterModal()">
+                    <div class="newsletter-meta">
+                        <span class="issue-tag premium">Premium</span>
+                        <span class="issue-date">Dec 2025</span>
+                    </div>
+
+                    <h4>East Africa Agri-Export Disruption Analysis</h4>
+                    <p class="blur-preview">
+                        Transport corridor volatility and climate variability
+                        may reduce regional export margins by 11%...
+                    </p>
+
+                    <button class="unlock-btn" onclick="openPremiumModal()">Unlock Edition</button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    {{-- <div class="newsletter-modal" id="newsletterModal">
+        <div class="newsletter-modal-content">
+            <span class="modal-close" onclick="closeNewsletterModal()">×</span>
+
+            <h3>Unlock Premium Intelligence</h3>
+            <p style="color: white">
+                Subscribe to access exclusive strategic briefings,
+                commodity forecasts and verified investment insights.
+            </p>
+
+           <button class="subscribe-action-btn" onclick="openPremiumModal()">
+                Subscribe Now
+            </button>
+        </div>
+    </div> --}}
+
+    <!-- PREMIUM SUBSCRIPTION MODAL -->
+    <div class="premium-modal" id="premiumModal">
+
+        <div class="premium-modal-content">
+
+            <span class="premium-close" onclick="closePremiumModal()">×</span>
+
+            <div class="premium-header">
+                <h2>Unlock Strategic Intelligence Access</h2>
+                <p>
+                    AI-generated cross-border intelligence reports.
+                    Never repeated. Always data-driven.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+
+                <!-- FREE PLAN -->
+                <div class="plan-card free-plan">
+                    <h3>Free Access</h3>
+                    <div class="subprice">$0</div>
+
+                    <ul>
+                        <li>✓ 1 Newsletter per Month</li>
+                        <li>✓ Limited Market Updates</li>
+                        <li>✕ No Intelligence Reports</li>
+                        <li>✕ No Archive Access</li>
+                    </ul>
+
+                    <button class="plan-btn free-btn" onclick="openAccessModal('free')">
+                        Continue Free
+                    </button>
+                </div>
+
+                <!-- PREMIUM PLAN -->
+                <div class="plan-card premium-plan">
+
+                    <div class="recommended-badge">Recommended</div>
+
+                    <h3>Intelligence Pro</h3>
+                    <div class="subprice">$5<span>/month</span></div>
+
+                    <ul>
+                        <li>✓ 3 Premium Newsletters / Week</li>
+                        <li>✓ 1 Weekly Market Intelligence Report</li>
+                        <li>✓ AI-Generated Strategic Analysis</li>
+                        <li>✓ No Repeated Content</li>
+                        <li>✓ Cross-Border Investment Signals</li>
+                        <li>✓ Full Archive Access</li>
+                    </ul>
+
+                    <div class="payment-options">
+                        <button class="pay-btn card-btn" onclick="openVerifyModal('card')">
+                            Pay with Card
+                        </button>
+
+                        <button class="pay-btn paypal-btn" onclick="openVerifyModal('paypal')">
+                            Pay with PayPal
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="premium-footer">
+                <p>
+                    AI-generated intelligence. Independent. Data-backed.
+                    Cancel anytime.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- USER ACCESS MODAL -->
+    <div class="access-modal" id="accessModal">
+
+        <div class="access-modal-content">
+
+            <span class="access-close" onclick="closeAccessModal()">×</span>
+
+            <h2>Create Your Intelligence Access</h2>
+            <p class="access-subtext">
+                Gain structured, AI-driven African market intelligence.
+            </p>
+
+            <form id="accessForm">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" id="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" placeholder="e.g. Nigeria" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <input type="text" id="industry" name="industry" placeholder="e.g. Energy, Mining, Agriculture"
+                        required>
+                </div>
+
+                <input type="hidden" id="selectedPlan" name="plan">
+
+                <button type="submit" class="submit-access-btn">
+                    Continue
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- EMAIL VERIFICATION MODAL -->
+    <!-- EMAIL VERIFICATION MODAL -->
+    <div class="verify-modal" id="verifyModal">
+        <div class="verify-modal-content">
+
+            <span class="verify-close" onclick="closeVerifyModal()">×</span>
+
+            <div class="verify-icon">
+                <i class="bi bi-envelope-check-fill"></i>
+            </div>
+
+            <h3>Email Verification Required</h3>
+
+            <p class="verify-text">
+                Enter your email to receive a secure verification code.
+            </p>
+
+            <!-- EMAIL INPUT FIELD -->
+            <div class="verify-form-group">
+                <input type="email" id="verifyEmailInput" placeholder="Enter your email address" required>
+            </div>
+
+            <!-- SEND OTP BUTTON -->
+            <button class="verify-send-btn" onclick="sendOTP()">
+                Send Verification Code
+            </button>
+
+            <div class="verify-loader" id="verifyLoader" style="display:none;">
+                Sending verification code...
+            </div>
+
+            <div class="verify-message" id="verifyMessage"></div>
+
+            <!-- REGISTER LINK -->
+            <div class="verify-register-link">
+                New user?
+                <a href="#" class="register-link" onclick="openAccessFromVerification()">
+                    Register here
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- OTP VERIFICATION MODAL -->
+    <div class="otp-modal" id="otpModal">
+        <div class="otp-modal-content">
+
+            <span class="otp-close" onclick="closeOtpModal()">×</span>
+
+            <div class="otp-icon">
+                <i class="bi bi-shield-lock-fill"></i>
+            </div>
+
+            <h3>Enter Verification Code</h3>
+
+            <p class="otp-text">
+                Enter the 6-digit code sent to your email to continue.
+            </p>
+
+            <!-- OTP INPUT BOXES -->
+            <div class="otp-input-group">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+            </div>
+
+            <button class="otp-verify-btn" onclick="submitOtp()">
+                Verify & Continue
+            </button>
+
+            <div class="otp-resend">
+                Didn’t receive the code?
+                <a href="#" onclick="resendOtp()">Resend</a>
+            </div>
+
+            <div class="otp-message" id="otpMessage"></div>
+
+        </div>
+    </div>
+
     <!--============= CALL TO ACTION =============== -->
 
     <section class="cta-pro">
@@ -1341,8 +1620,7 @@
 
 @endsection
 @push('scripts')
-
- <script>
+    <script>
         // ── Config ────────────────────────────────────────────────────────────────
         const REFRESH_MS = 60000; // 60 seconds
 
@@ -1419,97 +1697,97 @@
     {{-- =================== this is for the bottom news section ============================ --}}
 
     <script>
-let allNews = [];
-let currentPages = 1;
-const perPages = 3;
+        let allNews = [];
+        let currentPages = 1;
+        const perPages = 3;
 
-// ── Helpers ─────────────────────────────────────────────
-function esc(str = '') {
-    return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}
-
-function getCatLabel(cat) {
-    if (Array.isArray(cat)) return cat[0] ?? 'Investment';
-    return cat || 'Investment';
-}
-
-function getCatClass(cat) {
-    const label = getCatLabel(cat).toLowerCase();
-    const map = {
-        business: 'business',
-        technology: 'technology',
-        politics: 'politics',
-        health: 'health',
-        sports: 'sports',
-        science: 'science',
-        entertainment: 'entertainment',
-        environment: 'environment',
-    };
-    return map[label] ?? '';
-}
-
-function computeGrade(a) {
-    let s = 5;
-    if (a.image) s++;
-    if ((a.description?.length ?? 0) > 100) s++;
-    if ((a.title?.length ?? 0) > 40) s++;
-    if (Array.isArray(a.category) && a.category.length) s++;
-    return Math.min(s, 10);
-}
-
-// ── Fetch ─────────────────────────────────────────────
-async function loadAfricanInvestmentNews() {
-    const grid = document.getElementById('news-grid');
-    grid.innerHTML = `<div class="col-12 text-center py-5">Loading news...</div>`;
-
-    try {
-        const res = await fetch('/api/news/africa-investment');
-        const data = await res.json();
-
-        if (!data.success || !data.articles?.length) {
-            grid.innerHTML = `<div class="col-12 text-center">No news available.</div>`;
-            return;
+        // ── Helpers ─────────────────────────────────────────────
+        function esc(str = '') {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
         }
 
-        // Save all articles
-        allNews = data.articles;
+        function getCatLabel(cat) {
+            if (Array.isArray(cat)) return cat[0] ?? 'Investment';
+            return cat || 'Investment';
+        }
 
-        currentPages = 1;
+        function getCatClass(cat) {
+            const label = getCatLabel(cat).toLowerCase();
+            const map = {
+                business: 'business',
+                technology: 'technology',
+                politics: 'politics',
+                health: 'health',
+                sports: 'sports',
+                science: 'science',
+                entertainment: 'entertainment',
+                environment: 'environment',
+            };
+            return map[label] ?? '';
+        }
 
-        renderNews();
+        function computeGrade(a) {
+            let s = 5;
+            if (a.image) s++;
+            if ((a.description?.length ?? 0) > 100) s++;
+            if ((a.title?.length ?? 0) > 40) s++;
+            if (Array.isArray(a.category) && a.category.length) s++;
+            return Math.min(s, 10);
+        }
 
-    } catch (e) {
-        grid.innerHTML = `<div class="col-12 text-center text-danger">
+        // ── Fetch ─────────────────────────────────────────────
+        async function loadAfricanInvestmentNews() {
+            const grid = document.getElementById('news-grid');
+            grid.innerHTML = `<div class="col-12 text-center py-5">Loading news...</div>`;
+
+            try {
+                const res = await fetch('/api/news/africa-investment');
+                const data = await res.json();
+
+                if (!data.success || !data.articles?.length) {
+                    grid.innerHTML = `<div class="col-12 text-center">No news available.</div>`;
+                    return;
+                }
+
+                // Save all articles
+                allNews = data.articles;
+
+                currentPages = 1;
+
+                renderNews();
+
+            } catch (e) {
+                grid.innerHTML = `<div class="col-12 text-center text-danger">
             Failed to load news.
         </div>`;
-    }
-}
+            }
+        }
 
-// ── Render With Pagination ─────────────────────────────
-function renderNews() {
-    const grid = document.getElementById('news-grid');
-    const loadBtn = document.getElementById('loadMoreBtnMore');
+        // ── Render With Pagination ─────────────────────────────
+        function renderNews() {
+            const grid = document.getElementById('news-grid');
+            const loadBtn = document.getElementById('loadMoreBtnMore');
 
-    const end = currentPages * perPages;
-    const newsToShow = allNews.slice(0, end);
+            const end = currentPages * perPages;
+            const newsToShow = allNews.slice(0, end);
 
-    grid.innerHTML = newsToShow.map(a => {
-        const catLabel = getCatLabel(a.category);
-        const catCls = getCatClass(a.category);
-        const g = computeGrade(a);
+            grid.innerHTML = newsToShow.map(a => {
+                const catLabel = getCatLabel(a.category);
+                const catCls = getCatClass(a.category);
+                const g = computeGrade(a);
 
-        const imgHtml = a.image
-            ? `<img src="${esc(a.image)}"
+                const imgHtml = a.image ?
+                    `<img src="${esc(a.image)}"
                     loading="lazy"
                     style="height:200px;width:100%;object-fit:cover"
-                    onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">`
-            : `<div class="img-placeholder">📰</div>`;
+                    onerror="this.parentElement.innerHTML='<div class=\\'img-placeholder\\'>📰</div>'">` :
+                    `<div class="img-placeholder">📰</div>`;
 
-        return `
+                return `
         <div class="col-lg-4 mb-4">
             <div class="news-card h-100 shadow-sm"
                  onclick="window.open('${esc(a.url)}','_blank')"
@@ -1537,25 +1815,25 @@ function renderNews() {
 
             </div>
         </div>`;
-    }).join('');
+            }).join('');
 
-    // Show / Hide button
-    if (end >= allNews.length) {
-        loadBtn.classList.add('d-none');
-    } else {
-        loadBtn.classList.remove('d-none');
-    }
-}
+            // Show / Hide button
+            if (end >= allNews.length) {
+                loadBtn.classList.add('d-none');
+            } else {
+                loadBtn.classList.remove('d-none');
+            }
+        }
 
-// ── Load More Button ─────────────────────────────
-function loadMoreNews() {
-    currentPages++;
-    renderNews();
-}
+        // ── Load More Button ─────────────────────────────
+        function loadMoreNews() {
+            currentPages++;
+            renderNews();
+        }
 
-// ── Init ─────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
-</script>
+        // ── Init ─────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
+    </script>
 
     {{-- ======== this is for the articals ========== --}}
     <script>
@@ -1671,4 +1949,260 @@ document.addEventListener('DOMContentLoaded', loadAfricanInvestmentNews);
         document.addEventListener('DOMContentLoaded', loadInvestmentArticles);
     </script>
 
+    <script>
+        function openNewsletterModal() {
+            document.getElementById('premiumModal').style.display = 'flex';
+        }
+
+        function closeNewsletterModal() {
+            document.getElementById('premiumModal').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        function openPremiumModal() {
+            document.getElementById('premiumModal').style.display = 'flex';
+        }
+
+        function closePremiumModal() {
+            document.getElementById('premiumModal').style.display = 'none';
+        }
+
+        /* Close when clicking outside modal */
+        window.onclick = function(event) {
+            const modal = document.getElementById('premiumModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+    <script>
+        let selectedPayment = null;
+
+        /* OPEN VERIFICATION MODAL FIRST */
+        function openVerificationModal(planType) {
+            selectedPayment = planType;
+            document.getElementById('verifyModal').style.display = 'flex';
+        }
+
+        /* CLOSE VERIFICATION MODAL */
+        function closeVerifyModal() {
+            document.getElementById('verifyModal').style.display = 'none';
+        }
+
+        /* OPEN ACCESS MODAL FROM REGISTER LINK */
+        function openAccessFromVerification() {
+
+            // Close verification modal
+            closeVerifyModal();
+
+            // Set selected plan inside access modal
+            document.getElementById('selectedPlan').value = selectedPayment;
+
+            // Open access modal
+            document.getElementById('accessModal').style.display = 'flex';
+        }
+
+        /* CLOSE ACCESS MODAL */
+        function closeAccessModal() {
+            document.getElementById('accessModal').style.display = 'none';
+        }
+
+        /* FORM SUBMIT */
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (selectedPayment === 'free') {
+                window.location.href = "/free-access";
+            }
+
+            if (selectedPayment === 'card') {
+                window.location.href = "/stripe-checkout";
+            }
+
+            if (selectedPayment === 'paypal') {
+                window.location.href = "/paypal-checkout";
+            }
+        });
+    </script>
+    <script>
+        let selectedPlan = null;
+
+        function openAccessModal(plan) {
+            selectedPlan = plan;
+            document.getElementById('accessModal').style.display = 'flex';
+        }
+
+        function closeAccessModal() {
+            document.getElementById('accessModal').style.display = 'none';
+        }
+
+        document.getElementById('accessForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                country: document.getElementById('country').value,
+                industry: document.getElementById('industry').value,
+                plan: selectedPlan
+            };
+
+            const res = await fetch('/intelligence-access', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            }
+        });
+    </script>
+
+    <script>
+        function openVerifyModal(email) {
+            document.getElementById('verifyModal').style.display = 'flex';
+            document.getElementById('verifyEmailInput').innerText = email;
+        }
+
+        function closeVerifyModal() {
+            document.getElementById('verifyModal').style.display = 'none';
+        }
+
+        async function resendVerification() {
+
+            const email = document.querySelector('input[name="email"]').value;
+
+            document.getElementById('verifyLoader').style.display = 'block';
+
+            const res = await fetch('/subscribe', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: new FormData(document.getElementById('accessForm'))
+            });
+
+            document.getElementById('verifyLoader').style.display = 'none';
+
+            alert("Verification email resent.");
+        }
+    </script>
+
+    <script>
+        async function sendOTP() {
+
+            const email = document.getElementById('verifyEmailInput').value;
+            const loader = document.getElementById('verifyLoader');
+            const message = document.getElementById('verifyMessage');
+
+            if (!email) {
+                message.innerText = "Please enter your email.";
+                return;
+            }
+
+            loader.style.display = 'block';
+            message.innerText = "";
+
+            try {
+
+                const res = await fetch('/send-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
+                });
+
+                const data = await res.json();
+
+                loader.style.display = 'none';
+
+                if (data.success) {
+                    message.innerText = "Verification code sent successfully.";
+
+                    // OPTIONAL: Open OTP modal automatically
+                    openOtpModal();
+
+                } else {
+                    message.innerText = data.message;
+                }
+
+            } catch (error) {
+                loader.style.display = 'none';
+                message.innerText = "Server error. Try again.";
+            }
+        }
+
+        
+    </script>
+
+    <script>
+        // Auto move to next input
+        document.querySelectorAll(".otp-input").forEach((input, index, inputs) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+
+        // Open modal
+        function openOtpModal() {
+            document.getElementById("otpModal").style.display = "flex";
+        }
+
+        // Close modal
+        function closeOtpModal() {
+            document.getElementById("otpModal").style.display = "none";
+        }
+
+        // Submit OTP
+        async function submitOtp() {
+
+            const otp = Array.from(document.querySelectorAll(".otp-input"))
+                .map(input => input.value)
+                .join('');
+
+            const email = document.getElementById("verifyEmailInput").value;
+
+            const res = await fetch('/verify-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    email,
+                    otp
+                })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+
+                if (selectedPayment === 'card') {
+                    window.location.href = "/stripe-checkout";
+                }
+
+                if (selectedPayment === 'paypal') {
+                    window.location.href = "/paypal-checkout";
+                }
+
+            } else {
+                document.getElementById("otpMessage").innerText = data.message;
+            }
+        }
+    </script>
 @endpush

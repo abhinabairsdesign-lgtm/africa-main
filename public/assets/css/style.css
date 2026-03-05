@@ -1851,3 +1851,703 @@ body {
 .news-item:hover {
     background: rgba(255,255,255,0.05);
 }
+
+
+/* ================================
+   NEWSLETTER SECTION
+================================ */
+
+.newsletter-section {
+    background: #06121c;
+    padding: 100px 0;
+    color: #ffffff;
+}
+
+.newsletter-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.newsletter-header h2 {
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.newsletter-header h2 span {
+    color: #00f2ff;
+}
+
+.newsletter-header p {
+    color: #8aa4b6;
+    margin-top: 10px;
+}
+
+.newsletter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* ================================
+   CARD STYLE
+================================ */
+
+.newsletter-card {
+    background: #0c1b26;
+    padding: 35px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.newsletter-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(0,242,255,0.2);
+    border-color: rgba(0,242,255,0.3);
+}
+
+.newsletter-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.issue-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.issue-tag.free {
+    background: rgba(0,242,255,0.15);
+    color: #00f2ff;
+}
+
+.issue-tag.premium {
+    background: rgba(255,191,0,0.15);
+    color: #ffbf00;
+}
+
+.issue-date {
+    font-size: 12px;
+    color: #7f9fb5;
+}
+
+.newsletter-card h4 {
+    font-size: 18px;
+    margin: 10px 0 15px;
+}
+
+.newsletter-card p {
+    font-size: 14px;
+    color: #8aa4b6;
+}
+
+.view-btn {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ffbf00;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.view-btn:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   LOCKED EFFECT
+================================ */
+
+.locked .blur-preview {
+    filter: blur(5px);
+    user-select: none;
+}
+
+.unlock-btn {
+    margin-top: 15px;
+    background: #ffbf00;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.unlock-btn:hover {
+    background: #e6a800;
+}
+
+
+/* =============== subscription model ====================== */
+.newsletter-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.newsletter-modal-content {
+    background: #0c1b26;
+    padding: 50px;
+    width: 420px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid rgba(0,242,255,0.2);
+    position: relative;
+}
+
+.newsletter-modal-content h3 {
+    color: #00f2ff;
+    margin-bottom: 15px;
+}
+
+.subscribe-action-btn {
+    background: #ffbf00;
+    border: none;
+    padding: 10px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.subscribe-action-btn:hover {
+    background: #e6a800;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
+}
+
+
+/* ============================
+   PREMIUM SUBSCRIPTION MODAL
+============================ */
+
+/* ===== MODAL OVERLAY ===== */
+.premium-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 15, 25, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ===== MODAL CONTAINER ===== */
+.premium-modal-content {
+    background: linear-gradient(145deg, #071b26, #0b2a3a);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 50px;
+    color: #ffffff;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0, 242, 255, 0.15);
+    border: 1px solid rgba(0, 242, 255, 0.15);
+    animation: modalFade 0.35s ease;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes modalFade {
+    from { opacity: 0; transform: scale(.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== CLOSE BUTTON ===== */
+.premium-close {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.6);
+}
+.premium-close:hover {
+    color: #00f2ff;
+}
+
+/* ===== HEADER ===== */
+.premium-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.premium-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+.premium-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* ===== PRICING GRID ===== */
+.pricing-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== PLAN CARD ===== */
+.plan-card {
+    flex: 1;
+    min-width: 280px;
+    padding: 35px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ===== FREE PLAN ===== */
+.free-plan {
+    border-color: rgba(255,255,255,0.08);
+}
+
+/* ===== PREMIUM PLAN ===== */
+.premium-plan {
+    border: 1px solid #00f2ff;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+}
+
+/* ===== RECOMMENDED BADGE ===== */
+.recommended-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #ffbf00;
+    color: #000;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+/* ===== PLAN TITLE ===== */
+.plan-card h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* ===== PRICE ===== */
+.subprice {
+    font-size: 42px;
+    font-weight: 700;
+    color: #00f2ff;
+    margin-bottom: 25px;
+}
+.price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ===== FEATURES ===== */
+.plan-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+.plan-card ul li {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+}
+
+/* ===== BUTTONS ===== */
+.plan-btn,
+.pay-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin-top: 10px;
+}
+
+/* FREE BUTTON */
+.free-btn {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+.free-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* CARD BUTTON */
+.card-btn {
+    background: #00f2ff;
+    color: #00121a;
+}
+.card-btn:hover {
+    background: #00c4d1;
+}
+
+/* PAYPAL BUTTON */
+.paypal-btn {
+    background: #ffbf00;
+    color: #000;
+}
+.paypal-btn:hover {
+    background: #e6a800;
+}
+
+/* ===== FOOTER NOTE ===== */
+.premium-modal-content::after {
+    content: "AI-generated intelligence. Independent. Data-backed. Cancel anytime.";
+    display: block;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ACCESS MODAL */
+.access-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 10, 20, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.access-modal-content {
+    background: linear-gradient(145deg, #071b26, #0c2f3f);
+    padding: 40px;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 500px;
+    color: #fff;
+    border: 1px solid rgba(0,242,255,0.2);
+    box-shadow: 0 0 40px rgba(0,242,255,0.15);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.access-close {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    color: rgba(255,255,255,0.6);
+}
+
+.access-modal-content h2 {
+    margin-bottom: 10px;
+}
+
+.access-subtext {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 6px;
+    color: #00f2ff;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: #fff;
+}
+
+.submit-access-btn {
+    width: 100%;
+    padding: 12px;
+    background: #00f2ff;
+    color: #00121a;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-access-btn:hover {
+    background: #00c4d1;
+}
+
+.verify-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 20, 30, 0.85);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.verify-modal-content {
+    width: 420px;
+    background: linear-gradient(145deg, #052b35, #041f26);
+    border: 1px solid rgba(0, 242, 255, 0.25);
+    border-radius: 18px;
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
+    color: #ffffff;
+}
+
+.verify-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #aaa;
+}
+
+.verify-icon {
+    font-size: 40px;
+    color: #00f2ff;
+    margin-bottom: 20px;
+}
+
+.verify-text {
+    font-size: 14px;
+    color: #b0dbe2;
+    margin-bottom: 20px;
+}
+
+.verify-email-display {
+    font-size: 13px;
+    color: #00f2ff;
+    margin-bottom: 25px;
+}
+
+.verify-resend-btn {
+    background: #00f2ff;
+    color: #001a22;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.verify-resend-btn:hover {
+    background: #00c6d4;
+}
+
+.verify-loader {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.verify-register-link {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.register-link {
+    color: #00f2ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.register-link:hover {
+    color: #00cbd8;
+    text-decoration: underline;
+}
+
+.verify-form-group {
+    margin: 20px 0;
+}
+
+.verify-form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.verify-form-group input:focus {
+    border-color: #00f2ff;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.verify-send-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #00f2ff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.verify-send-btn:hover {
+    background: #00cbd8;
+}
+
+.verify-message {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #00ffae;
+}
+
+/* OTP MODAL BACKDROP */
+.otp-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 15, 25, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* OTP BOX */
+.otp-modal-content {
+    width: 420px;
+    padding: 40px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #052c36, #031e26);
+    border: 1px solid rgba(0, 242, 255, 0.25);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
+    text-align: center;
+    color: #fff;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.otp-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    cursor: pointer;
+    font-size: 22px;
+    color: #aaa;
+}
+
+.otp-icon {
+    font-size: 40px;
+    color: #00f2ff;
+    margin-bottom: 20px;
+}
+
+.otp-text {
+    font-size: 14px;
+    color: #a8dce2;
+    margin-bottom: 25px;
+}
+
+/* OTP INPUTS */
+.otp-input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.otp-input {
+    width: 50px;
+    height: 55px;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    transition: 0.2s ease;
+}
+
+.otp-input:focus {
+    border-color: #00f2ff;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+    outline: none;
+}
+
+/* VERIFY BUTTON */
+.otp-verify-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #00f2ff;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.otp-verify-btn:hover {
+    background: #00cbd8;
+}
+
+.otp-resend {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.otp-resend a {
+    color: #00f2ff;
+    text-decoration: none;
+}
+
+.otp-message {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #00ffae;
+}
