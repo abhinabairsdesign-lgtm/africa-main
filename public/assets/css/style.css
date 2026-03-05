@@ -1081,7 +1081,7 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #8da2b5;
+    /* color: #8da2b5; */
     margin-bottom: 10px;
 }
 
@@ -2551,3 +2551,148 @@ body {
     font-size: 13px;
     color: #00ffae;
 }
+
+
+
+
+/* ================== new api ============= */
+
+/* ── Slider shell ────────────────────────────────────────────────────────── */
+    .commodity-slider-outer {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .commodity-slider-track {
+        display: flex;
+        gap: 14px;
+        width: max-content;
+        will-change: transform;
+        /* animation injected by JS */
+    }
+
+    /* Pause on hover */
+    .commodity-slider-outer:hover .commodity-slider-track {
+        animation-play-state: paused;
+    }
+
+    /* ── Individual slide wrapper ─────────────────────────────────────────────── */
+    .commodity-slide {
+        flex: 0 0 220px;
+        width: 220px;
+    }
+
+    /* ── Card styles ─────────────────────────────────────────────────────────── */
+    .commodity-card {
+        position: relative;
+        padding: 1rem 1rem 0.75rem;
+        min-height: 148px;
+        cursor: default;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        height: 100%;
+        box-sizing: border-box;
+        background: linear-gradient(140deg, #050b16, #0a192f, #050b16); 
+        border-radius: 5px;
+    }
+
+    .commodity-card .price {
+        background: white !important;
+        color: black !important;
+        border-radius: 4px;
+        padding: 0.25rem 0.5rem;
+        display: inline-block;
+    }
+
+    .commodity-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Top-border colour states */
+    .commodity-card.up   { border-top: 3px solid #22c55e; }
+    .commodity-card.down { border-top: 3px solid #ef4444; }
+    .commodity-card.flat { border-top: 3px solid #94a3b8; }
+
+    .commodity-icon {
+        font-size: 1.35rem;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+    }
+
+    .unit-badge {
+        font-size: 0.62rem;
+        opacity: 0.5;
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        text-transform: none;
+    }
+
+    .commodity-meta {
+        margin-top: 0.4rem;
+        font-size: 0.68rem;
+        opacity: 1;
+        letter-spacing: 0.03em;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Change colours */
+    .change.up   { color: #22c55e !important; }
+    .change.down { color: #ef4444 !important; }
+    .change.flat { color: #94a3b8 !important; }
+
+    /* ── Edge fade masks ─────────────────────────────────────────────────────── */
+    .slider-fade {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 60px;
+        pointer-events: none;
+        z-index: 2;
+    }
+    .slider-fade-left  { left: 0;  background: linear-gradient(to right, var(--market-bg, #0d2137), transparent); }
+    .slider-fade-right { right: 0; background: linear-gradient(to left,  var(--market-bg, #0d2137), transparent); }
+
+    /* ── Pulse dot ───────────────────────────────────────────────────────────── */
+    .pulse-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #f59e0b;
+        margin-right: 6px;
+        animation: pulseAnim 1.4s ease-in-out infinite;
+        vertical-align: middle;
+    }
+
+    @keyframes pulseAnim {
+        0%, 100% { opacity: 1;   transform: scale(1);   }
+        50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* ── RTL slide keyframe ──────────────────────────────────────────────────── */
+    @keyframes commoditySlideRTL {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(var(--slide-distance)); }
+    }
+
+    /* ── Skeleton shimmer ────────────────────────────────────────────────────── */
+    .price.loading, .change.loading {
+        background: linear-gradient(90deg,
+            rgba(255,255,255,0.05) 25%,
+            rgba(255,255,255,0.13) 50%,
+            rgba(255,255,255,0.05) 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmerCom 1.5s infinite;
+        border-radius: 4px;
+        color: transparent !important;
+        min-width: 90px;
+        display: inline-block;
+    }
+
+    @keyframes shimmerCom {
+        0%   { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }

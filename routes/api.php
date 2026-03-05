@@ -9,6 +9,7 @@ use App\Http\Controllers\MarketController;
 use App\Http\Controllers\MineralsController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TechController;
+use App\Http\Controllers\CommoditiesController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -32,3 +33,13 @@ Route::get('/africa-market-gass', [GassController::class, 'fetchAfricaMarketPuls
 Route::get('/africa-minerals', [MineralsController::class, 'fetchAfricaMinerals']);
 
 Route::get('/africa-tech', [TechController::class, 'indexTechData']);
+
+
+
+
+Route::get('/commodities-pulse', [CommoditiesController::class, 'pulse'])
+    ->name('commodities.pulse');
+
+
+
+

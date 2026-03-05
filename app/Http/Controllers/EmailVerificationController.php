@@ -14,7 +14,7 @@ class EmailVerificationController extends Controller
     /* ========================================
        SEND OTP
     ======================================== */
-   public function sendOtp(Request $request)
+ public function sendOtp(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'email' => 'required|email'
@@ -30,25 +30,6 @@ class EmailVerificationController extends Controller
     $email = $request->email;
 
     /* ==========================================
-       CHECK IF ALREADY SUBSCRIBED
-    ========================================== */
-    $existingSubscriber = IntelligenceLead::where('email', $email)
-    ->whereHas('transaction', function ($query) {
-        $query->where('status', 'paid');
-    })
-    ->exists();
-
-    dd($existingSubscriber);
-
-    if ($existingSubscriber) {
-        return response()->json([
-            'success' => false,
-            'already_subscribed' => true,
-            'message' => 'You are already subscribed.'
-        ], 409);
-    }
-
-    /* ==========================================
        GENERATE OTP
     ========================================== */
     $otp = rand(100000, 999999);
@@ -56,9 +37,9 @@ class EmailVerificationController extends Controller
     EmailOtp::updateOrCreate(
         ['email' => $email],
         [
-            'otp' => $otp,
+            'otp'        => $otp,
             'expires_at' => Carbon::now()->addMinutes(10),
-            'verified' => false
+            'verified'   => false
         ]
     );
 
@@ -79,46 +60,181 @@ class EmailVerificationController extends Controller
     /* ========================================
        VERIFY OTP
     ======================================== */
-    public function verifyOtp(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'otp'   => 'required|digits:6'
-        ]);
+    // public function verifyOtp(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'email' => 'required|email',
+    //         'otp'   => 'required|digits:6'
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid verification data.'
-            ], 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Invalid verification data.'
+    //         ], 422);
+    //     }
 
-        $record = EmailOtp::where('email', $request->email)
-            ->where('otp', $request->otp)
-            ->where('verified', false)
-            ->first();
+    //     $record = EmailOtp::where('email', $request->email)
+    //         ->where('otp', $request->otp)
+    //         ->where('verified', false)
+    //         ->first();
 
-        if (!$record) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid verification code.'
-            ], 400);
-        }
+    //     if (!$record) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Invalid verification code.'
+    //         ], 400);
+    //     }
 
-        if (Carbon::now()->greaterThan($record->expires_at)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Verification code expired.'
-            ], 400);
-        }
+    //     if (Carbon::now()->greaterThan($record->expires_at)) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Verification code expired.'
+    //         ], 400);
+    //     }
 
-        $record->update([
-            'verified' => true
-        ]);
+    //     $record->update([
+    //         'verified' => true
+    //     ]);
 
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Email verified successfully.'
+    //     ]);
+    // }
+
+//     public function verifyOtp(Request $request)
+// {
+//     $validator = Validator::make($request->all(), [
+//         'email' => 'required|email',
+//         'otp'   => 'required|digits:6'  
+//     ]);
+
+//     if ($validator->fails()) {
+//         return response()->json([
+//             'success' => false,
+//             'message' => 'Invalid verification data.'
+//         ], 422);
+//     }
+
+//     $record = EmailOtp::where('email', $request->email)
+//         ->where('otp', $request->otp)
+//         ->where('verified', false)
+//         ->first();
+
+//     if (!$record) {
+//         return response()->json([
+//             'success' => false,
+//             'message' => 'Invalid verification code.'
+//         ], 400);
+//     }
+
+//     if (Carbon::now()->greaterThan($record->expires_at)) {
+//         return response()->json([
+//             'success' => false,
+//             'message' => 'Verification code expired.'
+//         ], 400);
+//     }
+
+//     $record->update(['verified' => true]);
+
+//     /* ==========================================
+//        CHECK IF ALREADY SUBSCRIBED AFTER OTP
+//     ========================================== */
+//     $alreadySubscribed = IntelligenceLead::where('email', $request->email)
+//         ->whereHas('transaction', function ($query) {
+//             $query->where('status', 'paid');
+//         })
+//         ->exists();
+
+//     if ($alreadySubscribed) {
+//         return response()->json([
+//             'success'            => true,
+//             'already_subscribed' => true,
+//             'message'            => 'You are already subscribed.'
+//         ], 200);
+//     }
+
+//     return response()->json([
+//         'success'            => true,
+//         'already_subscribed' => false,
+//         'message'            => 'Email verified successfully.'
+//     ]);
+// }
+public function verifyOtp(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email',
+        'otp'   => 'required|digits:6'
+    ]);
+
+    if ($validator->fails()) {
         return response()->json([
-            'success' => true,
-            'message' => 'Email verified successfully.'
-        ]);
+            'success' => false,
+            'message' => 'Invalid verification data.'
+        ], 422);
     }
+
+    $record = EmailOtp::where('email', $request->email)
+        ->where('otp', (int) $request->otp)
+        ->where('verified', false)
+        ->first();
+
+    if (!$record) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid verification code.'
+        ], 400);
+    }
+
+    if (Carbon::now()->greaterThan($record->expires_at)) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Verification code expired.'
+        ], 400);
+    }
+
+    $record->update(['verified' => true]);
+
+    /* ==========================================
+       CHECK IF ALREADY SUBSCRIBED (PAID)
+    ========================================== */
+    $alreadySubscribed = IntelligenceLead::where('email', $request->email)
+        ->whereHas('transaction', function ($query) {
+            $query->where('status', 'paid');
+        })
+        ->exists();
+
+    if ($alreadySubscribed) {
+        return response()->json([
+            'success'            => true,
+            'already_subscribed' => true,
+            'message'            => 'You are already subscribed.'
+        ], 200);
+    }
+
+    /* ==========================================
+       CHECK IF LEAD EXISTS BUT NOT PAID
+    ========================================== */
+    $existingLead = IntelligenceLead::where('email', $request->email)->first();
+
+    if ($existingLead) {
+        return response()->json([
+            'success'       => true,
+            'already_subscribed' => false,
+            'lead_exists'   => true,        // ✅ Lead exists, not paid
+            'message'       => 'Email verified. Please complete your details.'
+        ], 200);
+    }
+
+    /* ==========================================
+       BRAND NEW USER
+    ========================================== */
+    return response()->json([
+        'success'            => true,
+        'already_subscribed' => false,
+        'lead_exists'        => false,      // ✅ New user
+        'message'            => 'Email verified successfully.'
+    ], 200);
+}
 }

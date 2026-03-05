@@ -625,7 +625,7 @@
         </div>
     </section> --}}
 
-    <section>
+    {{-- <section>
         <div class="container my-5">
             <div class="market-section">
 
@@ -675,7 +675,123 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    <section class="commodities-section-wrapper">
+    <div class="container-fluid px-0 my-5">
+        <div class="market-section commodities-market-section px-3 px-md-4">
+
+            {{-- Header --}}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="market-title">
+                    <span class="pulse-dot"></span> LIVE COMMODITIES PULSE
+                </div>
+                <div class="update-text">● AI UPDATING IN REAL-TIME</div>
+            </div>
+
+            {{-- Slider wrapper --}}
+            <div class="commodity-slider-outer">
+                <div class="commodity-slider-track" id="commodityTrack">
+
+                    <!-- Gold -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="GOLD">
+                            <div class="commodity-icon">🥇</div>
+                            <div class="asset-name">GOLD <span class="unit-badge">/ oz</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Silver -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="SILVER">
+                            <div class="commodity-icon">🥈</div>
+                            <div class="asset-name">SILVER <span class="unit-badge">/ oz</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Copper -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="COPPER">
+                            <div class="commodity-icon">🔶</div>
+                            <div class="asset-name">COPPER <span class="unit-badge">/ lb</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Platinum -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="PLATINUM">
+                            <div class="commodity-icon">⬜</div>
+                            <div class="asset-name">PLATINUM <span class="unit-badge">/ oz</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Crude Oil -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="CRUDE_OIL">
+                            <div class="commodity-icon">🛢️</div>
+                            <div class="asset-name">CRUDE OIL <span class="unit-badge">/ bbl</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Natural Gas -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="NATURAL_GAS">
+                            <div class="commodity-icon">🔥</div>
+                            <div class="asset-name">NATURAL GAS <span class="unit-badge">/ MMBtu</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Soybeans -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="SOYBEANS">
+                            <div class="commodity-icon">🫘</div>
+                            <div class="asset-name">SOYBEANS <span class="unit-badge">/ bu</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Corn -->
+                    <div class="commodity-slide">
+                        <div class="market-card commodity-card" data-commodity="CORN">
+                            <div class="commodity-icon">🌽</div>
+                            <div class="asset-name">CORN <span class="unit-badge">/ bu</span></div>
+                            <div class="price">—</div>
+                            <div class="change">Loading…</div>
+                            <div class="commodity-meta">H: <span class="day-high">—</span> &nbsp; L: <span class="day-low">—</span></div>
+                        </div>
+                    </div>
+
+                </div>{{-- /.commodity-slider-track --}}
+
+                {{-- Fade edges --}}
+                <div class="slider-fade slider-fade-left"></div>
+                <div class="slider-fade slider-fade-right"></div>
+            </div>{{-- /.commodity-slider-outer --}}
+
+        </div>{{-- /.market-section --}}
+    </div>{{-- /.container-fluid --}}
+</section>
+
     <!-- ===================OUR INVESTMENT SECTION ========== -->
 
     {{-- <section class="invest-section py-5">
@@ -1620,7 +1736,7 @@
 
 @endsection
 @push('scripts')
-    <script>
+    {{-- <script>
         // ── Config ────────────────────────────────────────────────────────────────
         const REFRESH_MS = 60000; // 60 seconds
 
@@ -1692,7 +1808,142 @@
         // ── Init + auto-refresh ───────────────────────────────────────────────────
         loadMarketPulse();
         setInterval(loadMarketPulse, REFRESH_MS);
-    </script>
+    </script> --}}
+
+    <script>
+(function () {
+    'use strict';
+
+    /* ── Config ────────────────────────────────────────────────────────────── */
+    const REFRESH_MS   = 1_000;
+    const API_ENDPOINT = '/api/commodities-pulse';
+    const SLIDE_SPEED  = 35;      // px/sec — increase to go faster
+    const CARD_GAP     = 14;      // must match CSS gap value
+
+    /* ── Helpers ───────────────────────────────────────────────────────────── */
+    function fmt(val, dec = 2) {
+        const n = parseFloat(val);
+        if (val == null || isNaN(n)) return '—';
+        return n.toLocaleString('en-US', {
+            minimumFractionDigits : dec,
+            maximumFractionDigits : dec,
+        });
+    }
+
+    function decimalPlaces(key) {
+        return { COPPER: 4, SOYBEANS: 2, CORN: 2 }[key] ?? 2;
+    }
+
+    /* ── Infinite RTL slider ───────────────────────────────────────────────── */
+    function initSlider() {
+        const track = document.getElementById('commodityTrack');
+        if (!track) return;
+
+        // Clone every original slide and append for seamless loop
+        const origSlides = Array.from(track.children);
+        origSlides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+        });
+
+        // Total width of ONE set of cards
+        const oneSetWidth = origSlides.reduce(
+            (acc, slide) => acc + slide.offsetWidth + CARD_GAP, 0
+        );
+
+        const duration = oneSetWidth / SLIDE_SPEED; // seconds
+
+        track.style.setProperty('--slide-distance', `-${oneSetWidth}px`);
+        track.style.animation = `commoditySlideRTL ${duration}s linear infinite`;
+    }
+
+    /* ── Render a single card ──────────────────────────────────────────────── */
+    function renderCard(card, commodity) {
+        const priceEl  = card.querySelector('.price');
+        const changeEl = card.querySelector('.change');
+        const highEl   = card.querySelector('.day-high');
+        const lowEl    = card.querySelector('.day-low');
+
+        priceEl.classList.remove('loading');
+        changeEl.classList.remove('loading');
+
+        if (commodity.error || commodity.price == null) {
+            priceEl.textContent  = '—';
+            changeEl.textContent = 'No data';
+            changeEl.className   = 'change';
+            if (highEl) highEl.textContent = '—';
+            if (lowEl)  lowEl.textContent  = '—';
+            return;
+        }
+
+        const dec      = decimalPlaces(commodity.key);
+        const currency = commodity.currency || 'USD';
+
+        priceEl.textContent = `${currency} ${fmt(commodity.price, dec)}`;
+
+        if (highEl) highEl.textContent = fmt(commodity.high, dec);
+        if (lowEl)  lowEl.textContent  = fmt(commodity.low,  dec);
+
+        const pct = parseFloat(commodity.change_pct);
+        if (!isNaN(pct)) {
+            const dir   = pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat';
+            const arrow = pct > 0 ? '▲'  : pct < 0 ? '▼'    : '→';
+            changeEl.textContent = `${arrow} ${Math.abs(pct).toFixed(2)}% today`;
+            changeEl.className   = `change ${dir}`;
+            card.classList.remove('up', 'down', 'flat');
+            card.classList.add(dir);
+        }
+    }
+
+    /* ── Fetch & update all cards (originals + clones) ─────────────────────── */
+    function loadCommodityPulse() {
+        fetch(API_ENDPOINT, {
+            headers: {
+                'Accept'       : 'application/json',
+                'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+            },
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+        })
+        .then(json => {
+            if (!json.success || !json.commodities) throw new Error('Bad response');
+
+            json.commodities.forEach(commodity => {
+                // querySelectorAll hits both original and cloned cards
+                document.querySelectorAll(
+                    `.commodity-card[data-commodity="${commodity.key}"]`
+                ).forEach(card => renderCard(card, commodity));
+            });
+        })
+        .catch(err => {
+            console.error('Commodities Pulse Error:', err);
+            document.querySelectorAll('.commodity-card').forEach(card => {
+                const p = card.querySelector('.price');
+                const c = card.querySelector('.change');
+                if (p) { p.classList.remove('loading'); p.textContent = '—'; }
+                if (c) { c.classList.remove('loading'); c.textContent = 'No data'; c.className = 'change'; }
+            });
+        });
+    }
+
+    /* ── Boot ───────────────────────────────────────────────────────────────── */
+    // Shimmer on originals while waiting for first API response
+    document.querySelectorAll('.commodity-card').forEach(card => {
+        card.querySelector('.price')?.classList.add('loading');
+        card.querySelector('.change')?.classList.add('loading');
+    });
+
+    window.addEventListener('load', () => {
+        initSlider();
+        loadCommodityPulse();
+        setInterval(loadCommodityPulse, REFRESH_MS);
+    });
+
+})();
+</script>
 
     {{-- =================== this is for the bottom news section ============================ --}}
 
@@ -1959,7 +2210,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         function openPremiumModal() {
             document.getElementById('premiumModal').style.display = 'flex';
         }
@@ -1975,9 +2226,9 @@
                 modal.style.display = "none";
             }
         };
-    </script>
+    </script> --}}
 
-    <script>
+    {{-- <script>
         let selectedPayment = null;
 
         /* OPEN VERIFICATION MODAL FIRST */
@@ -2064,90 +2315,390 @@
                 window.location.href = data.redirect;
             }
         });
-    </script>
+    </script> --}}
 
-    <script>
-        function openVerifyModal(email) {
-            document.getElementById('verifyModal').style.display = 'flex';
-            document.getElementById('verifyEmailInput').innerText = email;
-        }
+    {{-- <script>
+    let selectedPayment = null;
 
-        function closeVerifyModal() {
-            document.getElementById('verifyModal').style.display = 'none';
-        }
+    function selectPlan(plan) {
+    selectedPlan = plan; // 'card', 'free', etc.
+}
 
-        async function resendVerification() {
+    /* ========================================
+       OPEN VERIFICATION MODAL
+    ======================================== */
+    function openVerificationModal(planType) {
+        selectedPayment = planType;
+        document.getElementById('verifyModal').style.display = 'flex';
+    }
 
-            const email = document.querySelector('input[name="email"]').value;
+    /* ========================================
+       CLOSE VERIFICATION MODAL
+    ======================================== */
+    function closeVerifyModal() {
+        document.getElementById('verifyModal').style.display = 'none';
+    }
 
-            document.getElementById('verifyLoader').style.display = 'block';
+    /* ========================================
+       OPEN ACCESS MODAL
+       Called from: register link OR after OTP verified
+    ======================================== */
+    // function openAccessModal() {
+    //     // ✅ Sync selectedPlan hidden input with selectedPayment
+    //     document.getElementById('selectedPlan').value = selectedPayment;
+    //     document.getElementById('accessModal').style.display = 'flex';
+    // }
 
-            const res = await fetch('/subscribe', {
+    function openAccessModal(plan = null) {
+    // Use passed plan OR fall back to already stored selectedPlan
+    if (plan) selectedPlan = plan;
+
+    document.getElementById('accessModal').style.display = 'flex';
+}
+
+    /* ========================================
+       CLOSE ACCESS MODAL
+    ======================================== */
+    function closeAccessModal() {
+        document.getElementById('accessModal').style.display = 'none';
+    }
+
+    /* ========================================
+       OPEN ACCESS MODAL FROM REGISTER LINK
+    ======================================== */
+    function openAccessFromVerification() {
+        closeVerifyModal();
+        openAccessModal();
+    }
+
+    /* ========================================
+       FORM SUBMIT — single listener
+    ======================================== */
+    document.getElementById('accessForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name:     document.getElementById('fullName').value,
+            email:    document.getElementById('email').value,
+            country:  document.getElementById('country').value,
+            industry: document.getElementById('industry').value,
+            plan:     selectedPayment  // ✅ Use one single source of truth
+        };
+
+        console.log("Submitting:", formData); // debug
+
+        try {
+            const res = await fetch('/intelligence-access', {
                 method: 'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 },
-                body: new FormData(document.getElementById('accessForm'))
+                body: JSON.stringify(formData)
             });
 
-            document.getElementById('verifyLoader').style.display = 'none';
+            const data = await res.json();
 
-            alert("Verification email resent.");
+            console.log("Response:", data); // debug
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                // ✅ Show validation errors
+                if (data.errors) {
+                    const errorMessages = Object.values(data.errors).flat().join('\n');
+                    alert("Please fix the following:\n\n" + errorMessages);
+                } else {
+                    alert(data.message || "Something went wrong.");
+                }
+            }
+
+        } catch (error) {
+            console.error("Submit error:", error);
+            alert("Server error. Please try again.");
         }
+    });
+</script>    --}}
+
+<script>
+    let selectedPayment = null;
+
+    /* ========================================
+       PREMIUM MODAL
+    ======================================== */
+    function openPremiumModal() {
+        document.getElementById('premiumModal').style.display = 'flex';
+    }
+
+    function closePremiumModal() {
+        document.getElementById('premiumModal').style.display = 'none';
+    }
+
+    /* ========================================
+       FREE PLAN — skip verify, go straight to access form
+    ======================================== */
+    function openAccessModal(plan) {
+        selectedPayment = plan; // ✅ Set plan here too
+        document.getElementById('selectedPlan').value = selectedPayment;
+        document.getElementById('accessModal').style.display = 'flex';
+        closePremiumModal();
+    }
+
+    /* ========================================
+       CARD / PAYPAL — open verify modal first
+    ======================================== */
+    function openVerifyModal(plan) {
+        selectedPayment = plan; // ✅ 'card' or 'paypal'
+        closePremiumModal();
+        document.getElementById('verifyModal').style.display = 'flex';
+    }
+
+    // alias — some buttons call openVerificationModal
+    function openVerificationModal(plan) {
+        openVerifyModal(plan);
+    }
+
+    /* ========================================
+       VERIFY MODAL
+    ======================================== */
+    function closeVerifyModal() {
+        document.getElementById('verifyModal').style.display = 'none';
+    }
+
+    /* ========================================
+       OPEN ACCESS MODAL FROM REGISTER LINK
+    ======================================== */
+    function openAccessFromVerification() {
+        closeVerifyModal();
+        document.getElementById('selectedPlan').value = selectedPayment;
+        document.getElementById('accessModal').style.display = 'flex';
+    }
+
+    /* ========================================
+       CLOSE ACCESS MODAL
+    ======================================== */
+    function closeAccessModal() {
+        document.getElementById('accessModal').style.display = 'none';
+    }
+
+    /* ========================================
+       OTP MODAL
+    ======================================== */
+    function openOtpModal() {
+        document.querySelectorAll(".otp-input").forEach(i => i.value = "");
+        document.getElementById("otpMessage").innerText = "";
+        document.getElementById("otpModal").style.display = "flex";
+        document.querySelector(".otp-input").focus();
+    }
+
+    function closeOtpModal() {
+        document.getElementById("otpModal").style.display = "none";
+    }
+
+    /* ========================================
+       AFTER OTP VERIFIED — open access modal
+    ======================================== */
+    function openAccessModalAfterOtp(email) {
+        closeOtpModal();
+        // ✅ Pre-fill email and sync plan
+        document.getElementById("email").value           = email;
+        document.getElementById('selectedPlan').value    = selectedPayment;
+        document.getElementById('accessModal').style.display = 'flex';
+    }
+
+    /* ========================================
+       ACCESS FORM SUBMIT
+    ======================================== */
+    document.getElementById('accessForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name:     document.getElementById('fullName').value,
+            email:    document.getElementById('email').value,
+            country:  document.getElementById('country').value,
+            industry: document.getElementById('industry').value,
+            plan:     selectedPayment  // ✅ Always from selectedPayment
+        };
+
+        console.log("Submitting:", formData); // debug
+
+        try {
+            const res = await fetch('/intelligence-access', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await res.json();
+            console.log("Response:", data); // debug
+
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                if (data.errors) {
+                    const msgs = Object.values(data.errors).flat().join('\n');
+                    alert("Please fix the following:\n\n" + msgs);
+                } else {
+                    alert(data.message || "Something went wrong.");
+                }
+            }
+
+        } catch (error) {
+            console.error("Submit error:", error);
+            alert("Server error. Please try again.");
+        }
+    });
+</script>
+
+    <script>
+        // function openVerifyModal(email) {
+        //     document.getElementById('verifyModal').style.display = 'flex';
+        //     document.getElementById('verifyEmailInput').innerText = email;
+        // }
+
+        // function closeVerifyModal() {
+        //     document.getElementById('verifyModal').style.display = 'none';
+        // }
+
+        function openVerifyModal(email = '') {
+    document.getElementById('verifyModal').style.display = 'flex';
+    document.getElementById('verifyEmailInput').value = email; // ✅ .value not .innerText
+    document.getElementById('verifyMessage').innerText = '';
+}
+
+function closeVerifyModal() {
+    document.getElementById('verifyModal').style.display = 'none';
+}
+
+function openOtpModal() {
+    document.querySelectorAll(".otp-input").forEach(i => i.value = "");
+    document.getElementById("otpMessage").innerText = "";
+    document.getElementById("otpModal").style.display = "flex";
+    document.querySelector(".otp-input").focus();
+}
+
+function closeOtpModal() {
+    document.getElementById("otpModal").style.display = "none";
+}
+
+        // async function resendVerification() {
+
+        //     const email = document.querySelector('input[name="email"]').value;
+
+        //     document.getElementById('verifyLoader').style.display = 'block';
+
+        //     const res = await fetch('/subscribe', {
+        //         method: 'POST',
+        //         headers: {
+        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        //         },
+        //         body: new FormData(document.getElementById('accessForm'))
+        //     });
+
+        //     document.getElementById('verifyLoader').style.display = 'none';
+
+        //     alert("Verification email resent.");
+        // }
     </script>
+
+    {{-- <script>
+        async function sendOTP() {
+    const email = document.getElementById('verifyEmailInput').value;
+    const loader = document.getElementById('verifyLoader');
+    const message = document.getElementById('verifyMessage');
+
+    if (!email) {
+        message.innerText = "Please enter your email.";
+        return;
+    }
+
+    loader.style.display = 'block';
+    message.innerText = "";
+
+    try {
+        const res = await fetch('/send-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+        loader.style.display = 'none';
+
+        if (data.success) {
+            // OTP sent — close verify modal and open OTP modal
+            closeVerifyModal();
+            openOtpModal();
+
+        } else if (data.already_subscribed) {
+            // ✅ Already subscribed — show alert
+            message.innerText = "";
+            alert("⚠️ You are already subscribed. Please log in to access your account.");
+
+        } else {
+            message.innerText = data.message;
+        }
+
+    } catch (error) {
+        loader.style.display = 'none';
+        message.innerText = "Server error. Try again.";
+    }
+}
+        
+    </script> --}}
 
     <script>
         async function sendOTP() {
+    const email   = document.getElementById('verifyEmailInput').value;
+    const loader  = document.getElementById('verifyLoader');
+    const message = document.getElementById('verifyMessage');
 
-            const email = document.getElementById('verifyEmailInput').value;
-            const loader = document.getElementById('verifyLoader');
-            const message = document.getElementById('verifyMessage');
+    if (!email) {
+        message.style.color = "red";
+        message.innerText   = "Please enter your email.";
+        return;
+    }
 
-            if (!email) {
-                message.innerText = "Please enter your email.";
-                return;
-            }
+    loader.style.display = 'block';
+    message.innerText    = "";
 
-            loader.style.display = 'block';
-            message.innerText = "";
+    try {
+        const res = await fetch('/send-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email })
+        });
 
-            try {
+        const data = await res.json();
+        loader.style.display = 'none';
 
-                const res = await fetch('/send-otp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        email: email
-                    })
-                });
-
-                const data = await res.json();
-
-                loader.style.display = 'none';
-
-                if (data.success) {
-                    message.innerText = "Verification code sent successfully.";
-
-                    // OPTIONAL: Open OTP modal automatically
-                    openOtpModal();
-
-                } else {
-                    message.innerText = data.message;
-                }
-
-            } catch (error) {
-                loader.style.display = 'none';
-                message.innerText = "Server error. Try again.";
-            }
+        if (data.success) {
+            // ✅ OTP sent — close verify modal and open OTP modal
+            closeVerifyModal();
+            openOtpModal();
+        } else {
+            message.style.color = "red";
+            message.innerText   = data.message;
         }
 
-        
+    } catch (error) {
+        loader.style.display = 'none';
+        message.style.color  = "red";
+        message.innerText    = "Server error. Try again.";
+    }
+}
     </script>
 
-    <script>
+    {{-- <script>
         // Auto move to next input
         document.querySelectorAll(".otp-input").forEach((input, index, inputs) => {
             input.addEventListener("input", () => {
@@ -2204,5 +2755,185 @@
                 document.getElementById("otpMessage").innerText = data.message;
             }
         }
+    </script> --}}
+    {{-- <script>
+        async function submitOtp() {
+
+    const inputs     = document.querySelectorAll(".otp-input");
+    const otp        = Array.from(inputs).map(i => i.value).join('');
+    const email      = document.getElementById("verifyEmailInput").value;
+    const otpMessage = document.getElementById("otpMessage");
+
+    // Validate all 6 digits filled
+    if (otp.length < 6) {
+        otpMessage.style.color = "red";
+        otpMessage.innerText   = "Please enter the complete 6-digit code.";
+        return;
+    }
+
+    otpMessage.style.color = "#888";
+    otpMessage.innerText   = "Verifying...";
+
+    try {
+        const res = await fetch('/verify-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email, otp })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+
+            /* ==========================================
+               ALREADY SUBSCRIBED — alert + redirect home
+            ========================================== */
+            if (data.already_subscribed) {
+                otpMessage.style.color = "orange";
+                otpMessage.innerText   = "Checking subscription...";
+
+                // Close OTP modal
+                closeOtpModal();
+
+                // Show alert then redirect to home
+                alert("⚠️ You are already subscribed. Redirecting you to the home page.");
+                window.location.href = "/";
+                return;
+            }
+
+            /* ==========================================
+               NEW USER — proceed to Stripe checkout
+            ========================================== */
+            otpMessage.style.color = "green";
+            otpMessage.innerText   = "✓ Verified! Redirecting to payment...";
+
+            setTimeout(() => {
+                window.location.href = "/stripe-checkout";
+            }, 800);
+
+        } else {
+            // Wrong OTP or expired
+            otpMessage.style.color = "red";
+            otpMessage.innerText   = data.message || "Invalid verification code.";
+
+            // Clear inputs so user can re-enter
+            inputs.forEach(i => i.value = "");
+            inputs[0].focus();
+        }
+
+    } catch (error) {
+        otpMessage.style.color = "red";
+        otpMessage.innerText   = "Server error. Please try again.";
+    }
+}
+    </script> --}}
+
+    <script>
+        async function submitOtp() {
+
+    const inputs     = document.querySelectorAll(".otp-input");
+    const otp        = Array.from(inputs).map(i => i.value).join('');
+    const email      = document.getElementById("verifyEmailInput").value;
+    const otpMessage = document.getElementById("otpMessage");
+
+    if (otp.length < 6) {
+        otpMessage.style.color = "red";
+        otpMessage.innerText   = "Please enter the complete 6-digit code.";
+        return;
+    }
+
+    otpMessage.style.color = "#888";
+    otpMessage.innerText   = "Verifying...";
+
+    try {
+        const res = await fetch('/verify-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email, otp })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+
+            /* ==========================================
+               CASE 1 — ALREADY SUBSCRIBED (PAID)
+               alert + redirect home
+            ========================================== */
+            if (data.already_subscribed) {
+                closeOtpModal();
+                alert("⚠️ You are already subscribed. Redirecting you to the home page.");
+                window.location.href = "/";
+                return;
+            }
+
+            /* ==========================================
+               CASE 2 — LEAD EXISTS BUT NOT PAID
+               Close OTP modal, open access modal with email pre-filled
+            ========================================== */
+            if (data.lead_exists) {
+                otpMessage.style.color = "green";
+                otpMessage.innerText   = "✓ Verified!";
+
+                closeOtpModal();
+
+                // ✅ Pre-fill email in access modal
+                document.getElementById("email").value = email;
+
+                // ✅ Open access modal for user to complete details
+                openAccessModal(selectedPlan);
+                return;
+            }
+
+            /* ==========================================
+               CASE 3 — BRAND NEW USER
+               Close OTP modal, open access modal with email pre-filled
+            ========================================== */
+            otpMessage.style.color = "green";
+            otpMessage.innerText   = "✓ Verified!";
+
+            closeOtpModal();
+
+            // ✅ Pre-fill email in access modal
+            document.getElementById("email").value = email;
+
+            // ✅ Open access modal for user to fill details
+           openAccessModal(selectedPlan);
+
+        } else {
+            // Wrong OTP or expired
+            otpMessage.style.color = "red";
+            otpMessage.innerText   = data.message || "Invalid verification code.";
+
+            inputs.forEach(i => i.value = "");
+            inputs[0].focus();
+        }
+
+    } catch (error) {
+        otpMessage.style.color = "red";
+        otpMessage.innerText   = "Server error. Please try again.";
+    }
+}
+
+/* ========================================
+   ACCESS MODAL CONTROLS
+======================================== */
+function openAccessModal() {
+    document.getElementById("accessModal").style.display = "flex";
+}
+
+function closeAccessModal() {
+    document.getElementById("accessModal").style.display = "none";
+}
+// if (data.success && !data.already_subscribed) {
+//     openAccessModalAfterOtp(email); // ✅ Handles everything in one call
+//     return;
+// }
     </script>
 @endpush
