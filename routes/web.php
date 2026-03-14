@@ -74,3 +74,7 @@ Route::get('/payment-cancel', [PaymentController::class, 'cancel']);
 
 Route::post('/send-otp', [EmailVerificationController::class, 'sendOtp']);
 Route::post('/verify-otp', [EmailVerificationController::class, 'verifyOtp']);
+
+Route::get('/news/view', function () {
+    return view('news_details');
+});
